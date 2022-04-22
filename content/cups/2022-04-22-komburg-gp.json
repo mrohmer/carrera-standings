@@ -1,0 +1,46 @@
+{
+  "date": "2022-03-18T09:36:23.775Z",
+  "title": "Komburg GP",
+  "results": {
+    "timeTrial": [
+      {
+        "racer": "BAE"
+      },
+      {
+        "racer": "HOH"
+      },
+      {
+        "racer": "ROH"
+      },
+      {
+        "racer": "SOM"
+      },
+      {
+        "racer": "JAE"
+      },
+      {
+        "racer": "HEG"
+      }
+    ],
+    "mainRace": [
+      {
+        "racer": "BAE"
+      },
+      {
+        "racer": "SOM"
+      },
+      {
+        "racer": "HOH"
+      },
+      {
+        "racer": "ROH"
+      },
+      {
+        "racer": "JAE"
+      },
+      {
+        "racer": "HEG"
+      }
+    ]
+  }
+}
