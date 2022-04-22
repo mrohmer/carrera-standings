@@ -26,7 +26,7 @@ const getPoints = (results): Record<string, number> => {
   ) ?? {};
 }
 const readCupFiles = (): Record<string, any>[] => {
-  const rootDir = process.env.REPOSITORY_URL ?? path.resolve(new URL('.', import.meta.url).pathname, '../..')
+  const rootDir = process.env.ROOT_DIR ?? path.resolve(new URL('.', import.meta.url).pathname, '../..')
   const dir = path.resolve(rootDir, 'content/cups')
   return fs.readdirSync(dir)
     .map(file => path.resolve(dir, file))
