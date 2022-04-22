@@ -14,6 +14,7 @@ export interface Standings {
 export interface Cup {
   title: string;
   points: Record<'mainRace'|'timeTrial', Record<string, number>>;
+  penalties: Record<string, number>;
   fastestLap?: string;
 }
 
@@ -46,6 +47,7 @@ export const getStandings = (): Standings => {
         timeTrial: getPoints(cup.results?.timeTrial, [6, 5, 4, 3, 2, 1]),
       },
       fastestLap: cup.results?.fastestLap,
+      penalties: cup.results?.mainRace?.filter(({penalty}) => !!penalty).reduce((prev, {racer, penalty}) => ({...prev, [racer]: penalty}), {}) ?? {},
     }));
 
   const points = cups

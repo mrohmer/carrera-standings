@@ -44,7 +44,7 @@
             <th>{index + 1}.</th>
             <th>{name}</th>
             {#each standings.cups as cup }
-                <td>{cup.points.timeTrial[name] ?? '-'} | {cup.points.mainRace[name] ?? '-'}</td>
+                <td>{cup.points.timeTrial[name] ?? '-'} | {cup.points.mainRace[name] ?? '-'} | {cup.penalties[name] ?? '-'} {cup.fastestLap === name ? '*' : ''}</td>
             {/each}
             <th>{points}</th>
         </tr>
