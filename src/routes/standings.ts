@@ -14,13 +14,14 @@ export interface Standings {
 export interface Cup {
   title: string;
   points: Record<'mainRace'|'timeTrial', Record<string, number>>;
+  fastestLap?: string;
 }
 
-const getPoints = (results): Record<string, number> => {
+const getPoints = (results, points: number[], fastestLapRacer?: string): Record<string, number> => {
   return results?.reduce(
-    (prev, {racer}, index) => ({
+    (prev, {racer, penalty}, index) => ({
       ...prev,
-      [racer]: racers.length - index,
+      [racer]: points[index] + +(fastestLapRacer === racer) - (penalty ?? 0),
     }),
     {},
   ) ?? {};
@@ -41,9 +42,10 @@ export const getStandings = (): Standings => {
     .map(cup => ({
       title: cup.title,
       points: {
-        mainRace: getPoints(cup.results?.mainRace),
-        timeTrial: getPoints(cup.results?.timeTrial),
+        mainRace: getPoints(cup.results?.mainRace, [10, 8, 6, 4, 2, 1], cup.results?.fastestLap),
+        timeTrial: getPoints(cup.results?.timeTrial, [6, 5, 4, 3, 2, 1]),
       },
+      fastestLap: cup.results?.fastestLap,
     }));
 
   const points = cups
@@ -52,7 +54,7 @@ export const getStandings = (): Standings => {
         racers.reduce(
           (points, racer) => ({
             ...points,
-            [racer]: (prev[racer] ?? 0) + (cup.points.mainRace[racer] ?? 0),
+            [racer]: (prev[racer] ?? 0) + (cup.points.mainRace[racer] ?? 0) + (cup.points.timeTrial[racer] ?? 0),
           }),
           {},
         )

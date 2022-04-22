@@ -9,9 +9,9 @@ const getLocalBackend = () => {
     url: `http://localhost:8082/api/v1`
   }
 }
+
 export const get = () => {
   const raceTypes = {
-    qualifying: 'Qualifying',
     timeTrial: 'Zeitfahren',
     mainRace: 'Hauptrennen',
   };
@@ -50,37 +50,46 @@ export const get = () => {
               name: 'results',
               widget: 'object',
               collapsed: false,
-              fields: Object.entries(raceTypes)
-                .map(([name, label]) => ({
-                  name,
-                  label,
-                  label_singular: 'Result',
-                  collapsed: true,
-                  widget: 'list',
-                  fields: [
-                    {
-                      name: 'racer',
-                      label: 'Fahrer',
-                      widget: 'select',
-                      options: racers,
-                    },
-                    {
-                      name: 'time',
-                      label: 'Zeit (in s)',
-                      widget: 'string',
-                      pattern: ['^(\\d{2}:){0,2}\\d{1,2}$', 'Muss im Format \'00:00:00\' sein.'],
-                      required: false,
-                    },
-                    {
-                      name: 'laps',
-                      label: 'Runden',
-                      widget: 'number',
-                      min: 0,
-                      max: 1000,
-                      required: false,
-                    },
-                  ]
-                }))
+              fields: [
+                ...Object.entries(raceTypes)
+                  .map(([name, label]) => ({
+                    name,
+                    label,
+                    label_singular: 'Result',
+                    collapsed: true,
+                    widget: 'list',
+                    default: racers.sort().map((racer) => ({racer})),
+                    fields: [
+                      {
+                        name: 'racer',
+                        label: 'Fahrer',
+                        widget: 'select',
+                        options: racers,
+                      },
+                      {
+                        name: 'noParticipation',
+                        label: 'Keine Teilnahme',
+                        widget: 'boolean',
+                        required: false,
+                      },
+                      name === 'mainRace' && {
+                        name: 'penalty',
+                        label: 'Strafpunkte',
+                        widget: 'number',
+                        required: false,
+                        default: 0,
+                        min: 0,
+                        max: 100,
+                      },
+                    ].filter(i => !!i),
+                  })),
+                  {
+                    name: 'fastestLap',
+                    label: 'Schnellste Runde',
+                    widget: 'select',
+                    options: racers,
+                  },
+                ],
             }
           ]
         }

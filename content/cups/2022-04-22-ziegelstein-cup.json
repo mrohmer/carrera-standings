@@ -27,13 +27,16 @@
         "racer": "BAE"
       },
       {
-        "racer": "HOH"
+        "racer": "HOH",
+        "penalty": 1
       },
       {
-        "racer": "HEG"
+        "racer": "HEG",
+        "penalty": 1
       },
       {
-        "racer": "SOM"
+        "racer": "SOM",
+        "penalty": 1
       },
       {
         "racer": "ROH"
@@ -41,6 +44,7 @@
       {
         "racer": "JAE"
       }
-    ]
+    ],
+    "fastestLap": "HEG"
   }
 }

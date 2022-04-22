@@ -27,20 +27,25 @@
         "racer": "BAE"
       },
       {
-        "racer": "SOM"
+        "racer": "SOM",
+        "penalty": 1
       },
       {
-        "racer": "HOH"
+        "racer": "HOH",
+        "penalty": 1
       },
       {
         "racer": "ROH"
       },
       {
-        "racer": "JAE"
+        "racer": "JAE",
+        "penalty": 1
       },
       {
-        "racer": "HEG"
+        "racer": "HEG",
+        "noParticipation": true
       }
-    ]
+    ],
+    "fastestLap": "HOH"
   }
 }
