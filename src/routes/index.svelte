@@ -4,7 +4,7 @@
     export const prerender = true;
 
     export const load: Load = async ({fetch}) => {
-        const response = await fetch('/standings');
+        const response = await fetch('/api/standings');
         const standings = await response.json();
         return {
             props: {
@@ -30,23 +30,23 @@
 <table>
     <thead>
     <tr>
-        <td></td>
-        <td></td>
-        {#each standings.cups as cup }
-            <th>{cup.title}</th>
-        {/each}
-        <th>Gesamt</th>
+        <th></th>
+        <th>Name</th>
+        <th>Punkte</th>
+        <th>Siege</th>
+        <th>Podien</th>
+        <th>Schnellste<br/>Runden</th>
     </tr>
     </thead>
     <tbody>
-    {#each Object.values(standings.points) as {name, points}, index}
+    {#each standings as {name, points, fastestLaps, wins, podiums}, index}
         <tr>
             <th>{index + 1}.</th>
-            <th>{name}</th>
-            {#each standings.cups as cup }
-                <td>{cup.points.timeTrial[name] ?? '-'} | {cup.points.mainRace[name] ?? '-'} | {cup.penalties[name] ?? '-'} {cup.fastestLap === name ? '*' : ''}</td>
-            {/each}
-            <th>{points}</th>
+            <td>{name}</td>
+            <td>{points}</td>
+            <td>{wins}</td>
+            <td>{podiums}</td>
+            <td>{fastestLaps}</td>
         </tr>
     {/each}
     </tbody>
