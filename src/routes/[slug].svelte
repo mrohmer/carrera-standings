@@ -1,6 +1,8 @@
 <script lang="ts" context="module">
   import type {Load} from '@sveltejs/kit';
 
+  export const prerender = true;
+
   export const load: Load = async ({fetch, params}) => {
     const {slug} = params;
 
@@ -10,7 +12,7 @@
       }
     }
 
-    const response = await fetch(`/api/cups/${slug}`);
+    const response = await fetch(`/${slug}.json`);
 
     if (!response?.ok) {
       return {
