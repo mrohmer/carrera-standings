@@ -21,32 +21,53 @@
 </script>
 
 <style lang="scss">
-    td, th {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    tr {
+      &.may-still-win {
+        background: #e9f6ff;
+      }
+    }
+
+    .cell {
+      border: none;
       padding: 5px 10px;
       text-align: center;
+
+      &--position {
+        width: 35px;
+        text-align: right;
+      }
+
+      &--name {
+        text-align: left;
+      }
     }
+  }
 </style>
 
 <table>
     <thead>
     <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Punkte</th>
-        <th>Siege</th>
-        <th>Podien</th>
-        <th>Schnellste<br/>Runden</th>
+        <th class="cell cell--position"></th>
+        <th class="cell cell--name">Name</th>
+        <th class="cell">Punkte</th>
+        <th class="cell">Siege</th>
+        <th class="cell">Podien</th>
+        <th class="cell">Schnellste<br/>Runden</th>
     </tr>
     </thead>
     <tbody>
-    {#each standings as {name, points, fastestLaps, wins, podiums}, index}
-        <tr>
-            <th>{index + 1}.</th>
-            <td>{name}</td>
-            <td>{points}</td>
-            <td>{wins}</td>
-            <td>{podiums}</td>
-            <td>{fastestLaps}</td>
+    {#each standings as {name, points, fastestLaps, wins, podiums, mayStillWin}, index}
+        <tr class:may-still-win={mayStillWin}>
+            <th class="cell cell--position">{index + 1}.</th>
+            <td class="cell cell--name">{name}</td>
+            <td class="cell">{points}</td>
+            <td class="cell">{wins}</td>
+            <td class="cell">{podiums}</td>
+            <td class="cell">{fastestLaps}</td>
         </tr>
     {/each}
     </tbody>

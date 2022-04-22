@@ -43,12 +43,20 @@ export const cupConverter = (cup): Cup => {
     .map(([key]) => key)
   ;
 
+  const pointsDone: Cup['pointsDone'] = {
+    mainRace: !!cup.results?.mainRace?.length,
+    timeTrial: !!cup.results?.timeTrial?.length,
+    fastestLap: !!cup.results?.fastestLap,
+  }
+
   return {
     title: cup.title,
+    slug: cup.slug,
     points: {
       ...rawPoints,
       total,
     },
+    pointsDone,
     fastestLap: cup.results?.fastestLap,
     penalties: cup.results?.mainRace?.filter(({penalty}) => !!penalty).reduce((prev, {racer, penalty}) => ({...prev, [racer]: penalty}), {}) ?? {},
     order,
