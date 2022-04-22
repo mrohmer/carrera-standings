@@ -32,6 +32,14 @@
   td, th {
     padding: 5px 10px;
     text-align: center;
+
+    &.penalty {
+      color: red;
+    }
+    &.fastest-lap {
+      color: #000;
+      font-weight: bold;
+    }
   }
 </style>
 
@@ -41,7 +49,13 @@
     export let cup: Cup;
 
     const getMainPoints = (racer: string): number|undefined => {
-        return undefined
+        const mainRace = cup.points.mainRace[racer];
+
+        if (!(mainRace >= 0)) {
+          return undefined;
+        }
+
+        return mainRace + +(cup.fastestLap === racer);
     }
 </script>
 
@@ -64,8 +78,8 @@
             <td>{racer}</td>
             <td>{cup.points.total[racer] ?? '-'}</td>
             <td>{cup.points.timeTrial[racer] ?? '-'}</td>
-            <td>{getMainPoints(racer) ?? '-'}</td>
-            <td style="color: red">{cup.points.penalty[racer] ?? '-'}</td>
+            <td class:fastest-lap={racer === cup.fastestLap}>{getMainPoints(racer) ?? '-'}{racer === cup.fastestLap ? '*' : ''}</td>
+            <td class="penalty">{cup.points.penalty[racer] ? -cup.points.penalty[racer] : '-'}</td>
         </tr>
     {/each}
     </tbody>
