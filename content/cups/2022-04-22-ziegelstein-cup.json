@@ -1,4 +1,46 @@
 {
-  "date": "2022-04-23T07:12:01.388Z",
-  "title": "Ziegelstein Cup"
+  "date": "2022-01-15T08:12:01.388Z",
+  "title": "Ziegelstein GP",
+  "results": {
+    "timeTrial": [
+      {
+        "racer": "HEG"
+      },
+      {
+        "racer": "BAE"
+      },
+      {
+        "racer": "HOH"
+      },
+      {
+        "racer": "SOM"
+      },
+      {
+        "racer": "JAE"
+      },
+      {
+        "racer": "ROH"
+      }
+    ],
+    "mainRace": [
+      {
+        "racer": "BAE"
+      },
+      {
+        "racer": "HOH"
+      },
+      {
+        "racer": "HEG"
+      },
+      {
+        "racer": "SOM"
+      },
+      {
+        "racer": "ROH"
+      },
+      {
+        "racer": "JAE"
+      }
+    ]
+  }
 }
