@@ -1,0 +1,46 @@
+{
+  "date": "2022-02-19T09:33:31.258Z",
+  "title": "Hummelstein GP",
+  "results": {
+    "timeTrial": [
+      {
+        "racer": "BAE"
+      },
+      {
+        "racer": "HEG"
+      },
+      {
+        "racer": "HOH"
+      },
+      {
+        "racer": "ROH"
+      },
+      {
+        "racer": "SOM"
+      },
+      {
+        "racer": "JAE"
+      }
+    ],
+    "mainRace": [
+      {
+        "racer": "JAE"
+      },
+      {
+        "racer": "ROH"
+      },
+      {
+        "racer": "HOH"
+      },
+      {
+        "racer": "HEG"
+      },
+      {
+        "racer": "BAE"
+      },
+      {
+        "racer": "SOM"
+      }
+    ]
+  }
+}
