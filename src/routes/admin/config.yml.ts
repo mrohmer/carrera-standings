@@ -31,6 +31,7 @@ export const get = () => {
           folder: "content/cups",
           create: true,
           slug: "{{year}}-{{month}}-{{day}}-{{title}}",
+          summary: '{{title}} ({{day}}.{{month}}.{{year}})',
           extension: 'json',
           editor: {
             preview: false,
