@@ -32,7 +32,6 @@
 
 		nav {
 			display: flex;
-			gap: 10px;
 			width: 100%;
 			padding-bottom: 20px;
 
@@ -41,9 +40,11 @@
 				width: fit-content;
 				white-space: nowrap;
 				text-decoration: none;
+				padding: 10px 15px;
+				font-size: 18px;
 
 				&:hover {
-					text-decoration: underline;
+					background: #333;
 				}
 
 				&.active {
