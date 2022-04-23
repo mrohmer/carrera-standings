@@ -1,6 +1,21 @@
 import type {Cup} from '../models';
 import racers from '../../../content/racer.json';
 
+const MONTHS = [
+  'Januar',
+  'Februar',
+  'März',
+  'April',
+  'Mai',
+  'Juni',
+  'Juli',
+  'August',
+  'September',
+  'Oktober',
+  'November',
+  'Dezember',
+];
+
 const getPoints = (results, points: number[]): Record<string, number> => {
   return results?.reduce(
     (prev, {racer, penalty}, index) => ({
@@ -47,7 +62,9 @@ export const cupConverter = (cup): Cup => {
     mainRace: !!cup.results?.mainRace?.length,
     timeTrial: !!cup.results?.timeTrial?.length,
     fastestLap: !!cup.results?.fastestLap,
-  }
+  };
+
+  const date = new Date(cup.date);
 
   return {
     title: cup.title,
@@ -65,5 +82,6 @@ export const cupConverter = (cup): Cup => {
       pitLaneLength: cup.info?.pitLaneLength,
       rounds: cup.info?.rounds,
     },
+    date: `${MONTHS[date.getMonth()]} ${date.getFullYear()}`,
   }
 }

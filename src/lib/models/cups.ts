@@ -5,6 +5,7 @@ export interface Cup {
   penalties: Record<string, number>;
   fastestLap?: string;
   order: string[];
+  date: string;
 
   pointsDone: Record<'mainRace'|'timeTrial'|'fastestLap', boolean>;
 

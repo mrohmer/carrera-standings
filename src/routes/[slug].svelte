@@ -167,9 +167,15 @@
         {/if}
     </TabContent>
     <TabContent>
-        {#if ['trackLength', 'pitLaneLength', 'rounds'].some(key => !!cup?.info[key])}
+        {#if ['trackLength', 'pitLaneLength', 'rounds'].some(key => !!cup?.info[key]) || cup?.date }
         <table class="info-table">
             <tbody>
+                {#if cup?.date}
+                    <tr class="info-table__row">
+                        <th class="info-table__item info-table__item--label">Datum</th>
+                        <td class="info-table__item info-table__item--value">{cup?.date}</td>
+                    </tr>
+                {/if}
                 {#if cup.info?.trackLength}
                     <tr class="info-table__row">
                         <th class="info-table__item info-table__item--label">Streckenlänge</th>
