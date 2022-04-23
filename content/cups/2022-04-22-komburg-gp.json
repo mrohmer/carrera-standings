@@ -47,5 +47,10 @@
       }
     ],
     "fastestLap": "HOH"
+  },
+  "info": {
+    "trackLength": 1621,
+    "pitLaneLength": 259,
+    "rounds": 189
   }
 }

@@ -1,4 +1,9 @@
 {
   "date": "2022-12-17T09:41:11.880Z",
-  "title": "Gebersdorf GP"
+  "title": "Gebersdorf GP",
+  "info": {
+    "trackLength": 1395,
+    "pitLaneLength": 121,
+    "rounds": 219
+  }
 }

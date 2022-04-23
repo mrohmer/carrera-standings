@@ -51,5 +51,10 @@
         "noParticipation": true
       }
     ]
+  },
+  "info": {
+    "trackLength": 1420,
+    "pitLaneLength": 426,
+    "rounds": 215
   }
 }

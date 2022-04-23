@@ -44,5 +44,10 @@
       }
     ],
     "fastestLap": "BAE"
+  },
+  "info": {
+    "trackLength": 1568,
+    "pitLaneLength": 318,
+    "rounds": 195
   }
 }

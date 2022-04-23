@@ -1,4 +1,9 @@
 {
   "date": "2022-10-15T08:40:41.756Z",
-  "title": "Eibach GP"
+  "title": "Eibach GP",
+  "info": {
+    "trackLength": 1356,
+    "pitLaneLength": 148,
+    "rounds": 225
+  }
 }

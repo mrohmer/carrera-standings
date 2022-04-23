@@ -46,5 +46,10 @@
       }
     ],
     "fastestLap": "HEG"
+  },
+  "info": {
+    "trackLength": 1461,
+    "pitLaneLength": 181,
+    "rounds": 209
   }
 }
