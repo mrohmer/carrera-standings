@@ -101,6 +101,15 @@
       }
     }
   }
+
+  .layout {
+    width: 100%;
+    margin: 0 0 10px;
+
+    img {
+      width: 100%;
+    }
+  }
 </style>
 
 <Tabs fixedTabs grow>
@@ -167,6 +176,11 @@
         {/if}
     </TabContent>
     <TabContent>
+        {#if cup?.layout}
+            <div class="layout">
+                <img src="{cup.layout}" alt="Streckenlayout" />
+            </div>
+        {/if}
         {#if ['trackLength', 'pitLaneLength', 'rounds'].some(key => !!cup?.info[key]) || cup?.date }
         <table class="info-table">
             <tbody>

@@ -83,5 +83,6 @@ export const cupConverter = (cup): Cup => {
       rounds: cup.info?.rounds,
     },
     date: `${MONTHS[date.getMonth()]} ${date.getFullYear()}`,
+    layout: cup.layout,
   }
 }

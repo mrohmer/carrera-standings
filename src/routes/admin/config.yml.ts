@@ -24,6 +24,7 @@ export const get = () => {
         branch: "master"
       },
       media_folder: "static/uploads",
+      public_folder: '/uploads',
       collections: [
         {
           name: "cup",
@@ -45,6 +46,14 @@ export const get = () => {
               label: "Datum",
               name: "date",
               widget: "date"
+            },
+            {
+              label: 'Streckenlayout',
+              name: 'layout',
+              widget: 'image',
+              required: false,
+              allow_multiple: false,
+              choose_url: false,
             },
             {
               name: 'info',

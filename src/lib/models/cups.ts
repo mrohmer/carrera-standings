@@ -6,6 +6,7 @@ export interface Cup {
   fastestLap?: string;
   order: string[];
   date: string;
+  layout?: string;
 
   pointsDone: Record<'mainRace'|'timeTrial'|'fastestLap', boolean>;
 
