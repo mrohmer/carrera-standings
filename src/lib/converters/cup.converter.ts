@@ -60,5 +60,10 @@ export const cupConverter = (cup): Cup => {
     fastestLap: cup.results?.fastestLap,
     penalties: cup.results?.mainRace?.filter(({penalty}) => !!penalty).reduce((prev, {racer, penalty}) => ({...prev, [racer]: penalty}), {}) ?? {},
     order,
+    info: {
+      trackLength: cup.info?.trackLength,
+      pitLaneLength: cup.info?.pitLaneLength,
+      rounds: cup.info?.rounds,
+    },
   }
 }

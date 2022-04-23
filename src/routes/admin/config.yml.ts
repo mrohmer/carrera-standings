@@ -47,6 +47,38 @@ export const get = () => {
               widget: "date"
             },
             {
+              name: 'info',
+              label: 'Info',
+              widget: 'object',
+              collapsed: true,
+              fields: [
+                {
+                  label: 'Streckenlänge',
+                  name: 'trackLength',
+                  required: false,
+                  widget: 'number',
+                  min: 0,
+                  value_type: 'int',
+                },
+                {
+                  label: 'Länge Box',
+                  name: 'pitLaneLength',
+                  required: false,
+                  widget: 'number',
+                  min: 0,
+                  value_type: 'int',
+                },
+                {
+                  label: 'Runden',
+                  name: 'rounds',
+                  required: false,
+                  widget: 'number',
+                  min: 0,
+                  value_type: 'int',
+                },
+              ]
+            },
+            {
               label: "Results",
               name: 'results',
               widget: 'object',
@@ -92,7 +124,7 @@ export const get = () => {
                     required: false,
                   },
                 ],
-            }
+            },
           ]
         }
       ],

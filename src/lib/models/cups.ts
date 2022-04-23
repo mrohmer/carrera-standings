@@ -7,4 +7,10 @@ export interface Cup {
   order: string[];
 
   pointsDone: Record<'mainRace'|'timeTrial'|'fastestLap', boolean>;
+
+  info: {
+    trackLength?: number;
+    pitLaneLength?: number;
+    rounds?: number;
+  }
 }
