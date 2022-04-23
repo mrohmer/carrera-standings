@@ -37,7 +37,7 @@ export const cupConverter = (cup): Cup => {
     {},
   );
 
-  const order = Object.entries(total)
+  const order = Object.entries(rawPoints.mainRace)
     .filter(([, points]) => !!points)
     .sort(([,a], [,b]) => a < b ? 1 : -1)
     .map(([key]) => key)
