@@ -14,28 +14,46 @@
 </script>
 <script lang="ts">
 	import { page } from '$app/stores';
-	import '../app.css';
+	import '../app.scss';
 
 	export let cups: Record<'slug'|'title', string>
 </script>
 
 <style lang="scss">
+	.content {
+		margin: auto;
+		max-width: 800px;
+		overflow: hidden;
+	}
 	header {
-		overflow: auto;
+		overflow: hidden;
 		padding: 0;
 		margin-bottom: 10px;
+
 		nav {
 			display: flex;
 			gap: 10px;
+			width: 100%;
+			padding-bottom: 20px;
 
 			a {
-				color: #222;
+				color: #aaa;
 				width: fit-content;
 				white-space: nowrap;
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
+
 				&.active {
-					color: #000;
+					color: #fff;
 					font-weight: bold;
 				}
+			}
+
+			&.content {
+				overflow: auto;
 			}
 		}
 	}
@@ -47,7 +65,7 @@
 </svelte:head>
 
 <header>
-	<nav>
+	<nav class="content">
 		<a href="/" class:active={$page.url.pathname === '/'}>
 			Gesamt
 		</a>
@@ -58,6 +76,6 @@
 		{/each}
 	</nav>
 </header>
-<main>
+<main class="content">
 	<slot />
 </main>

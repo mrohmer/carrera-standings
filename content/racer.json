@@ -1,8 +1,20 @@
-[
-  "BAE",
-  "HEG",
-  "SOM",
-  "JAE",
-  "ROH",
-  "HOH"
-]
+{
+  "BAE": {
+    "manufacturer": "McLaren"
+  },
+  "HEG": {
+    "manufacturer": "Mercedes-Benz"
+  },
+  "SOM": {
+    "manufacturer": "Ford"
+  },
+  "JAE": {
+    "manufacturer": "\uD83E\uDD37"
+  },
+  "ROH": {
+    "manufacturer": "Audi"
+  },
+  "HOH": {
+    "manufacturer": "BMW"
+  }
+}

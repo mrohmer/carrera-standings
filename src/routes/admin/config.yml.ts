@@ -59,13 +59,13 @@ export const get = () => {
                     label_singular: 'Result',
                     collapsed: true,
                     widget: 'list',
-                    default: racers.sort().map((racer) => ({racer})),
+                    default: Object.keys(racers).sort().map((racer) => ({racer})),
                     fields: [
                       {
                         name: 'racer',
                         label: 'Fahrer',
                         widget: 'select',
-                        options: racers,
+                        options: Object.keys(racers),
                       },
                       {
                         name: 'noParticipation',
@@ -88,7 +88,7 @@ export const get = () => {
                     name: 'fastestLap',
                     label: 'Schnellste Runde',
                     widget: 'select',
-                    options: racers,
+                    options: Object.keys(racers),
                     required: false,
                   },
                 ],

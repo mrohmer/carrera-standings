@@ -1,4 +1,4 @@
-import {Cup} from '../models/cups';
+import type {Cup} from '../models';
 import racers from '../../../content/racer.json';
 
 const getPoints = (results, points: number[]): Record<string, number> => {
@@ -24,7 +24,7 @@ export const cupConverter = (cup): Cup => {
     ) ?? {}) as Record<string, number>
   };
 
-  const total = racers.reduce(
+  const total = Object.keys(racers).reduce(
     (prev, racer) => ({
       ...prev,
       [racer]: Object.values(rawPoints)

@@ -1,9 +1,24 @@
 <script lang="ts" context="module">
   import type {Load} from '@sveltejs/kit';
+  import type {LoadInput} from '@sveltejs/kit';
+  import type {Cup, Racers} from '../lib/models';
 
   export const prerender = true;
 
-  export const load: Load = async ({fetch, params}) => {
+  export const loadCup = async ({fetch, params}: LoadInput): Promise<Record<'cup', Cup>> => {
+    const {slug} = params;
+
+    const response = await fetch(`/${slug}.json`);
+    const cup = await response.json();
+    return {cup};
+  }
+  export const loadRacers = async ({fetch}: LoadInput): Promise<Record<'racers', Racers>> => {
+    const response = await fetch('/api/racers');
+    const racers = await response.json();
+    return {racers};
+  }
+  export const load: Load = async (input) => {
+    const {params} = input;
     const {slug} = params;
 
     if (!slug?.trim?.()?.length) {
@@ -11,27 +26,26 @@
         status: 400,
       }
     }
-
-    const response = await fetch(`/${slug}.json`);
-
-    if (!response?.ok) {
-      return {
-        status: response.status,
-      }
-    }
-    const cup = await response.json();
+    const results = await Promise.all([loadCup(input), loadRacers(input)]);
+    const props = results
+      .reduce(
+        (prev, curr) => ({
+          ...prev,
+          ...curr,
+        }),
+        {},
+      );
     return {
-      props: {
-        cup,
-      },
+      props,
     };
   }
 </script>
 
 <script lang="ts">
-  import type {Cup} from '../lib/models/cups';
+  import type {Cup, Racers} from '../lib/models';
 
   export let cup: Cup & Record<'mayStillWin', Record<string, boolean>>;
+  export let racers: Racers;
 
   const getMainPoints = (racer: string): number | undefined => {
     const mainRace = cup.points.mainRace[racer];
@@ -50,71 +64,85 @@
     border-collapse: collapse;
     width: 100%;
 
-    tr {
-      &.may-still-win {
+    .row {
+      &--may-still-win {
         background: #e9f6ff;
       }
     }
 
     .cell {
-      border: none;
-      padding: 5px 10px;
-      text-align: center;
-
-      &--position {
-        width: 35px;
-        text-align: right;
-      }
-
-      &--name {
-        text-align: left;
-      }
-
       &--penalty {
         color: red;
       }
 
-      &--fastest-lap {
-        color: #000;
-        font-weight: bold;
+      &--fastest-lap-set {
+        padding-left: 0;
+        padding-right: 0;
       }
     }
   }
+
+  .info-not-yet {
+    font-size: 25px;
+    text-align: center;
+    padding: 30px 0;
+
+    color: #444;
+  }
 </style>
 
-{#if cup?.order?.length}
-    <table>
-        <thead>
-        <tr>
-            <th class="cell--position"></th>
-            <th class="cell--name">Name</th>
-            <th class="cell">Gesamt</th>
-            <th class="cell">Zeit</th>
-            <th class="cell">Haupt</th>
-            <th class="cell">Strafe</th>
-        </tr>
-        </thead>
+<table>
+    <thead>
+    <tr class="row row--head">
+        <th class="cell cell--head cell--position">Rang</th>
+        <th class="cell cell--head cell--name">Name</th>
+        <th class="cell cell--head cell--total">Gesamt</th>
+        <th class="cell cell--head cell--time-trial">Zeit</th>
+        <th class="cell cell--head cell--main-race" class:cell--fastest-lap-set={!!cup?.fastestLap}>Haupt</th>
+        <th class="cell cell--head">Strafe</th>
+    </tr>
+    </thead>
+
+    {#if cup?.order?.length}
         <tbody>
         {#each cup.order as racer, index}
-            <tr class:may-still-win={cup.mayStillWin[racer]}>
-                <th class="cell cell--position">{index + 1}.</th>
-                <td class="cell cell--name">{racer}</td>
-                <td class="cell">{cup.points.total[racer] ?? '-'}</td>
-                <td class="cell">{cup.points.timeTrial[racer] ?? '-'}</td>
-                <td class="cell"
-                    class:cell--fastest-lap={racer === cup.fastestLap}>
-                    {getMainPoints(racer) ?? '-'}
+            <tr class="row" class:row--may-still-win={cup.mayStillWin[racer]}>
+                <th class="cell cell--position">{index + 1}</th>
+                <td class="cell cell--name">
+                    <div class="cell__line">
+                        {racer}
+                    </div>
+                    <div class="cell__subline">
+                        {racers[racer].manufacturer}
+                    </div>
+                </td>
+                <td class="cell cell--total">{cup.points.total[racer] ?? '-'}</td>
+                <td class="cell cell--time-trial">
+                    {cup.points.timeTrial[racer] ?? '-'}
+                </td>
+                <td class="cell cell--main-race"
+                    class:cell--fastest-lap={racer === cup.fastestLap}
+                    class:cell--fastest-lap-set={!!cup.fastestLap}
+                >
+                    <div class="cell__line">
+                        {getMainPoints(racer) ?? '-'}
+                    </div>
+
                     {#if racer === cup.fastestLap}
-                        <br>
-                        <span style="font-size: 50%; font-weight: normal; line-height: 1px; display: block; margin-bottom: -1px;">(schnellste)</span>
+                        <div class="cell__subline">
+                            (schnellste)
+                        </div>
                     {/if}
                 </td>
                 <td class="cell cell--penalty">{cup.points.penalty[racer] ? -cup.points.penalty[racer] : '-'}</td>
             </tr>
         {/each}
         </tbody>
-    </table>
+    {/if}
+</table>
 
-{:else }
-    {cup?.title ?? 'Cup' } noch nicht gewertet
+{#if !cup?.order?.length}
+    <div class="info-not-yet">
+        {cup?.title ?? 'Cup' } noch nicht gewertet
+    </div>
 {/if}

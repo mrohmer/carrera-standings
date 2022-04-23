@@ -1,4 +1,4 @@
-import {Cup} from '../models/cups';
+import type {Cup} from '../models';
 import {calcTotalPoints} from './calc-total-points';
 
 interface Extras {

@@ -4,16 +4,7 @@ import {cupConverter} from '../../lib/converters/cup.converter';
 import {readCupFiles} from '../../lib/utils/read-cup-files';
 import {calcTotalPoints} from '../../lib/utils/calc-total-points';
 import {racerMayStillWin} from '../../lib/utils/racer-may-still-win';
-
-
-export type Standings = {
-    name: string;
-    points: number;
-    wins: number;
-    podiums: number;
-    fastestLaps: number;
-    mayStillWin: boolean;
-  }[];
+import {Standings} from '../../lib/models';
 
 export const getStandings = (): Standings => {
   const rawCups = readCupFiles();
@@ -23,7 +14,7 @@ export const getStandings = (): Standings => {
 
   const points = calcTotalPoints(cups);
 
-  return racers
+  return Object.keys(racers)
     .map((name) => ({
       points: points[name],
       name,
