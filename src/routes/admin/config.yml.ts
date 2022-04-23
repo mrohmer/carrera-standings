@@ -88,6 +88,7 @@ export const get = () => {
                     label: 'Schnellste Runde',
                     widget: 'select',
                     options: racers,
+                    required: false,
                   },
                 ],
             }
