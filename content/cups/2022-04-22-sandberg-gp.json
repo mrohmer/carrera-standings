@@ -1,4 +1,28 @@
 {
   "date": "2022-04-23T08:39:02.764Z",
-  "title": "Sandberg GP"
+  "title": "Sandberg GP",
+  "results": {
+    "timeTrial": [
+      {
+        "racer": "BAE"
+      },
+      {
+        "racer": "ROH"
+      },
+      {
+        "racer": "HEG"
+      },
+      {
+        "racer": "SOM"
+      },
+      {
+        "racer": "JAE"
+      },
+      {
+        "racer": "HOH",
+        "noParticipation": true
+      }
+    ],
+    "fastestLap": "BAE"
+  }
 }
