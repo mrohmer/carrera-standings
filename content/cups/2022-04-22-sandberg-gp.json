@@ -23,6 +23,33 @@
         "noParticipation": true
       }
     ],
-    "fastestLap": null
+    "fastestLap": "ROH",
+    "mainRace": [
+      {
+        "penalty": 0,
+        "racer": "BAE"
+      },
+      {
+        "penalty": 0,
+        "racer": "SOM"
+      },
+      {
+        "penalty": 0,
+        "racer": "HEG"
+      },
+      {
+        "penalty": 0,
+        "racer": "JAE"
+      },
+      {
+        "penalty": 0,
+        "racer": "ROH"
+      },
+      {
+        "penalty": 0,
+        "racer": "HEG",
+        "noParticipation": true
+      }
+    ]
   }
 }
