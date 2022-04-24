@@ -49,7 +49,12 @@
   },
   "info": {
     "trackLength": 1461,
-    "pitLaneLength": 181
+    "pitLaneLength": 181,
+    "record": {
+      "date": "2022-01-15T08:42:54.718Z",
+      "racer": "BAE",
+      "time": 3.958
+    }
   },
   "layout": "/uploads/strecke-2022-08.jpg"
 }
