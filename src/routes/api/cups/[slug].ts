@@ -23,7 +23,7 @@ export const get: RequestHandler = ({params}) => {
 
   const convertedCup = cupConverter(cup);
 
-  const cups = readCupFiles().map(cupConverter);
+  const cups = readCupFiles().map(cup => cupConverter(cup));
   const mayStillWin = Object.keys(racers)
     .map(name => [name, racerMayStillWin(name, cups, {currentCupSlug: convertedCup.slug})])
     .reduce(

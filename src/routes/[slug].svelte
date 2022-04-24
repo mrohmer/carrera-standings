@@ -57,6 +57,8 @@
 
     return mainRace + +(cup.fastestLap === racer);
   }
+
+  $: hasStartOrderForMainRace = cup?.startOrderForMainRace && Object.keys(cup.startOrderForMainRace).length
 </script>
 
 
@@ -93,9 +95,11 @@
 
   .info-table {
     margin: 10px 0;
+
     &__item {
       padding: 10px;
       width: 50%;
+
       &--label {
         text-align: right;
       }
@@ -116,6 +120,9 @@
     <div slot="tabs">
         <Tab>Tabelle</Tab>
         <Tab>Info</Tab>
+        {#if hasStartOrderForMainRace}
+            <Tab>Startreihenfolge</Tab>
+        {/if}
     </div>
 
     <TabContent>
@@ -178,12 +185,12 @@
     <TabContent>
         {#if cup?.layout}
             <div class="layout">
-                <img src="{cup.layout}" alt="Streckenlayout" />
+                <img src="{cup.layout}" alt="Streckenlayout"/>
             </div>
         {/if}
         {#if ['trackLength', 'pitLaneLength', 'rounds'].some(key => !!cup?.info[key]) || cup?.date }
-        <table class="info-table">
-            <tbody>
+            <table class="info-table">
+                <tbody>
                 {#if cup?.date}
                     <tr class="info-table__row">
                         <th class="info-table__item info-table__item--label">Datum</th>
@@ -208,13 +215,44 @@
                         <td class="info-table__item info-table__item--value">{cup.info.rounds}</td>
                     </tr>
                 {/if}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         {:else}
             <div class="info-not-yet">
                 Keine Infos zu {cup?.title ?? 'Cup'} hinterlegt
             </div>
         {/if}
     </TabContent>
+    {#if hasStartOrderForMainRace}
+        <TabContent>
+            <table>
+                <thead>
+                <tr class="row row--head">
+                    <th class="cell cell--head cell--position">Startnummer</th>
+                    <th class="cell cell--head cell--name">Fahrer</th>
+                    <th class="cell cell--head">Start in Runde</th>
+                </tr>
+                </thead>
+                <tbody>
+                {#each Object.entries(cup.startOrderForMainRace).sort(([, a], [, b]) => a < b ? -1 : 1) as [racer, rounds], index}
+                    <tr class="row">
+                        <th class="cell cell--position">
+                            {index + 1}
+                        </th>
+                        <td class="cell cell--name">
+                            <div class="cell__line">
+                                {racer}
+                            </div>
+                            <div class="cell__subline">
+                                {racers[racer].manufacturer}
+                            </div>
+                        </td>
+                        <td class="cell">{rounds}</td>
+                    </tr>
+                {/each}
+                </tbody>
+            </table>
+        </TabContent>
+    {/if}
 </Tabs>
 

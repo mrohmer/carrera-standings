@@ -7,6 +7,7 @@ export interface Cup {
   order: string[];
   date: string;
   layout?: string;
+  startOrderForMainRace: Record<string, number>;
 
   pointsDone: Record<'mainRace'|'timeTrial'|'fastestLap', boolean>;
 

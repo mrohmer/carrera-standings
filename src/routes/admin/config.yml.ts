@@ -123,6 +123,23 @@ export const get = () => {
                         min: 0,
                         max: 100,
                       },
+                      name === 'timeTrial' && {
+                        name: 'rounds',
+                        label: 'Runden',
+                        widget: 'number',
+                        required: false,
+                        min: 0,
+                        max: 500,
+                      },
+                      name === 'timeTrial' && {
+                        name: 'fastestLapTime',
+                        label: 'Schnellste Rundenzeit',
+                        widget: 'number',
+                        required: false,
+                        min: 0,
+                        max: 100,
+                        value_type: 'float',
+                      }
                     ].filter(i => !!i),
                   })),
                   {
