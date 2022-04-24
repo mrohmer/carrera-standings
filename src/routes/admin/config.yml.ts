@@ -28,7 +28,16 @@ export const get = () => {
       backend: {
         name: "github",
         repo: "mrohmer/carrera-standings",
-        branch: "master"
+        branch: "master",
+
+        commit_messages: {
+          create: 'content({{collection}}): created {{slug}}',
+          update: 'content({{collection}}): updated {{slug}}',
+          delete: 'content({{collection}}): deleted {{slug}}',
+          uploadMedia: 'content(media): uploaded {{path}}',
+          deleteMedia: 'content(media): deleted {{path}}',
+          openAuthoring: 'content: {{message}}',
+        }
       },
       media_folder: "static/uploads",
       public_folder: '/uploads',
