@@ -128,7 +128,6 @@ export const cupConverter = (cup): Cup => {
     info: {
       trackLength: cup.info?.trackLength,
       pitLaneLength: cup.info?.pitLaneLength,
-      rounds: cup.info?.rounds,
     },
     date: `${MONTHS[date.getMonth()]} ${date.getFullYear()}`,
     layout: cup.layout,

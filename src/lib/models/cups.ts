@@ -14,6 +14,5 @@ export interface Cup {
   info: {
     trackLength?: number;
     pitLaneLength?: number;
-    rounds?: number;
   }
 }
