@@ -77,14 +77,6 @@ export const get = () => {
                   min: 0,
                   value_type: 'int',
                 },
-                {
-                  label: 'Runden',
-                  name: 'rounds',
-                  required: false,
-                  widget: 'number',
-                  min: 0,
-                  value_type: 'int',
-                },
               ]
             },
             {

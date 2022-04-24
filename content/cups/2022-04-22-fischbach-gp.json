@@ -3,8 +3,7 @@
   "title": "Fischbach GP",
   "info": {
     "trackLength": 1463,
-    "pitLaneLength": 121,
-    "rounds": 209
+    "pitLaneLength": 121
   },
   "layout": "/uploads/strecke-2022-09.jpg"
 }

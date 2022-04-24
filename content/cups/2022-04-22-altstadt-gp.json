@@ -3,8 +3,7 @@
   "title": "Altstadt GP",
   "info": {
     "trackLength": 1730,
-    "pitLaneLength": 204,
-    "rounds": 177
+    "pitLaneLength": 204
   },
   "layout": "/uploads/strecke-2022-10.jpg"
 }

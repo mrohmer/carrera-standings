@@ -3,8 +3,7 @@
   "title": "Gebersdorf GP",
   "info": {
     "trackLength": 1395,
-    "pitLaneLength": 121,
-    "rounds": 219
+    "pitLaneLength": 121
   },
   "layout": "/uploads/strecke-2022-06.jpg"
 }

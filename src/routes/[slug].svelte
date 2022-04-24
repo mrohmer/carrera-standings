@@ -202,17 +202,15 @@
                         <th class="info-table__item info-table__item--label">Streckenlänge</th>
                         <td class="info-table__item info-table__item--value">{cup.info.trackLength} cm</td>
                     </tr>
+                    <tr class="info-table__row">
+                        <th class="info-table__item info-table__item--label">Runden</th>
+                        <td class="info-table__item info-table__item--value">{Math.ceil(305000 / cup.info.trackLength)}</td>
+                    </tr>
                 {/if}
                 {#if cup.info?.pitLaneLength}
                     <tr class="info-table__row">
                         <th class="info-table__item info-table__item--label">Länge Box</th>
                         <td class="info-table__item info-table__item--value">{cup.info.pitLaneLength} cm</td>
-                    </tr>
-                {/if}
-                {#if cup.info?.rounds}
-                    <tr class="info-table__row">
-                        <th class="info-table__item info-table__item--label">Runden</th>
-                        <td class="info-table__item info-table__item--value">{cup.info.rounds}</td>
                     </tr>
                 {/if}
                 </tbody>

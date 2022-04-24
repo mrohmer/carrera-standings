@@ -3,8 +3,7 @@
   "title": "Langwasser GP",
   "info": {
     "trackLength": 1537,
-    "pitLaneLength": 217,
-    "rounds": 199
+    "pitLaneLength": 217
   },
   "layout": "/uploads/strecke-2022-03.jpg"
 }
