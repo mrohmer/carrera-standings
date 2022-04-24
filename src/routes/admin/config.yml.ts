@@ -16,6 +16,13 @@ export const get = () => {
     mainRace: 'Hauptrennen',
   };
 
+  const racerSelect = {
+    name: 'racer',
+    label: 'Fahrer',
+    widget: 'select',
+    options: Object.keys(racers),
+  };
+
   return {
     body: {
       backend: {
@@ -77,6 +84,34 @@ export const get = () => {
                   min: 0,
                   value_type: 'int',
                 },
+                {
+                  label: 'Bahnrekord',
+                  name: 'record',
+                  widget: 'object',
+                  collapsed: true,
+                  summary: '{{fields.time}}s {{fields.racer}}',
+                  fields: [
+                    {
+                      ...racerSelect,
+                      required: false,
+                    },
+                    {
+                      name: 'time',
+                      label: 'Rundenzeit',
+                      widget: 'number',
+                      required: false,
+                      min: 0,
+                      max: 100,
+                      value_type: 'float',
+                    },
+                    {
+                      name: 'date',
+                      label: 'Zeitpunkt',
+                      widget: 'date',
+                      required: false,
+                    }
+                  ]
+                }
               ]
             },
             {
@@ -94,12 +129,7 @@ export const get = () => {
                     widget: 'list',
                     default: Object.keys(racers).sort().map((racer) => ({racer})),
                     fields: [
-                      {
-                        name: 'racer',
-                        label: 'Fahrer',
-                        widget: 'select',
-                        options: Object.keys(racers),
-                      },
+                      racerSelect,
                       {
                         name: 'noParticipation',
                         label: 'Keine Teilnahme',
@@ -134,14 +164,13 @@ export const get = () => {
                       }
                     ].filter(i => !!i),
                   })),
-                  {
-                    name: 'fastestLap',
-                    label: 'Schnellste Runde',
-                    widget: 'select',
-                    options: Object.keys(racers),
-                    required: false,
-                  },
-                ],
+                {
+                  ...racerSelect,
+                  name: 'fastestLap',
+                  label: 'Schnellste Runde',
+                  required: false,
+                },
+              ],
             },
           ]
         }

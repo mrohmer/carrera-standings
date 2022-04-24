@@ -14,5 +14,10 @@ export interface Cup {
   info: {
     trackLength?: number;
     pitLaneLength?: number;
+    record?: {
+      racer?: string;
+      time?: number;
+      date?: string;
+    }
   }
 }

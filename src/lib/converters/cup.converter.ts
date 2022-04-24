@@ -16,6 +16,15 @@ const MONTHS = [
   'Dezember',
 ];
 
+const formatDate = (date: Date | string): string | undefined => {
+  if (!date) {
+    return undefined;
+  }
+  if (typeof date === 'string') {
+    date = new Date(date);
+  }
+  return `${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+}
 const getStartOrderForMainRace = (results): Record<string, number> => {
   return results
     ?.filter(({noParticipation, rounds, fastestLapTime}) => !noParticipation && !!rounds && !!fastestLapTime)
@@ -60,7 +69,20 @@ const getStartOrderForMainRace = (results): Record<string, number> => {
       }),
       {}
     )
-  ;
+    ;
+}
+const getInfo = (cup): Cup['info'] => {
+  const record: Cup['info']['record'] = cup.info?.record && ['racer', 'time'].some(k => !!cup.info?.record[k]) ? {
+    racer: cup.info?.record?.racer,
+    time: cup.info?.record?.time,
+    date: formatDate(cup.info?.record?.date),
+  } : undefined;
+
+  return {
+    trackLength: cup.info?.trackLength,
+    pitLaneLength: cup.info?.pitLaneLength,
+    record,
+  };
 }
 const getPoints = (results, points: number[]): Record<string, number> => {
   return results?.reduce(
@@ -73,7 +95,7 @@ const getPoints = (results, points: number[]): Record<string, number> => {
 };
 const getOrder = (points: Cup['points'][string]): string[] => Object.entries(points)
   .filter(([, points]) => !!points)
-  .sort(([,a], [,b]) => a < b ? 1 : -1)
+  .sort(([, a], [, b]) => a < b ? 1 : -1)
   .map(([key]) => key);
 export const cupConverter = (cup): Cup => {
   const rawPoints: Omit<Cup['points'], 'total'> = {
@@ -83,7 +105,7 @@ export const cupConverter = (cup): Cup => {
     penalty: (cup.results?.mainRace?.reduce(
       (prev, {racer, penalty}) => ({
         ...prev,
-        [racer]: penalty ? -penalty: 0,
+        [racer]: penalty ? -penalty : 0,
       }),
       {},
     ) ?? {}) as Record<string, number>
@@ -112,8 +134,6 @@ export const cupConverter = (cup): Cup => {
     fastestLap: !!cup.results?.fastestLap,
   };
 
-  const date = new Date(cup.date);
-
   return {
     title: cup.title,
     slug: cup.slug,
@@ -123,13 +143,13 @@ export const cupConverter = (cup): Cup => {
     },
     pointsDone,
     fastestLap: cup.results?.fastestLap,
-    penalties: cup.results?.mainRace?.filter(({penalty}) => !!penalty).reduce((prev, {racer, penalty}) => ({...prev, [racer]: penalty}), {}) ?? {},
+    penalties: cup.results?.mainRace?.filter(({penalty}) => !!penalty).reduce((prev, {racer, penalty}) => ({
+      ...prev,
+      [racer]: penalty
+    }), {}) ?? {},
     order: orderMainRace,
-    info: {
-      trackLength: cup.info?.trackLength,
-      pitLaneLength: cup.info?.pitLaneLength,
-    },
-    date: `${MONTHS[date.getMonth()]} ${date.getFullYear()}`,
+    info: getInfo(cup),
+    date: formatDate(cup.date),
     layout: cup.layout,
     startOrderForMainRace: Object.keys(startOrderForMainRace ?? {}).length ? startOrderForMainRace : undefined,
   }
