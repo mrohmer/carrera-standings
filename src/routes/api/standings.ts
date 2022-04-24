@@ -1,10 +1,10 @@
 import racers from '../../../content/racer.json';
-import {Cup} from '../../lib/models/cups';
+import type {Cup} from '../../lib/models/cups';
 import {cupConverter} from '../../lib/converters/cup.converter';
 import {readCupFiles} from '../../lib/utils/read-cup-files';
 import {calcTotalPoints} from '../../lib/utils/calc-total-points';
 import {racerMayStillWin} from '../../lib/utils/racer-may-still-win';
-import {Standings} from '../../lib/models';
+import type {Standings} from '../../lib/models';
 
 export const getStandings = (): Standings => {
   const rawCups = readCupFiles();

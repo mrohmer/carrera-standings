@@ -1,5 +1,6 @@
 import type {Cup} from '../models';
 import {calcTotalPoints} from './calc-total-points';
+import {filterCupsUntil} from './filter-cups-until';
 
 interface Extras {
   totalCups: number;
@@ -23,9 +24,8 @@ export const racerMayStillWin = (racer: string, cups: Cup[], extras?: Partial<Ex
     ...(extras ?? {}),
   };
   const {currentCupSlug} = extras;
-  let currentCupIndex = currentCupSlug ? cups.findIndex(cup => cup.slug === currentCupSlug) : -1;
-  currentCupIndex = currentCupIndex === -1 ? cups.length - 1 : currentCupIndex;
-  const evaluatedCups = cups.filter((cup, index) => cup.order?.length && index <= currentCupIndex);
+  const evaluatedCups = filterCupsUntil(cups, currentCupSlug)
+    .filter(cup => cup.order?.length);
 
   const totalPoints = calcTotalPoints(evaluatedCups);
   const leader = Object.entries(totalPoints)
