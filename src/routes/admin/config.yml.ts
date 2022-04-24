@@ -1,4 +1,5 @@
 import racers from '../../../content/racer.json';
+import type {RequestHandler} from '@sveltejs/kit';
 
 const getLocalBackend = () => {
   if (!!process.env.PROD) {
@@ -10,7 +11,7 @@ const getLocalBackend = () => {
   }
 }
 
-export const get = () => {
+export const get: RequestHandler = ({url}) => {
   const raceTypes = {
     timeTrial: 'Zeitfahren',
     mainRace: 'Hauptrennen',
@@ -185,6 +186,8 @@ export const get = () => {
         }
       ],
       local_backend: getLocalBackend(),
+      display_url: `${url.protocol}//${url.host}`,
+      locale: 'de',
     }
   }
 };
