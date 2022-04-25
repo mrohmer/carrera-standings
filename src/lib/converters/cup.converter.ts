@@ -86,9 +86,9 @@ const getInfo = (cup): Cup['info'] => {
 }
 const getPoints = (results, points: number[]): Record<string, number> => {
   return results?.reduce(
-    (prev, {racer, penalty}, index) => ({
+    (prev, {racer, penalty, noParticipation}, index) => ({
       ...prev,
-      [racer]: points[index],
+      [racer]: !noParticipation ? points[index] : points[points.length - 1],
     }),
     {},
   ) ?? {};
