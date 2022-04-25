@@ -76,5 +76,6 @@
     {/each}
     </tbody>
 
-    <MayStillWinLegend />
 </table>
+
+<MayStillWinLegend />

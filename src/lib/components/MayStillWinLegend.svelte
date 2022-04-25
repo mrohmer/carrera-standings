@@ -5,5 +5,5 @@
     }
 </style>
 <div class="may-still-win-legend">
-    * Gewinnsieg ist möglich
+    * Gesamtsieg ist möglich
 </div>
