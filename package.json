@@ -33,6 +33,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@rohmer/svelte-base": "^1.0.0",
     "layercake": "^6.1.0",
     "svelte-materialify": "^0.3.11"
   }

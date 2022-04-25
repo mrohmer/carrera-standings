@@ -15,6 +15,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import '../app.scss';
+	import PoweredBy from '@rohmer/svelte-base/PoweredBy.svelte';
 
 	export let cups: Record<'slug'|'title', string>
 </script>
@@ -83,3 +84,9 @@
 <main class="content">
 	<slot />
 </main>
+<footer>
+	<PoweredBy name="Matthias Rohmer"
+			   url="https://matthias.rohmer.rocks"
+			   technologies={['svelte', 'netlify']}
+			   sourceCodeUrl="https://github.com/mrohmer/carrera-standings" />
+</footer>
