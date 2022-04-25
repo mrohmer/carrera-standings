@@ -70,6 +70,9 @@
 		<a href="/" class:active={$page.url.pathname === '/'}>
 			Gesamt
 		</a>
+		<a href="/course" class:active={$page.url.pathname === '/course'}>
+			Verlauf
+		</a>
 		{#each cups as {title, slug}}
 			<a href="/{slug}" class:active={$page.url.pathname === `/${slug}`}>
 				{title}

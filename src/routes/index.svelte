@@ -32,6 +32,7 @@
 
 <script lang="ts">
     import type {Standings, Racers} from '$lib/models';
+    import MayStillWinLegend from "../lib/components/MayStillWinLegend.svelte";
 
     export let standings: Standings;
     export let racers: Racers;
@@ -41,12 +42,6 @@
   table {
     border-collapse: collapse;
     width: 100%;
-
-    .row {
-      &--may-still-win {
-        background: #e9f6ff;
-      }
-    }
   }
 </style>
 
@@ -63,8 +58,8 @@
     </thead>
     <tbody>
     {#each standings as {name, points, fastestLaps, wins, podiums, mayStillWin}, index}
-        <tr class="row" class:row--may-still-win={mayStillWin}>
-            <th class="cell cell--position">{index + 1}</th>
+        <tr class="row">
+            <th class="cell cell--position">{index + 1}{mayStillWin ? '*' : '&nbsp;'}</th>
             <td class="cell cell--name">
                 <div class="cell__line">
                     {name}
@@ -80,4 +75,6 @@
         </tr>
     {/each}
     </tbody>
+
+    <MayStillWinLegend />
 </table>

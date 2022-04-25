@@ -44,6 +44,7 @@
 <script lang="ts">
   import type {Cup, Racers} from '../lib/models';
   import {Tab, TabContent, Tabs} from "svelte-materialify";
+  import MayStillWinLegend from "../lib/components/MayStillWinLegend.svelte";
 
   export let cup: Cup & Record<'mayStillWin', Record<string, boolean>>;
   export let previous: Cup|undefined;
@@ -88,12 +89,6 @@
   table {
     border-collapse: collapse;
     width: 100%;
-
-    .row {
-      &--may-still-win {
-        background: #e9f6ff;
-      }
-    }
 
     .cell {
       &--penalty {
@@ -172,8 +167,8 @@
             {#if cup?.order?.length}
                 <tbody>
                 {#each cup.order as racer, index}
-                    <tr class="row" class:row--may-still-win={cup.mayStillWin[racer]}>
-                        <th class="cell cell--position">{index + 1}</th>
+                    <tr class="row">
+                        <th class="cell cell--position">{index + 1}{cup.mayStillWin[racer] ? '*' : '&nbsp;'}</th>
                         <td class="cell cell--name">
                             <div class="cell__line">
                                 {racer}
@@ -212,6 +207,8 @@
                 {cup?.title ?? 'Cup' } noch nicht gewertet
             </div>
         {/if}
+
+        <MayStillWinLegend />
     </TabContent>
     <TabContent>
         {#if cup?.layout}
