@@ -12,7 +12,7 @@
     export const loadRacers = async ({fetch}: LoadInput): Promise<Record<'racers', string[]>> => {
       const response = await fetch('/api/racers');
       const racers = await response.json();
-      return {racers: Object.keys(racers)};
+      return {racers};
     }
     export const load: Load = async (input) => {
       const results = await Promise.all([loadCourse(input), loadRacers(input)]);
@@ -31,7 +31,7 @@
 </script>
 
 <script lang="ts">
-    import type {Course} from '$lib/models';
+  import type {Course, Racers} from '$lib/models';
 
     import { LayerCake, Svg, Html } from 'layercake';
     import { scaleOrdinal } from 'd3-scale';
@@ -41,13 +41,15 @@
     import GroupLabels from "../lib/components/chart/GroupLabels.svelte";
 
     export let course: Course;
-    export let racers: string[];
+    export let racers: Racers;
 
     const xKey = 'cup';
     const yKey = 'rank';
     const zKey = 'racer';
-    const seriesNames = racers;
-    const seriesColors = ['#FF7B08', '#f50437', '#ffe4b8', '#ffb3c0', '#ff7ac7', '#ff00cc'];
+    const seriesNames = Object.keys(racers);
+    const seriesColors = Object.values(racers).map(({color}) => color);
+
+    console.log(seriesColors);
 
     /* --------------------------------------------
      * Create a "long" format that is a grouped series of data points
@@ -126,7 +128,7 @@
             />
             <AxisY
                     ticks={4}
-                    formatTick={rank => racers.length - rank}
+                    formatTick={rank => Object.keys(racers).length - rank}
             />
             <MultiLine/>
         </Svg>

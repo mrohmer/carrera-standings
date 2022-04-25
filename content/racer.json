@@ -1,20 +1,26 @@
 {
   "BAE": {
-    "manufacturer": "McLaren"
+    "manufacturer": "McLaren",
+    "color": "#ff7b08"
   },
   "HEG": {
-    "manufacturer": "Mercedes-Benz"
+    "manufacturer": "Mercedes-Benz",
+    "color": "#a4aaae"
   },
   "SOM": {
-    "manufacturer": "Ford"
+    "manufacturer": "Ford",
+    "color": "#133a7c"
   },
   "JAE": {
-    "manufacturer": "Aston Martin"
+    "manufacturer": "Aston Martin",
+    "color": "#156e48"
   },
   "ROH": {
-    "manufacturer": "Audi"
+    "manufacturer": "Audi",
+    "color": "#f50437"
   },
   "HOH": {
-    "manufacturer": "BMW"
+    "manufacturer": "BMW",
+    "color": "#009ada"
   }
 }
