@@ -49,8 +49,6 @@
     const seriesNames = Object.keys(racers);
     const seriesColors = Object.values(racers).map(({color}) => color);
 
-    console.log(seriesColors);
-
     /* --------------------------------------------
      * Create a "long" format that is a grouped series of data points
      * Layer Cake uses this data structure and the key names
