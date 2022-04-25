@@ -77,7 +77,7 @@
 
 <style>
     .tick {
-        font-size: .725em;
+        font-size: 16px;
         font-weight: 200;
     }
 
@@ -89,7 +89,7 @@
     }
 
     .tick text {
-        fill: #666;
+        fill: #fff;
     }
 
     .tick.tick-0 line {
