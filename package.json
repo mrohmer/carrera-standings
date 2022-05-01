@@ -37,6 +37,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fortawesome/fontawesome-free": "^5.15.4",
+		"@fortawesome/free-solid-svg-icons": "^5.15.4",
 		"@rohmer/svelte-base": "^1.0.0",
 		"layercake": "^6.1.0",
 		"svelte-materialify": "^0.3.11"

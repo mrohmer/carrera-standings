@@ -1,53 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 * {
-    box-sizing: border-box;
-    position: relative;
+	box-sizing: border-box;
+	position: relative;
 
-    font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
-html, body {
-    background: #202124;
-    color: #ddd;
+html,
+body {
+	background: #202124;
+	color: #ddd;
+}
+
+.content {
+	margin: auto;
+	max-width: 800px;
+	overflow: hidden;
 }
 
 a {
-    color: #fff;
+	color: #fff;
 }
 
 .row {
-    border-bottom: 1px solid #666;
+	border-bottom: 1px solid #666;
 
-    &:last-child {
-        border-bottom: none;
-    }
-    &--head {
-        border-bottom: 1px solid #aaa !important;
-    }
+	&:last-child {
+		border-bottom: none;
+	}
+	&--head {
+		border-bottom: 1px solid #aaa !important;
+	}
 }
 
 .cell {
-    border: none;
-    padding: 10px;
-    text-align: center;
-    vertical-align: top;
-    &, * {
-        color: #fff;
-    }
+	border: none;
+	padding: 10px;
+	text-align: center;
+	vertical-align: top;
+	&,
+	* {
+		color: #fff;
+	}
 
-    &--head {
-        vertical-align: bottom;
-    }
-    &--head, &__subline {
-        color: #aaa;
-        font-size: 12px;
-    }
+	&--head {
+		vertical-align: bottom;
+	}
+	&--head,
+	&__subline {
+		color: #aaa;
+		font-size: 12px;
+	}
 
-    &--position {
-        width: 35px;
-    }
+	&--position {
+		width: 35px;
+	}
 
-    &--name {
-        text-align: left;
-    }
+	&--name {
+		text-align: left;
+	}
 }
