@@ -11,12 +11,16 @@
 	export let cups: Cup[] = [];
 
 	let navEl: HTMLElement;
+	let leftButtonEl: HTMLButtonElement;
+	let rightButtonEl: HTMLButtonElement;
 	let outerWidth = 0;
 	let scrollPosition = 0;
 
 	const btnFadeOptions = {
 		duration: 200
 	};
+
+	let activeClicked: HTMLAnchorElement;
 
 	const onScrollBtnClick = (dir: number) => {
 		if (!navEl) {
@@ -27,15 +31,43 @@
 			left: scrollPosition + (outerWidth / 2) * dir
 		});
 	};
+	const onPageUrlChange = (active: HTMLAnchorElement) => {
+		const element = active ?? navEl?.querySelector('.active');
+		if (!element) {
+			return;
+		}
+		const leftButtonWidth = leftButtonEl?.offsetWidth ?? 40;
+		const rightButtonWidth = rightButtonEl?.offsetWidth ?? 40;
+
+		const left = element.offsetLeft - scrollPosition;
+		const right = left + element.offsetWidth;
+
+		const leftOverflow = left < leftButtonWidth;
+		const rightOverflow = right > outerWidth - rightButtonWidth;
+
+		if (leftOverflow) {
+			navEl.scrollTo({
+				left: left + scrollPosition - leftButtonWidth
+			});
+		} else if (rightOverflow) {
+			navEl.scrollTo({
+				left: right - outerWidth + scrollPosition + rightButtonWidth
+			});
+		}
+	};
+	const resetActiveClicked = () => (activeClicked = undefined);
 
 	$: innerWidth = navEl && outerWidth ? navEl.scrollWidth : 0;
 	$: overflowsLeft = scrollPosition > OVERFLOW_THRESHOLD;
 	$: overflowsRight = innerWidth - outerWidth - scrollPosition > OVERFLOW_THRESHOLD;
+	$: setTimeout(() => $page.url.pathname && onPageUrlChange(activeClicked), 1);
+	$: setTimeout(() => $page.url.pathname && resetActiveClicked(), 1);
 </script>
 
 <div class="nav content">
 	{#if overflowsLeft}
 		<button
+			bind:this={leftButtonEl}
 			class="btn btn--left"
 			on:click={() => onScrollBtnClick(-1)}
 			transition:fade={btnFadeOptions}
@@ -49,10 +81,26 @@
 		bind:offsetWidth={outerWidth}
 		on:scroll={() => (scrollPosition = navEl?.scrollLeft)}
 	>
-		<a href="/" class:active={$page.url.pathname === '/'}> Gesamt </a>
-		<a href="/course" class:active={$page.url.pathname === '/course'}> Verlauf </a>
+		<a
+			href="/"
+			class:active={$page.url.pathname === '/'}
+			on:click={({ target }) => (activeClicked = target)}
+		>
+			Gesamt
+		</a>
+		<a
+			href="/course"
+			class:active={$page.url.pathname === '/course'}
+			on:click={({ target }) => (activeClicked = target)}
+		>
+			Verlauf
+		</a>
 		{#each cups as { title, slug }}
-			<a href="/{slug}" class:active={decodeURIComponent($page.url.pathname) === `/${slug}`}>
+			<a
+				href="/{slug}"
+				class:active={decodeURIComponent($page.url.pathname) === `/${slug}`}
+				on:click={({ target }) => (activeClicked = target)}
+			>
 				{title}
 			</a>
 		{/each}
@@ -60,6 +108,7 @@
 
 	{#if overflowsRight}
 		<button
+			bind:this={rightButtonEl}
 			class="btn btn--right"
 			on:click={() => onScrollBtnClick(1)}
 			transition:fade={btnFadeOptions}
