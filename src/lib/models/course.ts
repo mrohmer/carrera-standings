@@ -1,7 +1,8 @@
-interface CourseCup {
-  cupTitle: string;
-  date: string;
-  points?: Record<string, number>;
-  order?: string[];
+import type { Cup } from './cups';
+
+export interface CourseCup {
+	cup: Pick<Cup, 'title' | 'order'>;
+	date: string;
+	order?: string[];
 }
 export type Course = CourseCup[];
