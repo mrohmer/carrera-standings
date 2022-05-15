@@ -41,6 +41,33 @@
         "rounds": 57,
         "fastestLapTime": 6.3
       }
-    ]
+    ],
+    "mainRace": [
+      {
+        "penalty": 1,
+        "racer": "ROH"
+      },
+      {
+        "penalty": 0,
+        "racer": "HOH"
+      },
+      {
+        "penalty": 1,
+        "racer": "HEG"
+      },
+      {
+        "penalty": 1,
+        "racer": "SOM"
+      },
+      {
+        "penalty": 0,
+        "racer": "BAE"
+      },
+      {
+        "penalty": 1,
+        "racer": "JAE"
+      }
+    ],
+    "fastestLap": "BAE"
   }
 }
