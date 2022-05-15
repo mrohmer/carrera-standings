@@ -3,7 +3,44 @@
   "title": "Maxfeld GP",
   "info": {
     "trackLength": 1756,
-    "pitLaneLength": 228
+    "pitLaneLength": 228,
+    "record": {
+      "date": "2022-05-15T14:15:29.994Z"
+    }
   },
-  "layout": "/uploads/strecke-2022-02.jpg"
+  "layout": "/uploads/strecke-2022-02.jpg",
+  "results": {
+    "timeTrial": [
+      {
+        "racer": "BAE",
+        "rounds": 90,
+        "fastestLapTime": 5.147
+      },
+      {
+        "racer": "HOH",
+        "rounds": 88,
+        "fastestLapTime": 5.502
+      },
+      {
+        "racer": "ROH",
+        "rounds": 85,
+        "fastestLapTime": 5.404
+      },
+      {
+        "racer": "HEG",
+        "rounds": 85,
+        "fastestLapTime": 5.323
+      },
+      {
+        "racer": "SOM",
+        "rounds": 81,
+        "fastestLapTime": 5.437
+      },
+      {
+        "racer": "JAE",
+        "rounds": 57,
+        "fastestLapTime": 6.3
+      }
+    ]
+  }
 }
