@@ -72,7 +72,7 @@
 	<div class="chart__container" bind:this={container}>
 		{#if render}
 			<LayerCake
-				padding={{ top: 15, right: 10, bottom: 50, left: 25 }}
+				padding={{ top: 15, right: 10, bottom: 125, left: 25 }}
 				x={xKey}
 				y={yKey}
 				z={zKey}
@@ -114,7 +114,7 @@
 		padding-top: 20px;
 		&__container {
 			width: 100%;
-			height: 600px;
+			height: 650px;
 			max-height: calc(100vh - 150px);
 		}
 	}
