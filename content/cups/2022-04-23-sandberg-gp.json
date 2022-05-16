@@ -1,56 +1,49 @@
 {
 	"date": "2022-04-23T08:39:02.764Z",
 	"title": "Sandberg GP",
+	"participation": {
+		"BAE": true,
+		"HEG": true,
+		"JAE": true,
+		"ROH": true,
+		"SOM": true
+	},
 	"results": {
-		"timeTrial": [
-			{
+		"timeTrial": {
+			"pos0": {
 				"racer": "BAE"
 			},
-			{
+			"pos1": {
 				"racer": "ROH"
 			},
-			{
+			"pos2": {
 				"racer": "HEG"
 			},
-			{
+			"pos3": {
 				"racer": "SOM"
 			},
-			{
+			"pos4": {
 				"racer": "JAE"
-			},
-			{
-				"racer": "HOH",
-				"noParticipation": true
 			}
-		],
+		},
 		"fastestLap": "ROH",
-		"mainRace": [
-			{
-				"penalty": 0,
+		"mainRace": {
+			"pos0": {
 				"racer": "BAE"
 			},
-			{
-				"penalty": 0,
+			"pos1": {
 				"racer": "SOM"
 			},
-			{
-				"penalty": 0,
+			"pos2": {
 				"racer": "HEG"
 			},
-			{
-				"penalty": 0,
+			"pos3": {
 				"racer": "JAE"
 			},
-			{
-				"penalty": 0,
+			"pos4": {
 				"racer": "ROH"
-			},
-			{
-				"penalty": 0,
-				"racer": "HOH",
-				"noParticipation": true
 			}
-		]
+		}
 	},
 	"info": {
 		"trackLength": 1420,

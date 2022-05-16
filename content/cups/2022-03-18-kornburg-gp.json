@@ -1,51 +1,53 @@
 {
 	"date": "2022-03-18T09:36:23.775Z",
 	"title": "Kornburg GP",
+	"participation": {
+		"BAE": true,
+		"HOH": true,
+		"JAE": true,
+		"ROH": true,
+		"SOM": true
+	},
 	"results": {
-		"timeTrial": [
-			{
+		"timeTrial": {
+			"pos0": {
 				"racer": "BAE"
 			},
-			{
+			"pos1": {
 				"racer": "HOH"
 			},
-			{
+			"pos2": {
 				"racer": "ROH"
 			},
-			{
+			"pos3": {
 				"racer": "SOM"
 			},
-			{
+			"pos4": {
 				"racer": "JAE"
-			},
-			{
-				"racer": "HEG"
 			}
-		],
-		"mainRace": [
-			{
+		},
+		"mainRace": {
+			"pos0": {
 				"racer": "BAE"
 			},
-			{
-				"racer": "SOM",
-				"penalty": 1
+			"pos1": {
+				"racer": "SOM"
 			},
-			{
-				"racer": "HOH",
-				"penalty": 1
+			"pos2": {
+				"racer": "HOH"
 			},
-			{
+			"pos3": {
 				"racer": "ROH"
 			},
-			{
-				"racer": "JAE",
-				"penalty": 1
-			},
-			{
-				"racer": "HEG",
-				"noParticipation": true
+			"pos4": {
+				"racer": "JAE"
 			}
-		],
+		},
+		"penalties": {
+			"HOH": 1,
+			"JAE": 1,
+			"SOM": 1
+		},
 		"fastestLap": "HOH"
 	},
 	"info": {

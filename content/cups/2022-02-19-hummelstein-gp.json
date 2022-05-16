@@ -1,48 +1,58 @@
 {
 	"date": "2022-02-19T09:33:31.258Z",
 	"title": "Hummelstein GP",
+	"participation": {
+		"BAE": true,
+		"HEG": true,
+		"HOH": true,
+		"JAE": true,
+		"ROH": true,
+		"SOM": true
+	},
 	"results": {
-		"timeTrial": [
-			{
+		"timeTrial": {
+			"pos0": {
 				"racer": "BAE"
 			},
-			{
+			"pos1": {
 				"racer": "HEG"
 			},
-			{
+			"pos2": {
 				"racer": "HOH"
 			},
-			{
+			"pos3": {
 				"racer": "ROH"
 			},
-			{
+			"pos4": {
 				"racer": "SOM"
 			},
-			{
+			"pos5": {
 				"racer": "JAE"
 			}
-		],
-		"mainRace": [
-			{
+		},
+		"mainRace": {
+			"pos0": {
 				"racer": "JAE"
 			},
-			{
+			"pos1": {
 				"racer": "ROH"
 			},
-			{
-				"racer": "HOH",
-				"penalty": 1
+			"pos2": {
+				"racer": "HOH"
 			},
-			{
+			"pos3": {
 				"racer": "HEG"
 			},
-			{
+			"pos4": {
 				"racer": "BAE"
 			},
-			{
+			"pos5": {
 				"racer": "SOM"
 			}
-		],
+		},
+		"penalties": {
+			"HOH": 1
+		},
 		"fastestLap": "BAE"
 	},
 	"info": {

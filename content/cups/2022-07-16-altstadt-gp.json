@@ -5,5 +5,13 @@
 		"trackLength": 1730,
 		"pitLaneLength": 204
 	},
-	"layout": "/uploads/strecke-2022-10.jpg"
+	"layout": "/uploads/strecke-2022-10.jpg",
+	"participation": {
+		"BAE": true,
+		"HEG": true,
+		"HOH": true,
+		"JAE": true,
+		"ROH": true,
+		"SOM": true
+	}
 }

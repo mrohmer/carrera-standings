@@ -9,65 +9,85 @@
 		}
 	},
 	"layout": "/uploads/strecke-2022-02.jpg",
+	"participation": {
+		"BAE": true,
+		"HEG": true,
+		"HOH": true,
+		"JAE": true,
+		"ROH": true,
+		"SOM": true
+	},
 	"results": {
-		"timeTrial": [
-			{
+		"timeTrial": {
+			"pos0": {
 				"racer": "BAE",
-				"rounds": 90,
-				"fastestLapTime": 5.147
+				"raceStats": {
+					"rounds": 90,
+					"fastestLapTime": 5.147
+				}
 			},
-			{
+			"pos1": {
 				"racer": "HOH",
-				"rounds": 88,
-				"fastestLapTime": 5.502
+				"raceStats": {
+					"rounds": 88,
+					"fastestLapTime": 5.502
+				}
 			},
-			{
+			"pos2": {
 				"racer": "ROH",
-				"rounds": 85,
-				"fastestLapTime": 5.404
+				"raceStats": {
+					"rounds": 85,
+					"fastestLapTime": 5.404
+				}
 			},
-			{
+			"pos3": {
 				"racer": "HEG",
-				"rounds": 85,
-				"fastestLapTime": 5.323
+				"raceStats": {
+					"rounds": 85,
+					"fastestLapTime": 5.323
+				}
 			},
-			{
+			"pos4": {
 				"racer": "SOM",
-				"rounds": 81,
-				"fastestLapTime": 5.437
+				"raceStats": {
+					"rounds": 81,
+					"fastestLapTime": 5.437
+				}
 			},
-			{
+			"pos5": {
 				"racer": "JAE",
-				"rounds": 57,
-				"fastestLapTime": 6.3
+				"raceStats": {
+					"rounds": 57,
+					"fastestLapTime": 6.3
+				}
 			}
-		],
-		"mainRace": [
-			{
-				"penalty": 1,
+		},
+		"mainRace": {
+			"pos0": {
 				"racer": "ROH"
 			},
-			{
-				"penalty": 0,
+			"pos1": {
 				"racer": "HOH"
 			},
-			{
-				"penalty": 1,
+			"pos2": {
 				"racer": "HEG"
 			},
-			{
-				"penalty": 1,
+			"pos3": {
 				"racer": "SOM"
 			},
-			{
-				"penalty": 0,
+			"pos4": {
 				"racer": "BAE"
 			},
-			{
-				"penalty": 1,
+			"pos5": {
 				"racer": "JAE"
 			}
-		],
+		},
+		"penalties": {
+			"HEG": 1,
+			"JAE": 1,
+			"ROH": 1,
+			"SOM": 1
+		},
 		"fastestLap": "BAE"
 	}
 }

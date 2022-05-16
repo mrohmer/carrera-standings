@@ -1,50 +1,60 @@
 {
 	"date": "2022-01-15T08:12:01.388Z",
 	"title": "Ziegelstein GP",
+	"participation": {
+		"BAE": true,
+		"HEG": true,
+		"HOH": true,
+		"JAE": true,
+		"ROH": true,
+		"SOM": true
+	},
 	"results": {
-		"timeTrial": [
-			{
+		"timeTrial": {
+			"pos0": {
 				"racer": "HEG"
 			},
-			{
+			"pos1": {
 				"racer": "BAE"
 			},
-			{
+			"pos2": {
 				"racer": "HOH"
 			},
-			{
+			"pos3": {
 				"racer": "SOM"
 			},
-			{
+			"pos4": {
 				"racer": "JAE"
 			},
-			{
+			"pos5": {
 				"racer": "ROH"
 			}
-		],
-		"mainRace": [
-			{
+		},
+		"mainRace": {
+			"pos0": {
 				"racer": "BAE"
 			},
-			{
-				"racer": "HOH",
-				"penalty": 1
+			"pos1": {
+				"racer": "HOH"
 			},
-			{
-				"racer": "HEG",
-				"penalty": 1
+			"pos2": {
+				"racer": "HEG"
 			},
-			{
-				"racer": "SOM",
-				"penalty": 1
+			"pos3": {
+				"racer": "SOM"
 			},
-			{
+			"pos4": {
 				"racer": "ROH"
 			},
-			{
+			"pos5": {
 				"racer": "JAE"
 			}
-		],
+		},
+		"penalties": {
+			"HOH": 1,
+			"HEG": 1,
+			"SOM": 1
+		},
 		"fastestLap": "HEG"
 	},
 	"info": {
