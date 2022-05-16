@@ -85,6 +85,7 @@
 			href="/"
 			class:active={$page.url.pathname === '/'}
 			on:click={({ target }) => (activeClicked = target)}
+			sveltekit:prefetch
 		>
 			Gesamt
 		</a>
@@ -92,6 +93,7 @@
 			href="/course"
 			class:active={$page.url.pathname === '/course'}
 			on:click={({ target }) => (activeClicked = target)}
+			sveltekit:prefetch
 		>
 			Verlauf
 		</a>
@@ -100,6 +102,7 @@
 				href="/{slug}"
 				class:active={decodeURIComponent($page.url.pathname) === `/${slug}`}
 				on:click={({ target }) => (activeClicked = target)}
+				sveltekit:prefetch
 			>
 				{title}
 			</a>
