@@ -136,7 +136,15 @@ const getPoints = (
 				let p = 0;
 
 				if (!participation[racer]) {
-					p = points[points.length - 1];
+					const notParticipatingDriverCount = Object.keys(racers).filter(
+						(i) => !participation[i]
+					).length;
+					const sharedPoints = [...points]
+						.reverse()
+						.filter((_, i) => i < notParticipatingDriverCount)
+						.reduce((prev, curr) => prev + curr, 0);
+
+					p = sharedPoints / notParticipatingDriverCount;
 				} else {
 					const index = resultsArr.findIndex((result) => result.racer === racer);
 					if (index >= 0) {
