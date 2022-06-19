@@ -1,5 +1,6 @@
 import type { Cup } from '../models';
 import racers from '../../../content/racer.json';
+import ms from 'ms';
 
 const MONTHS = [
 	'Januar',
@@ -32,6 +33,7 @@ interface CupContent {
 	title: string;
 	slug: string;
 	date: string;
+	liveSessionId: string;
 	layout: string;
 }
 
@@ -124,6 +126,22 @@ const getInfo = (cup: CupContent): Cup['info'] => {
 		record
 	};
 };
+const getLiveSessionId = ({
+	liveSessionId,
+	date
+}: Pick<CupContent, 'liveSessionId' | 'date'>): string | undefined => {
+	if (!liveSessionId || !date) {
+		return undefined;
+	}
+
+	const dateObj = new Date(date);
+	const now = new Date();
+	if (+now - ms('3d') > +dateObj || +now + ms('2d') < +dateObj) {
+		return undefined;
+	}
+
+	return liveSessionId;
+};
 const getPoints = (
 	results: Results,
 	participation: Participation,
@@ -167,6 +185,7 @@ const getOrder = (points: Cup['points'][keyof Cup['points']]): string[] =>
 		.filter(([, points]) => !!points)
 		.sort(([, a], [, b]) => (a < b ? 1 : -1))
 		.map(([key]) => key);
+
 export const cupConverter = (cup: CupContent): Cup => {
 	const rawPoints: Omit<Cup['points'], 'total'> = {
 		mainRace: getPoints(cup.results?.mainRace, cup.participation ?? {}, [10, 8, 6, 4, 2, 1]),
@@ -213,6 +232,7 @@ export const cupConverter = (cup: CupContent): Cup => {
 		order: orderMainRace,
 		info: getInfo(cup),
 		date: formatDate(cup.date),
+		liveSessionId: getLiveSessionId(cup),
 		layout: cup.layout,
 		startOrderForMainRace: Object.keys(startOrderForMainRace ?? {}).length
 			? startOrderForMainRace

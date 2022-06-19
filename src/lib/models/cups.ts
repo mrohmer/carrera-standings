@@ -9,6 +9,7 @@ export interface Cup {
 	fastestLap?: string;
 	order: string[];
 	date?: string;
+	liveSessionId?: string;
 	layout?: string;
 	startOrderForMainRace?: Record<string, number>;
 

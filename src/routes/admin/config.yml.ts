@@ -73,6 +73,11 @@ export const get: RequestHandler = ({ url }) => {
 							choose_url: false
 						},
 						{
+							label: 'Live-Session ID',
+							name: 'liveSessionId',
+							required: false
+						},
+						{
 							name: 'info',
 							label: 'Info',
 							widget: 'object',

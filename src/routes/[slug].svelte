@@ -104,6 +104,11 @@
 			: undefined;
 </script>
 
+{#if cup?.liveSessionId}
+	<a href="https://carrera-live.rohmer.rocks/{cup.liveSessionId}" class="live-session">
+		Live Session
+	</a>
+{/if}
 <Tabs fixedTabs grow>
 	<div slot="tabs">
 		<Tab>Tabelle</Tab>
@@ -375,6 +380,44 @@
 
 		img {
 			width: 100%;
+		}
+	}
+
+	.live-session {
+		display: block;
+		width: fit-content;
+		max-width: 75%;
+		margin: 20px auto 30px;
+		text-align: center;
+		text-decoration: none;
+		border: 2px solid white;
+		padding: 15px 30px;
+		color: white;
+		font-weight: bold;
+		font-size: 20px;
+
+		&:after {
+			$size: 8px;
+			content: '';
+			display: inline-block;
+			width: $size;
+			height: $size;
+			border-radius: 50%;
+			background: #ff0000;
+			vertical-align: top;
+			margin: 3px 0 0 3px;
+
+			animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+		}
+	}
+
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.6;
 		}
 	}
 </style>
