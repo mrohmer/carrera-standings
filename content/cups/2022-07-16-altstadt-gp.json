@@ -47,6 +47,21 @@
           "fastestLapTime": 5.847
         }
       }
-    }
+    },
+    "mainRace": {
+      "pos1": {
+        "racer": "BAE"
+      },
+      "pos2": {
+        "racer": "SOM"
+      },
+      "pos3": {
+        "racer": "ROH"
+      },
+      "pos4": {
+        "racer": "JAE"
+      }
+    },
+    "fastestLap": "BAE"
   }
 }
