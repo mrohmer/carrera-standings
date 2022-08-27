@@ -59,7 +59,7 @@
     <tbody>
     {#each standings as {name, points, fastestLaps, wins, podiums, mayStillWin}, index}
         <tr class="row">
-            <th class="cell cell--position">{index + 1}{mayStillWin ? '*' : '&nbsp;'}</th>
+            <th class="cell cell--position">{index + 1}{@html mayStillWin ? '&asterisk' : '&nbsp;'}</th>
             <td class="cell cell--name">
                 <div class="cell__line">
                     {name}
