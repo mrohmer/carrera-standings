@@ -54,6 +54,9 @@
           "fastestLapTime": 4.981
         }
       }
+    },
+    "penalties": {
+      "JAE": 1
     }
   }
 }
