@@ -5,7 +5,9 @@
     "trackLength": 1537,
     "pitLaneLength": 217,
     "record": {
-      "date": "2022-08-27T18:27:49.768Z"
+      "date": "2022-08-27T18:27:49.768Z",
+      "racer": "BAE",
+      "time": 4.139
     }
   },
   "layout": "/uploads/strecke-2022-03.jpg",
@@ -56,7 +58,27 @@
       }
     },
     "penalties": {
-      "JAE": 1
-    }
+      "JAE": 2,
+      "BAE": 1,
+      "ROH": 1
+    },
+    "mainRace": {
+      "pos1": {
+        "racer": "SOM"
+      },
+      "pos2": {
+        "racer": "ROH"
+      },
+      "pos3": {
+        "racer": "BAE"
+      },
+      "pos4": {
+        "racer": "HOH"
+      },
+      "pos5": {
+        "racer": "JAE"
+      }
+    },
+    "fastestLap": "BAE"
   }
 }
