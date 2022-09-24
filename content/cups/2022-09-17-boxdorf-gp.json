@@ -16,5 +16,44 @@
     "JAE": true,
     "ROH": true,
     "SOM": false
+  },
+  "results": {
+    "timeTrial": {
+      "pos1": {
+        "racer": "HOH",
+        "raceStats": {
+          "rounds": 111,
+          "fastestLapTime": 3.868
+        }
+      },
+      "pos2": {
+        "racer": "BAE",
+        "raceStats": {
+          "rounds": 107,
+          "fastestLapTime": 3.881
+        }
+      },
+      "pos3": {
+        "racer": "HEG",
+        "raceStats": {
+          "rounds": 97,
+          "fastestLapTime": 4.102
+        }
+      },
+      "pos4": {
+        "racer": "ROH",
+        "raceStats": {
+          "rounds": 94,
+          "fastestLapTime": 4.288
+        }
+      },
+      "pos5": {
+        "racer": "JAE",
+        "raceStats": {
+          "rounds": 70,
+          "fastestLapTime": 4.201
+        }
+      }
+    }
   }
 }
