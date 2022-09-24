@@ -56,7 +56,25 @@
           "fastestLapTime": 4.201
         }
       }
-    }
+    },
+    "mainRace": {
+      "pos1": {
+        "racer": "HEG"
+      },
+      "pos2": {
+        "racer": "ROH"
+      },
+      "pos3": {
+        "racer": "HOH"
+      },
+      "pos4": {
+        "racer": "BAE"
+      },
+      "pos5": {
+        "racer": "JAE"
+      }
+    },
+    "fastestLap": "HEG"
   },
   "liveSessionId": "cma_2022/1737"
 }
