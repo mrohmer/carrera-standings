@@ -1,11 +1,12 @@
 import type { Standings } from '../models';
 import type { Cup } from '../models';
-import { cupConverter } from './cup.converter';
+import { cupConverter } from './cup';
 import { calcTotalPoints } from '../utils/calc-total-points';
 import { racerMayStillWin } from '../utils/racer-may-still-win';
 import racers from '../../../content/racer.json';
+import type { CupContent } from '../models/content/cup';
 
-export const standingsConverter = (rawCups: Record<string, any>[]): Standings => {
+export const standingsConverter = (rawCups: CupContent[]): Standings => {
 	const cups: Cup[] = rawCups.map((cup) => cupConverter(cup));
 
 	const points = calcTotalPoints(cups);

@@ -1,8 +1,9 @@
-import type { Cup } from '../../lib/models/cups';
-import { cupConverter } from '../../lib/converters/cup.converter';
-import { readCupFiles } from '../../lib/utils/read-cup-files';
-import type { Course, Standings } from '../../lib/models';
-import { standingsConverter } from '../../lib/converters/standings.converter';
+import type { Cup } from '$lib/models/cups';
+import { cupConverter } from '$lib/converters/cup';
+import { readCupFiles } from '$lib/utils/read-cup-files';
+import type { Course, Standings } from '$lib/models';
+import { standingsConverter } from '$lib/converters/standings.converter';
+import type { CupContent } from '../../lib/models/content/cup';
 
 export const getCourse = (): Course => {
 	const rawCups = readCupFiles();
@@ -11,9 +12,9 @@ export const getCourse = (): Course => {
 		.map(
 			(cup, index, arr) =>
 				[cup, cupConverter(cup), arr.filter((__, i) => index >= i)] as [
-					Record<string, any>,
+					CupContent,
 					Cup,
-					Record<string, any>[]
+					CupContent[]
 				]
 		)
 		.map(([rawCup, cup, cups]) => {
