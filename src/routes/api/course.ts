@@ -23,7 +23,7 @@ export const getCourse = (): Course => {
 			);
 			const standings: Standings | undefined = hasStandings ? standingsConverter(cups) : undefined;
 
-			const order = standings?.map(({ name }) => name);
+			const order = standings?.standings?.map(({ name }) => name);
 
 			const origDate = new Date(rawCup.date);
 			return {

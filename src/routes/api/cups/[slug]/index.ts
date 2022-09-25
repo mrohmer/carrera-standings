@@ -5,6 +5,10 @@ import { cupConverter } from '$lib/converters/cup';
 import { racerMayStillWin } from '$lib/utils/racer-may-still-win';
 import type { RequestEvent } from '@sveltejs/kit/types/private';
 import type { Cup } from '$lib/models';
+import {
+	getCupsWithoutDiscardedResults,
+	getWorstResultsByRacer
+} from '../../../../lib/utils/discarded-results';
 
 export const validateSlug = ({ params }: Pick<RequestEvent, 'params'>): boolean => {
 	const { slug } = params;
@@ -13,7 +17,7 @@ export const validateSlug = ({ params }: Pick<RequestEvent, 'params'>): boolean 
 export const getCup = ({
 	params
 }: Pick<RequestEvent, 'params'>):
-	| (Cup & Record<'mayStillWin', Record<string, boolean>>)
+	| (Cup & Record<'mayStillWin' | 'discardedResult', string[]>)
 	| undefined => {
 	const { slug } = params;
 	const cup = readCupFile(slug);
@@ -26,24 +30,22 @@ export const getCup = ({
 
 	const cups = readCupFiles().map((cup) => cupConverter(cup));
 	const mayStillWin = Object.keys(racers)
-		.map(
-			(name) =>
-				[name, racerMayStillWin(name, cups, { currentCupSlug: convertedCup.slug })] as [
-					string,
-					boolean
-				]
+		.map((name) =>
+			racerMayStillWin(name, getCupsWithoutDiscardedResults(cups), {
+				currentCupSlug: convertedCup.slug
+			})
+				? name
+				: undefined!
 		)
-		.reduce(
-			(prev, [key, value]) => ({
-				...prev,
-				[key]: value
-			}),
-			{}
-		);
+		.filter((name) => !!name);
+	const discardedResult = Object.keys(racers)
+		.map((name) => (getWorstResultsByRacer(name, cups).includes(cup.slug) ? name : undefined!))
+		.filter((name) => !!name);
 
 	return {
 		...convertedCup,
-		mayStillWin
+		mayStillWin,
+		discardedResult
 	};
 };
 export const get: RequestHandler = (event) => {

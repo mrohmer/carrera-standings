@@ -48,7 +48,7 @@
 	import { Tab, TabContent, Tabs } from 'svelte-materialify';
 	import MayStillWinLegend from '../lib/components/MayStillWinLegend.svelte';
 
-	export let cup: Cup & Record<'mayStillWin', Record<string, boolean>>;
+	export let cup: Cup & Record<'mayStillWin' | 'discardedResults', string[]>;
 	export let previous: Cup | undefined;
 	export let racers: Racers;
 
@@ -142,26 +142,38 @@
 					{#each cup.order as racer, index}
 						<tr class="row">
 							<th class="cell cell--position"
-								>{calcPosition(index, cup.points.total[racer])}{cup.mayStillWin[racer]
+								>{calcPosition(index, cup.points.total[racer])}{cup.mayStillWin?.includes(racer)
 									? '*'
 									: ' '}</th
 							>
 							<td class="cell cell--name">
 								<div class="cell__line">
-									{racer}
+									<span class:strikethrough={cup.discardedResult?.includes(racer)}>{racer}</span>
+									{#if cup.discardedResult?.includes(racer)}
+										<span class="cell__subline">(Streichergebnis)</span>
+									{/if}
 								</div>
 								<div class="cell__subline">
 									{racers[racer].manufacturer}
 								</div>
 							</td>
-							<td class="cell cell--total">{cup.points.total[racer] ?? '-'}</td>
-							<td class="cell cell--time-trial">
+							<td
+								class="cell cell--total"
+								class:strikethrough={cup.discardedResult?.includes(racer)}
+							>
+								{cup.points.total[racer] ?? '-'}
+							</td>
+							<td
+								class="cell cell--time-trial"
+								class:strikethrough={cup.discardedResult?.includes(racer)}
+							>
 								{cup.points.timeTrial[racer] ?? '-'}
 							</td>
 							<td
 								class="cell cell--main-race"
 								class:cell--fastest-lap={racer === cup.fastestLap}
 								class:cell--fastest-lap-set={!!cup.fastestLap}
+								class:strikethrough={cup.discardedResult?.includes(racer)}
 							>
 								<div class="cell__line">
 									{getMainPoints(racer) ?? '-'}
@@ -171,9 +183,12 @@
 									<div class="cell__subline">(schnellste)</div>
 								{/if}
 							</td>
-							<td class="cell cell--penalty"
-								>{cup.points.penalty[racer] ? -cup.points.penalty[racer] : '-'}</td
+							<td
+								class="cell cell--penalty"
+								class:strikethrough={cup.discardedResult?.includes(racer)}
 							>
+								{cup.points.penalty[racer] ? -cup.points.penalty[racer] : '-'}
+							</td>
 						</tr>
 					{/each}
 				</tbody>
@@ -409,6 +424,10 @@
 
 			animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 		}
+	}
+
+	.strikethrough {
+		text-decoration: line-through;
 	}
 
 	@keyframes pulse {
