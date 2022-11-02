@@ -320,6 +320,9 @@
 						<th class="cell cell--head cell--position">Startnummer</th>
 						<th class="cell cell--head cell--name">Fahrer</th>
 						<th class="cell cell--head">Start in Runde</th>
+						{#if cup.info.trackLength}
+							<th class="cell cell--head">Mehrstrecke</th>
+						{/if}
 					</tr>
 				</thead>
 				<tbody>
@@ -337,6 +340,13 @@
 								</div>
 							</td>
 							<td class="cell">{rounds}</td>
+							{#if cup.info.trackLength}
+								<td class="cell">
+									{#if rounds !== 0}
+										{((rounds * cup.info.trackLength) / 100).toFixed(2)} m
+									{/if}
+								</td>
+							{/if}
 						</tr>
 					{/each}
 				</tbody>
