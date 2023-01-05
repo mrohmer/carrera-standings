@@ -99,8 +99,8 @@
 		</a>
 		{#each cups as { title, slug }}
 			<a
-				href="/{slug}"
-				class:active={decodeURIComponent($page.url.pathname).startsWith(`/${slug}`)}
+				href="/cups/{slug}"
+				class:active={decodeURIComponent($page.url.pathname).startsWith(`/cups/${slug}`)}
 				on:click={({ target }) => (activeClicked = target)}
 				sveltekit:prefetch
 			>

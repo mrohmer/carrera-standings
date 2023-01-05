@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import '../app.scss';
-	import '../app.css';
+	import '../../app.scss';
+	import '../../app.css';
 	import PoweredBy from '@rohmer/svelte-base/PoweredBy.svelte';
-	import Navigation from '../lib/components/Navigation.svelte';
+	import Navigation from '$lib/components/Navigation.svelte';
 	import { goto } from '$app/navigation';
 
 	export let data: Record<'cups', Record<'slug' | 'title', string>[]>;

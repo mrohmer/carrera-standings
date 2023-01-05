@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MayStillWinLegend from '../lib/components/MayStillWinLegend.svelte';
+	import MayStillWinLegend from '$lib/components/MayStillWinLegend.svelte';
 	import type { Racers, Standings } from '$lib/models';
 
 	export let data: Record<'standings', Standings> & Record<'racers', Racers>;

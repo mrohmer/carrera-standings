@@ -1,5 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import racers from '../../../../../content/racer.json';
+import racers from '../../../../../../content/racer.json';
 import { readCupFile, readCupFiles } from '$lib/utils/read-cup-files';
 import { cupConverter } from '$lib/converters/cup';
 import { racerMayStillWin } from '$lib/utils/racer-may-still-win';

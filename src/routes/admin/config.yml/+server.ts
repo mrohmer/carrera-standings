@@ -1,5 +1,4 @@
-import racers from '../../../../content/racer.json';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 
 const getLocalBackend = () => {
 	if (process.env.PROD) {
@@ -11,7 +10,13 @@ const getLocalBackend = () => {
 	};
 };
 
-export const GET: RequestHandler = ({ url }) => {
+const loadRacers = async ({ fetch }: RequestEvent) => {
+	const response = await fetch(`/api/${new Date().getFullYear()}/racers`);
+	return response.json();
+};
+export const GET: RequestHandler = async (event) => {
+	const { url } = event;
+	const racers = await loadRacers(event);
 	const raceTypes = {
 		timeTrial: 'Zeitfahren',
 		mainRace: 'Hauptrennen'

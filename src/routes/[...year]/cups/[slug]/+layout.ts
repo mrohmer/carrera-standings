@@ -2,6 +2,7 @@ import type { Load, LoadEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import type { Cup, Racers } from '$lib/models';
 import { validateSlug } from '$lib/api/validate-slug';
+import { getYear } from '$lib/api/get-year';
 
 export const prerender = true;
 
@@ -9,7 +10,8 @@ const loadCup = async ({
 	fetch,
 	params
 }: LoadEvent): Promise<Cup & Record<'mayStillWin' | 'discardedResult', string[]>> => {
-	const response = await fetch(`/api/cups/${params.slug}`);
+	const year = getYear({ params });
+	const response = await fetch(`/api/${year}/cups/${params.slug}`);
 	const cup = await response.json();
 	if (!cup) {
 		throw error(404);
@@ -17,11 +19,13 @@ const loadCup = async ({
 	return cup;
 };
 const loadPreviousCup = async ({ fetch, params }: LoadEvent): Promise<Cup> => {
-	const response = await fetch(`/api/cups/${params.slug}/previous`);
+	const year = getYear({ params });
+	const response = await fetch(`/api/${year}/cups/${params.slug}/previous`);
 	return await response.json();
 };
-const loadRacers = async ({ fetch }: LoadEvent): Promise<Record<'racers', Racers>> => {
-	const response = await fetch('/api/racers');
+const loadRacers = async ({ fetch, params }: LoadEvent): Promise<Record<'racers', Racers>> => {
+	const year = getYear({ params });
+	const response = await fetch(`/api/${year}/racers`);
 	return await response.json();
 };
 export const load: Load = async (event: LoadEvent) => {
