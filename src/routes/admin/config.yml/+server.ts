@@ -1,9 +1,8 @@
 import racers from '../../../../content/racer.json';
 import type { RequestHandler } from '@sveltejs/kit';
-import { PROD } from '$env/dynamic/private';
 
 const getLocalBackend = () => {
-	if (PROD) {
+	if (process.env.PROD) {
 		return undefined;
 	}
 
