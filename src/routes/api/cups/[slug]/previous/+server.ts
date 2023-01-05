@@ -2,13 +2,14 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { readCupFile, readCupFiles } from '$lib/utils/read-cup-files';
 import { cupConverter } from '$lib/converters/cup';
 import { filterCupsUntil } from '$lib/utils/filter-cups-until';
-import { validateSlug } from './index';
-import type { RequestEvent } from '@sveltejs/kit/types/private';
+import type { RequestEvent } from '@sveltejs/kit';
 import type { Cup } from '$lib/models';
+import { error } from '@sveltejs/kit';
+import { validateSlug } from '$lib/api/validate-slug';
 
 export const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefined => {
 	const { slug } = params;
-	const cup = readCupFile(slug);
+	const cup = readCupFile(slug!);
 
 	if (!cup) {
 		return undefined;
@@ -23,22 +24,16 @@ export const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | 
 	}
 	return cupConverter(previous);
 };
-export const get: RequestHandler = (event) => {
+export const GET: RequestHandler = (event) => {
 	if (!validateSlug(event)) {
-		return {
-			status: 400
-		};
+		throw error(400);
 	}
 
 	const previous = getPreviousCup(event);
 
 	if (!previous) {
-		return {
-			status: 404
-		};
+		throw error(404);
 	}
 
-	return {
-		body: previous as any
-	};
+	return new Response(JSON.stringify(previous));
 };

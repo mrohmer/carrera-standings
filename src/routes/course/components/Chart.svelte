@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Racers, Course, CourseCup } from '../../lib/models';
+	import type { Racers, Course, CourseCup } from '$lib/models';
 
 	import { LayerCake, Svg, Html } from 'layercake';
 	import { scaleOrdinal } from 'd3-scale';

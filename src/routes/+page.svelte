@@ -1,41 +1,8 @@
-<script lang="ts" context="module">
-	import type { Load, LoadInput } from '@sveltejs/kit';
-	import type { Racers, Standings } from '$lib/models';
-
-	export const prerender = true;
-
-	export const loadStandings = async ({
-		fetch
-	}: LoadInput): Promise<Record<'standings', Standings>> => {
-		const response = await fetch('/api/standings');
-		const standings = await response.json();
-		return { standings };
-	};
-	export const loadRacers = async ({ fetch }: LoadInput): Promise<Record<'racers', Racers>> => {
-		const response = await fetch('/api/racers');
-		const racers = await response.json();
-		return { racers };
-	};
-	export const load: Load = async (input) => {
-		const results = await Promise.all([loadStandings(input), loadRacers(input)]);
-		const props = results.reduce(
-			(prev, curr) => ({
-				...prev,
-				...curr
-			}),
-			{}
-		);
-		return {
-			props
-		};
-	};
-</script>
-
 <script lang="ts">
 	import MayStillWinLegend from '../lib/components/MayStillWinLegend.svelte';
+	import type { Racers, Standings } from '$lib/models';
 
-	export let standings: Standings;
-	export let racers: Racers;
+	export let data: Record<'standings', Standings> & Record<'racers', Racers>;
 </script>
 
 <table>
@@ -50,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each standings.standings as { name, points, pointsWithDiscardedResults, fastestLaps, wins, podiums, mayStillWin }, index}
+		{#each data.standings.standings as { name, points, pointsWithDiscardedResults, fastestLaps, wins, podiums, mayStillWin }, index}
 			<tr class="row">
 				<th class="cell cell--position">{index + 1}{@html mayStillWin ? '*' : '&nbsp;'}</th>
 				<td class="cell cell--name">
@@ -58,14 +25,14 @@
 						{name}
 					</div>
 					<div class="cell__subline">
-						{racers[name].manufacturer}
+						{data.racers[name].manufacturer}
 					</div>
 				</td>
 				<td class="cell">
 					<div class="cell__line">
 						{points}
 					</div>
-					{#if standings.hasDiscardedResults}
+					{#if data.standings.hasDiscardedResults}
 						<div class="cell__subline">
 							({pointsWithDiscardedResults})
 						</div>

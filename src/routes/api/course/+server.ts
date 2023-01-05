@@ -3,7 +3,8 @@ import { cupConverter } from '$lib/converters/cup';
 import { readCupFiles } from '$lib/utils/read-cup-files';
 import type { Course, Standings } from '$lib/models';
 import { standingsConverter } from '$lib/converters/standings.converter';
-import type { CupContent } from '../../lib/models/content/cup';
+import type { CupContent } from '$lib/models/content/cup';
+import type { RequestHandler } from '@sveltejs/kit';
 
 export const getCourse = (): Course => {
 	const rawCups = readCupFiles();
@@ -40,4 +41,4 @@ export const getCourse = (): Course => {
 		});
 };
 
-export const get = () => ({ body: getCourse() });
+export const GET: RequestHandler = () => new Response(JSON.stringify(getCourse()));

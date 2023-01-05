@@ -1,65 +1,23 @@
-<script lang="ts" context="module">
-	import type { Load } from '@sveltejs/kit';
-	import type { LoadInput } from '@sveltejs/kit';
-	import type { Cup, Racers } from '../lib/models';
-
-	export const prerender = true;
-
-	export const loadCup = async ({
-		fetch,
-		params
-	}: LoadInput): Promise<Record<'cup' | 'previous', Cup>> => {
-		const { slug } = params;
-
-		const response = await fetch(`/${slug}.json`);
-		const cup = await response.json();
-		return cup;
-	};
-	export const loadRacers = async ({ fetch }: LoadInput): Promise<Record<'racers', Racers>> => {
-		const response = await fetch('/api/racers');
-		const racers = await response.json();
-		return { racers };
-	};
-	export const load: Load = async (input) => {
-		const { params } = input;
-		const { slug } = params;
-
-		if (!slug?.trim?.()?.length) {
-			return {
-				status: 400
-			};
-		}
-		const results = await Promise.all([loadCup(input), loadRacers(input)]);
-		const props = results.reduce(
-			(prev, curr) => ({
-				...prev,
-				...curr
-			}),
-			{}
-		);
-		return {
-			props
-		};
-	};
-</script>
-
 <script lang="ts">
-	import type { Cup, Racers } from '../lib/models';
+	import type { Cup, Racers } from '$lib/models';
 	import { Tab, TabContent, Tabs } from 'svelte-materialify';
-	import MayStillWinLegend from '../lib/components/MayStillWinLegend.svelte';
+	import MayStillWinLegend from '$lib/components/MayStillWinLegend.svelte';
 
-	export let cup: Cup & Record<'mayStillWin' | 'discardedResults', string[]>;
-	export let previous: Cup | undefined;
-	export let racers: Racers;
+	interface Data {
+		cup: Cup & Record<'mayStillWin' | 'discardedResults', string[]>;
+		previous: Cup | undefined;
+		racers: Racers;
+	}
+	export let data: Data;
 
 	const getMainPoints = (racer: string): number | undefined => {
-		const mainRace = cup.points.mainRace[racer];
+		const mainRace = data.cup.points.mainRace[racer];
 
 		if (!(mainRace >= 0)) {
 			return undefined;
 		}
 
-		return mainRace + +(cup.fastestLap === racer);
+		return mainRace + +(data.cup.fastestLap === racer);
 	};
 
 	const NORMAL_TANK_VALUE = 5;
@@ -83,8 +41,8 @@
 			return 1;
 		}
 
-		const prevDriver = cup?.order?.[index - 1];
-		const prevPoints = prevDriver ? cup?.points?.total?.[prevDriver] : undefined;
+		const prevDriver = data.cup?.order?.[index - 1];
+		const prevPoints = prevDriver ? data.cup?.points?.total?.[prevDriver] : undefined;
 		if (prevPoints && points === prevPoints) {
 			return calcPosition(index - 1, prevPoints);
 		}
@@ -93,19 +51,19 @@
 	};
 
 	$: hasStartOrderForMainRace =
-		cup?.startOrderForMainRace && Object.keys(cup.startOrderForMainRace).length;
+		data.cup?.startOrderForMainRace && Object.keys(data.cup.startOrderForMainRace).length;
 	$: hasDefaultInfoTable =
-		['trackLength', 'pitLaneLength'].some((key) => !!cup?.info[key]) || !!cup?.date;
-	$: hasRecordTable = !!cup?.info?.record;
-	$: hasPenalties = !!previous?.order?.length;
+		['trackLength', 'pitLaneLength'].some((key) => !!data.cup?.info[key]) || !!data.cup?.date;
+	$: hasRecordTable = !!data.cup?.info?.record;
+	$: hasPenalties = !!data.previous?.order?.length;
 	$: totalRounds =
-		hasDefaultInfoTable && cup.info.trackLength
-			? Math.ceil(305000 / cup.info.trackLength)
+		hasDefaultInfoTable && data.cup.info.trackLength
+			? Math.ceil(305000 / data.cup.info.trackLength)
 			: undefined;
 </script>
 
-{#if cup?.liveSessionId}
-	<a href="https://carrera-live.rohmer.rocks/{cup.liveSessionId}" class="live-session">
+{#if data.cup?.liveSessionId}
+	<a href="https://carrera-live.rohmer.rocks/{data.cup.liveSessionId}" class="live-session">
 		Live Session
 	</a>
 {/if}
@@ -131,63 +89,67 @@
 					<th class="cell cell--head cell--time-trial">Zeit</th>
 					<th
 						class="cell cell--head cell--main-race"
-						class:cell--fastest-lap-set={!!cup?.fastestLap}>Haupt</th
+						class:cell--fastest-lap-set={!!data.cup?.fastestLap}>Haupt</th
 					>
 					<th class="cell cell--head">Strafe</th>
 				</tr>
 			</thead>
 
-			{#if cup?.order?.length}
+			{#if data.cup?.order?.length}
 				<tbody>
-					{#each cup.order as racer, index}
+					{#each data.cup.order as racer, index}
 						<tr class="row">
 							<th class="cell cell--position"
-								>{calcPosition(index, cup.points.total[racer])}{cup.mayStillWin?.includes(racer)
+								>{calcPosition(index, data.cup.points.total[racer])}{data.cup.mayStillWin?.includes(
+									racer
+								)
 									? '*'
 									: ' '}</th
 							>
 							<td class="cell cell--name">
 								<div class="cell__line">
-									<span class:strikethrough={cup.discardedResult?.includes(racer)}>{racer}</span>
-									{#if cup.discardedResult?.includes(racer)}
+									<span class:strikethrough={data.cup.discardedResult?.includes(racer)}
+										>{racer}</span
+									>
+									{#if data.cup.discardedResult?.includes(racer)}
 										<span class="cell__subline">(Streichergebnis)</span>
 									{/if}
 								</div>
 								<div class="cell__subline">
-									{racers[racer].manufacturer}
+									{data.racers[racer].manufacturer}
 								</div>
 							</td>
 							<td
 								class="cell cell--total"
-								class:strikethrough={cup.discardedResult?.includes(racer)}
+								class:strikethrough={data.cup.discardedResult?.includes(racer)}
 							>
-								{cup.points.total[racer] ?? '-'}
+								{data.cup.points.total[racer] ?? '-'}
 							</td>
 							<td
 								class="cell cell--time-trial"
-								class:strikethrough={cup.discardedResult?.includes(racer)}
+								class:strikethrough={data.cup.discardedResult?.includes(racer)}
 							>
-								{cup.points.timeTrial[racer] ?? '-'}
+								{data.cup.points.timeTrial[racer] ?? '-'}
 							</td>
 							<td
 								class="cell cell--main-race"
-								class:cell--fastest-lap={racer === cup.fastestLap}
-								class:cell--fastest-lap-set={!!cup.fastestLap}
-								class:strikethrough={cup.discardedResult?.includes(racer)}
+								class:cell--fastest-lap={racer === data.cup.fastestLap}
+								class:cell--fastest-lap-set={!!data.cup.fastestLap}
+								class:strikethrough={data.cup.discardedResult?.includes(racer)}
 							>
 								<div class="cell__line">
 									{getMainPoints(racer) ?? '-'}
 								</div>
 
-								{#if racer === cup.fastestLap}
+								{#if racer === data.cup.fastestLap}
 									<div class="cell__subline">(schnellste)</div>
 								{/if}
 							</td>
 							<td
 								class="cell cell--penalty"
-								class:strikethrough={cup.discardedResult?.includes(racer)}
+								class:strikethrough={data.cup.discardedResult?.includes(racer)}
 							>
-								{cup.points.penalty[racer] ? -cup.points.penalty[racer] : '-'}
+								{data.cup.points.penalty[racer] ? -data.cup.points.penalty[racer] : '-'}
 							</td>
 						</tr>
 					{/each}
@@ -195,18 +157,18 @@
 			{/if}
 		</table>
 
-		{#if !cup?.order?.length}
+		{#if !data.cup?.order?.length}
 			<div class="info-not-yet">
-				{cup?.title ?? 'Cup'} noch nicht gewertet
+				{data.cup?.title ?? 'Cup'} noch nicht gewertet
 			</div>
 		{/if}
 
 		<MayStillWinLegend />
 	</TabContent>
 	<TabContent>
-		{#if cup?.layout}
+		{#if data.cup?.layout}
 			<div class="layout">
-				<img src={cup.layout} alt="Streckenlayout" />
+				<img src={data.cup.layout} alt="Streckenlayout" />
 			</div>
 		{/if}
 		{#if hasDefaultInfoTable || hasRecordTable}
@@ -214,26 +176,29 @@
 				<h3 class="info-headline">Streckeninfo</h3>
 				<table class="info-table">
 					<tbody>
-						{#if cup?.date}
+						{#if data.cup?.date}
 							<tr class="info-table__row">
 								<th class="info-table__item info-table__item--label">Datum</th>
-								<td class="info-table__item info-table__item--value">{cup?.date}</td>
+								<td class="info-table__item info-table__item--value">{data.cup?.date}</td>
 							</tr>
 						{/if}
-						{#if cup.info?.trackLength}
+						{#if data.cup.info?.trackLength}
 							<tr class="info-table__row">
 								<th class="info-table__item info-table__item--label">Streckenlänge</th>
-								<td class="info-table__item info-table__item--value">{cup.info.trackLength} cm</td>
+								<td class="info-table__item info-table__item--value"
+									>{data.cup.info.trackLength} cm</td
+								>
 							</tr>
 							<tr class="info-table__row">
 								<th class="info-table__item info-table__item--label">Runden</th>
 								<td class="info-table__item info-table__item--value">{totalRounds}</td>
 							</tr>
 						{/if}
-						{#if cup.info?.pitLaneLength}
+						{#if data.cup.info?.pitLaneLength}
 							<tr class="info-table__row">
 								<th class="info-table__item info-table__item--label">Länge Box</th>
-								<td class="info-table__item info-table__item--value">{cup.info.pitLaneLength} cm</td
+								<td class="info-table__item info-table__item--value"
+									>{data.cup.info.pitLaneLength} cm</td
 								>
 							</tr>
 						{/if}
@@ -246,12 +211,12 @@
 					<tbody>
 						<tr class="info-table__row">
 							<th class="info-table__item info-table__item--label"
-								>{cup.info.record.racer ?? '-'}</th
+								>{data.cup.info.record.racer ?? '-'}</th
 							>
 							<td class="info-table__item info-table__item--value">
-								{cup.info.record.time ? `${cup.info.record.time}s` : '-'}
-								{#if cup.info.record.date}
-									({cup.info.record.date})
+								{data.cup.info.record.time ? `${data.cup.info.record.time}s` : '-'}
+								{#if data.cup.info.record.date}
+									({data.cup.info.record.date})
 								{/if}
 							</td>
 						</tr>
@@ -260,7 +225,7 @@
 			{/if}
 		{:else}
 			<div class="info-not-yet">
-				Keine Infos zu {cup?.title ?? 'Cup'} hinterlegt
+				Keine Infos zu {data.cup?.title ?? 'Cup'} hinterlegt
 			</div>
 		{/if}
 	</TabContent>
@@ -279,9 +244,9 @@
 					</tr>
 				</thead>
 
-				{#if previous?.order?.length}
+				{#if data.previous?.order?.length}
 					<tbody>
-						{#each previous.order as racer, index}
+						{#each data.previous.order as racer, index}
 							<tr class="row">
 								<th class="cell cell--position">{index + 1}</th>
 								<td class="cell cell--name">
@@ -289,7 +254,7 @@
 										{racer}
 									</div>
 									<div class="cell__subline">
-										{racers[racer].manufacturer}
+										{data.racers[racer].manufacturer}
 									</div>
 								</td>
 								<td class="cell">
@@ -320,13 +285,13 @@
 						<th class="cell cell--head cell--position">Startnummer</th>
 						<th class="cell cell--head cell--name">Fahrer</th>
 						<th class="cell cell--head">Start in Runde</th>
-						{#if cup.info.trackLength}
+						{#if data.cup.info.trackLength}
 							<th class="cell cell--head">Mehrstrecke</th>
 						{/if}
 					</tr>
 				</thead>
 				<tbody>
-					{#each Object.entries(cup.startOrderForMainRace).sort( ([, a], [, b]) => (a < b ? -1 : 1) ) as [racer, rounds], index}
+					{#each Object.entries(data.cup.startOrderForMainRace).sort( ([, a], [, b]) => (a < b ? -1 : 1) ) as [racer, rounds], index}
 						<tr class="row">
 							<th class="cell cell--position">
 								{index + 1}
@@ -336,14 +301,14 @@
 									{racer}
 								</div>
 								<div class="cell__subline">
-									{racers[racer].manufacturer}
+									{data.racers[racer].manufacturer}
 								</div>
 							</td>
 							<td class="cell">{rounds}</td>
-							{#if cup.info.trackLength}
+							{#if data.cup.info.trackLength}
 								<td class="cell">
 									{#if rounds !== 0}
-										{((rounds * cup.info.trackLength) / 100).toFixed(2)} m
+										{((rounds * data.cup.info.trackLength) / 100).toFixed(2)} m
 									{/if}
 								</td>
 							{/if}

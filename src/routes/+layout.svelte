@@ -1,17 +1,3 @@
-<script lang="ts" context="module">
-	import type { Load } from '@sveltejs/kit';
-
-	export const load: Load = async ({ fetch }) => {
-		const response = await fetch('/api/cups');
-		const cups = await response.json();
-		return {
-			props: {
-				cups
-			}
-		};
-	};
-</script>
-
 <script lang="ts">
 	import { page } from '$app/stores';
 	import '../app.scss';
@@ -19,7 +5,7 @@
 	import Navigation from '../lib/components/Navigation.svelte';
 	import { goto } from '$app/navigation';
 
-	export let cups: Record<'slug' | 'title', string>[];
+	export let data: Record<'cups', Record<'slug' | 'title', string>[]>;
 
 	const swipe = async (node: HTMLElement) => {
 		if (typeof window === 'undefined') {
@@ -45,19 +31,19 @@
 			const newIndex = indexInStaticPages + dir;
 
 			if (newIndex < 0) {
-				return cups?.length
-					? `/${cups[cups.length - 1].slug}`
+				return data?.cups?.length
+					? `/${data.cups[data.cups.length - 1].slug}`
 					: staticPages[staticPages.length - 1];
 			}
 			if (newIndex >= staticPages.length) {
-				return cups?.length ? `/${cups[0].slug}` : staticPages[0];
+				return data?.cups?.length ? `/${data.cups[0].slug}` : staticPages[0];
 			}
 
 			return staticPages[newIndex];
 		}
 
-		if (cups?.length) {
-			const indexInCups = cups.findIndex((i) => {
+		if (data?.cups?.length) {
+			const indexInCups = data.cups.findIndex((i) => {
 				return decodeURIComponent(url) === `/${i.slug}`;
 			});
 
@@ -67,11 +53,11 @@
 				if (newIndex < 0) {
 					return staticPages[staticPages.length - 1];
 				}
-				if (newIndex >= cups.length) {
+				if (newIndex >= data.cups.length) {
 					return staticPages[0];
 				}
 
-				return `/${cups[newIndex].slug}`;
+				return `/${data.cups[newIndex].slug}`;
 			}
 		}
 
@@ -96,7 +82,7 @@
 </svelte:head>
 
 <header>
-	<Navigation {cups} />
+	<Navigation cups={data.cups} />
 </header>
 <div class="main" use:swipe on:swipeleft={swipeLeft} on:swiperight={swipeRight}>
 	<main class="content">
