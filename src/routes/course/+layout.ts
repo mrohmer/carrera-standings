@@ -13,4 +13,13 @@ const loadRacers = async ({ fetch }: LoadEvent): Promise<Record<'racers', string
 	const racers = await response.json();
 	return { racers };
 };
-export const load: Load = ({ parent }) => parent();
+export const load: Load = async (input) => {
+	const results = await Promise.all([loadCourse(input), loadRacers(input)]);
+	return results.reduce(
+		(prev, curr) => ({
+			...prev,
+			...curr
+		}),
+		{}
+	);
+};
