@@ -8,4 +8,6 @@
 		order ? [...order]?.reverse().indexOf(key) : null;
 </script>
 
-<Chart course={data.course} racers={data.racers} mapOrder={orderMappingTotal} />
+{#if data.course?.length}
+	<Chart course={data.course} racers={data.racers} mapOrder={orderMappingTotal} />
+{/if}

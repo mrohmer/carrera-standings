@@ -1,21 +1,23 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { readCupFile, readCupFiles } from '$lib/utils/read-cup-files';
+import { readCupFile, readCupFiles } from '$lib/utils/read-content-files';
 import { cupConverter } from '$lib/converters/cup';
 import { filterCupsUntil } from '$lib/utils/filter-cups-until';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { Cup } from '$lib/models';
 import { error } from '@sveltejs/kit';
 import { validateSlug } from '$lib/api/validate-slug';
+import { getYear } from '$lib/api/get-year';
 
 export const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefined => {
 	const { slug } = params;
-	const cup = readCupFile(slug!);
+	const year = getYear({ params });
+	const cup = readCupFile(year, slug!);
 
 	if (!cup) {
 		return undefined;
 	}
 
-	const previous = filterCupsUntil(readCupFiles(), slug)
+	const previous = filterCupsUntil(readCupFiles(year), slug)
 		.reverse()
 		.find((c) => c.slug !== slug);
 

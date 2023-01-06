@@ -1,11 +1,12 @@
-import type { CupContentParticipation, CupContentPositionResult } from '../../models/content/cup';
-import { cupResultToArr } from '../../utils/cup-results-to-arr';
-import racers from '../../../../content/racer.json';
+import type { CupContentParticipation, CupContentPositionResult } from '$lib/models/content/cup';
+import { cupResultToArr } from '$lib/utils/cup-results-to-arr';
+import type { Racers } from '$lib/models';
 
 export const pointsConverter = (
 	results: CupContentPositionResult,
 	participation: CupContentParticipation,
-	points: number[]
+	points: number[],
+	racers: Racers
 ): Record<string, number> => {
 	const resultsArr = cupResultToArr(results);
 	return (

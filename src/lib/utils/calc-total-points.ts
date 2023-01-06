@@ -1,7 +1,10 @@
 import type { Cup } from '../models';
-import racers from '../../../content/racer.json';
+import type { Racers } from '../models';
 
-export const calcTotalPoints = (cups: Pick<Cup, 'points'>[]): Record<string, number> =>
+export const calcTotalPoints = (
+	cups: Pick<Cup, 'points'>[],
+	racers: Racers
+): Record<string, number> =>
 	cups.reduce(
 		(prev, cup) =>
 			Object.keys(racers).reduce(
@@ -11,5 +14,5 @@ export const calcTotalPoints = (cups: Pick<Cup, 'points'>[]): Record<string, num
 				}),
 				{}
 			),
-		{}
+		{} as Record<string, number>
 	);

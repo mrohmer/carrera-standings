@@ -1,6 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import racers from '../../../../../../content/racer.json';
-import { readCupFile, readCupFiles } from '$lib/utils/read-cup-files';
+import { readCupFile, readCupFiles, readRacersFile } from '$lib/utils/read-content-files';
 import { cupConverter } from '$lib/converters/cup';
 import { racerMayStillWin } from '$lib/utils/racer-may-still-win';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -11,6 +10,7 @@ import {
 } from '$lib/utils/discarded-results';
 import { validateSlug } from '$lib/api/validate-slug';
 import { error } from '@sveltejs/kit';
+import { getYear } from '$lib/api/get-year';
 
 const getCup = ({
 	params
@@ -18,18 +18,25 @@ const getCup = ({
 	| (Cup & Record<'mayStillWin' | 'discardedResult', string[]>)
 	| undefined => {
 	const { slug } = params;
-	const cup = readCupFile(slug!);
+	const year = getYear({ params });
+	const cup = readCupFile(year, slug!);
 
 	if (!cup) {
 		return undefined;
 	}
 
-	const convertedCup = cupConverter(cup);
+	const racers = readRacersFile(year);
 
-	const cups = readCupFiles().map((cup) => cupConverter(cup));
+	if (!racers) {
+		return undefined;
+	}
+
+	const convertedCup = cupConverter(cup, racers);
+
+	const cups = readCupFiles(year).map((cup) => cupConverter(cup, racers));
 	const mayStillWin = Object.keys(racers)
 		.map((name) =>
-			racerMayStillWin(name, getCupsWithoutDiscardedResults(cups), {
+			racerMayStillWin(name, getCupsWithoutDiscardedResults(cups, racers), {
 				currentCupSlug: convertedCup.slug
 			})
 				? name

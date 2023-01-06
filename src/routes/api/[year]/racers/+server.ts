@@ -1,4 +1,9 @@
-import racers from '../../../../../content/racer.json';
 import type { RequestHandler } from '@sveltejs/kit';
+import { getYear } from '$lib/api/get-year';
+import { readRacersFile } from '$lib/utils/read-content-files';
 
-export const GET: RequestHandler = () => new Response(JSON.stringify(racers));
+export const GET: RequestHandler = (event) => {
+	const year = getYear(event);
+
+	return new Response(JSON.stringify(readRacersFile(year) ?? {}));
+};

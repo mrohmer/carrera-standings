@@ -1,4 +1,5 @@
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
+import { getYear } from '$lib/api/get-year';
 
 const getLocalBackend = () => {
 	if (process.env.PROD) {
@@ -15,7 +16,8 @@ const loadRacers = async ({ fetch }: RequestEvent) => {
 	return response.json();
 };
 export const GET: RequestHandler = async (event) => {
-	const { url } = event;
+	const { url, params } = event;
+	const year = getYear(event);
 	const racers = await loadRacers(event);
 	const raceTypes = {
 		timeTrial: 'Zeitfahren',
@@ -48,9 +50,76 @@ export const GET: RequestHandler = async (event) => {
 		public_folder: '/uploads',
 		collections: [
 			{
+				name: 'files',
+				label: 'Files',
+				files: [
+					{
+						label: 'Manufacturer',
+						name: 'manufacturer',
+						file: `content/${year}/manufacturer.json`,
+						extension: 'json',
+						editor: {
+							preview: false
+						},
+						fields: [
+							{
+								label: 'Manufacturer',
+								name: 'manufacturer',
+								widget: 'list',
+								fields: [
+									{
+										label: 'Name',
+										name: 'name',
+										widget: 'string'
+									}
+								]
+							}
+						]
+					},
+					{
+						label: 'Racers',
+						name: 'racers',
+						file: `content/${year}/racer.json`,
+						extension: 'json',
+						editor: {
+							preview: false
+						},
+						fields: [
+							{
+								label: 'Racers',
+								name: 'racers',
+								widget: 'list',
+								fields: [
+									{
+										label: 'Key',
+										name: 'key',
+										widget: 'string'
+									},
+									{
+										label: 'Manufacturer',
+										name: 'manufacturer',
+										widget: 'relation',
+										collection: `files`,
+										file: `manufacturer`,
+										valueField: 'manufacturer.*.name',
+										displayFields: ['manufacturer.*.name'],
+										searchFields: ['manufacturer.*.name']
+									},
+									{
+										label: 'Color',
+										name: 'color',
+										widget: 'color'
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
 				name: 'cup',
 				label: 'Cup',
-				folder: 'content/cups',
+				folder: `content/${year}/cups`,
 				create: true,
 				slug: '{{year}}-{{month}}-{{day}}-{{title}}',
 				summary: '{{title}} ({{day}}.{{month}}.{{year}})',

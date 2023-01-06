@@ -1,13 +1,15 @@
 import type { Cup } from '$lib/models/cups';
 import { cupConverter } from '$lib/converters/cup';
-import { readCupFiles } from '$lib/utils/read-cup-files';
+import { readCupFiles } from '$lib/utils/read-content-files';
 import type { Course, Standings } from '$lib/models';
 import { standingsConverter } from '$lib/converters/standings.converter';
 import type { CupContent } from '$lib/models/content/cup';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
+import { getYear } from '$lib/api/get-year';
 
-export const getCourse = (): Course => {
-	const rawCups = readCupFiles();
+export const getCourse = (event: RequestEvent): Course => {
+	const year = getYear(event);
+	const rawCups = readCupFiles(year);
 
 	return rawCups
 		.map(
@@ -41,4 +43,4 @@ export const getCourse = (): Course => {
 		});
 };
 
-export const GET: RequestHandler = () => new Response(JSON.stringify(getCourse()));
+export const GET: RequestHandler = (event) => new Response(JSON.stringify(getCourse(event)));

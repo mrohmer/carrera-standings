@@ -1,0 +1,22 @@
+{
+	"manufacturer": [
+		{
+			"name": "McLaren"
+		},
+		{
+			"name": "Mercedes-Benz"
+		},
+		{
+			"name": "Ford"
+		},
+		{
+			"name": "Aston Martin"
+		},
+		{
+			"name": "Audi"
+		},
+		{
+			"name": "BMW"
+		}
+	]
+}

@@ -1,0 +1,84 @@
+{
+	"date": "2022-08-20T08:40:11.178Z",
+	"title": "Langwasser GP",
+	"info": {
+		"trackLength": 1537,
+		"pitLaneLength": 217,
+		"record": {
+			"date": "2022-08-27T18:27:49.768Z",
+			"racer": "BAE",
+			"time": 4.139
+		}
+	},
+	"layout": "/uploads/strecke-2022-03.jpg",
+	"participation": {
+		"BAE": true,
+		"HEG": false,
+		"HOH": true,
+		"JAE": true,
+		"ROH": true,
+		"SOM": true
+	},
+	"results": {
+		"timeTrial": {
+			"pos1": {
+				"racer": "HOH",
+				"raceStats": {
+					"rounds": 97,
+					"fastestLapTime": 4.69
+				}
+			},
+			"pos2": {
+				"racer": "BAE",
+				"raceStats": {
+					"rounds": 94,
+					"fastestLapTime": 4.642
+				}
+			},
+			"pos3": {
+				"racer": "ROH",
+				"raceStats": {
+					"rounds": 88,
+					"fastestLapTime": 5.02
+				}
+			},
+			"pos4": {
+				"racer": "SOM",
+				"raceStats": {
+					"rounds": 82,
+					"fastestLapTime": 4.79
+				}
+			},
+			"pos5": {
+				"racer": "JAE",
+				"raceStats": {
+					"rounds": 69,
+					"fastestLapTime": 4.981
+				}
+			}
+		},
+		"penalties": {
+			"JAE": 2,
+			"BAE": 1,
+			"ROH": 1
+		},
+		"mainRace": {
+			"pos1": {
+				"racer": "SOM"
+			},
+			"pos2": {
+				"racer": "ROH"
+			},
+			"pos3": {
+				"racer": "BAE"
+			},
+			"pos4": {
+				"racer": "HOH"
+			},
+			"pos5": {
+				"racer": "JAE"
+			}
+		},
+		"fastestLap": "BAE"
+	}
+}
