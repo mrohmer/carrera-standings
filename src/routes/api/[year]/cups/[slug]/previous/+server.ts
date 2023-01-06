@@ -8,7 +8,7 @@ import { error } from '@sveltejs/kit';
 import { validateSlug } from '$lib/api/validate-slug';
 import { getYear } from '$lib/api/get-year';
 
-export const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefined => {
+const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefined => {
 	const { slug } = params;
 	const year = getYear({ params });
 	const cup = readCupFile(year, slug!);
