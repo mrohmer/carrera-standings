@@ -3,6 +3,8 @@ import { URL } from 'url';
 import fs from 'fs';
 import type { CupContent } from '../models/content/cup';
 import type { Racers } from '$lib/models';
+import { env } from '$env/dynamic/private';
+
 const readJsonFile = <T = any>(file: string): T | undefined => {
 	if (!fs.existsSync(file)) {
 		return undefined;
@@ -18,8 +20,7 @@ const readJsonFile = <T = any>(file: string): T | undefined => {
 	return JSON.parse(rawJson);
 };
 const getContentsDir = (year: number) => {
-	const rootDir =
-		process.env.ROOT_DIR ?? path.resolve(new URL('.', import.meta.url).pathname, '../../..');
+	const rootDir = env.ROOT_DIR ?? path.resolve(new URL('.', import.meta.url).pathname, '../../..');
 	return path.resolve(rootDir, 'content', String(year));
 };
 const readContentFile = <T = any>(year: number, file: string): T | undefined =>

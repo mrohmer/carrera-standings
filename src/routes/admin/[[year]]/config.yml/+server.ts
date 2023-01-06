@@ -1,8 +1,9 @@
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { getYear } from '$lib/api/get-year';
+import { env } from '$env/dynamic/private';
 
 const getLocalBackend = () => {
-	if (process.env.PROD) {
+	if (env.PROD) {
 		return undefined;
 	}
 
