@@ -35,7 +35,7 @@
 	>
 		{#each Object.entries(tabs) as [path, label]}
 			{@const href = `${urlPrefix}/cups/${data.cup.slug}${path}`}
-			{@const isActive = $page.url.pathname === href}
+			{@const isActive = $page.url.pathname === encodeURI(href)}
 			<li class="md:mr-2">
 				<a
 					{href}
