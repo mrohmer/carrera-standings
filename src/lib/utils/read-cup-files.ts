@@ -2,10 +2,10 @@ import path from 'path';
 import { URL } from 'url';
 import fs from 'fs';
 import type { CupContent } from '../models/content/cup';
+import { env } from '$env/dynamic/private';
 
 const getCupsDir = () => {
-	const rootDir =
-		process.env.ROOT_DIR ?? path.resolve(new URL('.', import.meta.url).pathname, '../../..');
+	const rootDir = env.ROOT_DIR ?? path.resolve(new URL('.', import.meta.url).pathname, '../../..');
 	return path.resolve(rootDir, 'content/cups');
 };
 const processCupFile = (file: string): CupContent => {
