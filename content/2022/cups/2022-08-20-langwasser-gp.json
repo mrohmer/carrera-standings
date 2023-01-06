@@ -11,14 +11,7 @@
 		}
 	},
 	"layout": "/uploads/strecke-2022-03.jpg",
-	"participation": {
-		"BAE": true,
-		"HEG": false,
-		"HOH": true,
-		"JAE": true,
-		"ROH": true,
-		"SOM": true
-	},
+	"participation": ["HEG"],
 	"results": {
 		"timeTrial": {
 			"pos1": {
@@ -57,11 +50,20 @@
 				}
 			}
 		},
-		"penalties": {
-			"JAE": 2,
-			"BAE": 1,
-			"ROH": 1
-		},
+		"penalties": [
+			{
+				"racer": "JAE",
+				"points": 2
+			},
+			{
+				"racer": "BAE",
+				"points": 1
+			},
+			{
+				"racer": "ROH",
+				"points": 1
+			}
+		],
 		"mainRace": {
 			"pos1": {
 				"racer": "SOM"

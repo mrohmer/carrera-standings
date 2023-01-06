@@ -1,14 +1,7 @@
 {
 	"date": "2022-01-15T08:12:01.388Z",
 	"title": "Ziegelstein GP",
-	"participation": {
-		"BAE": true,
-		"HEG": true,
-		"HOH": true,
-		"JAE": true,
-		"ROH": true,
-		"SOM": true
-	},
+	"participation": [],
 	"results": {
 		"timeTrial": {
 			"pos0": {
@@ -50,11 +43,20 @@
 				"racer": "JAE"
 			}
 		},
-		"penalties": {
-			"HOH": 1,
-			"HEG": 1,
-			"SOM": 1
-		},
+		"penalties": [
+			{
+				"racer": "HOH",
+				"points": 1
+			},
+			{
+				"racer": "HEG",
+				"points": 1
+			},
+			{
+				"racer": "SOM",
+				"points": 1
+			}
+		],
 		"fastestLap": "HEG"
 	},
 	"info": {

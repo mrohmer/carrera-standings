@@ -1,13 +1,7 @@
 {
 	"date": "2022-03-18T09:36:23.775Z",
 	"title": "Kornburg GP",
-	"participation": {
-		"BAE": true,
-		"HOH": true,
-		"JAE": true,
-		"ROH": true,
-		"SOM": true
-	},
+	"participation": ["HEG"],
 	"results": {
 		"timeTrial": {
 			"pos0": {
@@ -43,11 +37,20 @@
 				"racer": "JAE"
 			}
 		},
-		"penalties": {
-			"HOH": 1,
-			"JAE": 1,
-			"SOM": 1
-		},
+		"penalties": [
+			{
+				"racer": "HOH",
+				"points": 1
+			},
+			{
+				"racer": "JAE",
+				"points": 1
+			},
+			{
+				"racer": "SOM",
+				"points": 1
+			}
+		],
 		"fastestLap": "HOH"
 	},
 	"info": {

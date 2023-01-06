@@ -16,9 +16,8 @@ const loadRacers = async ({ fetch }: RequestEvent) => {
 	return response.json();
 };
 export const GET: RequestHandler = async (event) => {
-	const { url, params } = event;
+	const { url } = event;
 	const year = getYear(event);
-	const racers = await loadRacers(event);
 	const raceTypes = {
 		timeTrial: 'Zeitfahren',
 		mainRace: 'Hauptrennen'
@@ -27,8 +26,12 @@ export const GET: RequestHandler = async (event) => {
 	const racerSelect = {
 		name: 'racer',
 		label: 'Fahrer',
-		widget: 'select',
-		options: Object.keys(racers),
+		widget: 'relation',
+		collection: `files`,
+		file: `racers`,
+		valueField: 'racers.*.key',
+		displayFields: ['racers.*.key'],
+		searchFields: ['racers.*.key'],
 		required: false
 	};
 
@@ -203,17 +206,20 @@ export const GET: RequestHandler = async (event) => {
 						]
 					},
 					{
-						label: 'Teilnahme',
+						label: 'Fehlende',
 						name: 'participation',
 						collapsed: true,
-						widget: 'object',
-						fields: Object.keys(racers).map((name) => ({
-							name,
-							label: name,
-							widget: 'boolean',
-							default: true,
-							required: false
-						}))
+						widget: 'list',
+						field: {
+							label: 'Name',
+							name: 'name',
+							widget: 'relation',
+							collection: `files`,
+							file: `racers`,
+							valueField: 'racers.*.key',
+							displayFields: ['racers.*.key'],
+							searchFields: ['racers.*.key']
+						}
 					},
 					{
 						label: 'Results',
@@ -226,7 +232,7 @@ export const GET: RequestHandler = async (event) => {
 								label,
 								collapsed: true,
 								widget: 'object',
-								fields: Object.keys(racers).map((_, index) => ({
+								fields: Array.from(new Array(8)).map((_, index) => ({
 									name: `pos${index + 1}`,
 									label: `Position ${index + 1}`,
 									widget: 'object',
@@ -264,17 +270,29 @@ export const GET: RequestHandler = async (event) => {
 							{
 								name: 'penalties',
 								label: 'Strafpunkte',
-								widget: 'object',
+								widget: 'list',
 								collapsed: true,
-								fields: Object.keys(racers).map((name) => ({
-									name,
-									label: name,
-									widget: 'number',
-									required: false,
-									default: 0,
-									min: 0,
-									max: 100
-								}))
+								fields: [
+									{
+										label: 'Racer',
+										name: 'racer',
+										widget: 'relation',
+										collection: `files`,
+										file: `racers`,
+										valueField: 'racers.*.key',
+										displayFields: ['racers.*.key'],
+										searchFields: ['racers.*.key']
+									},
+									{
+										name: 'points',
+										label: 'Punkte',
+										widget: 'number',
+										required: false,
+										default: 0,
+										min: 0,
+										max: 100
+									}
+								]
 							},
 							{
 								...racerSelect,

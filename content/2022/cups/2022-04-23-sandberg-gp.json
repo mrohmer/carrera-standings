@@ -1,13 +1,7 @@
 {
 	"date": "2022-04-23T08:39:02.764Z",
 	"title": "Sandberg GP",
-	"participation": {
-		"BAE": true,
-		"HEG": true,
-		"JAE": true,
-		"ROH": true,
-		"SOM": true
-	},
+	"participation": ["HOH"],
 	"results": {
 		"timeTrial": {
 			"pos0": {

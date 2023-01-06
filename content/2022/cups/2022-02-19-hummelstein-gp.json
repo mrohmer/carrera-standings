@@ -1,14 +1,7 @@
 {
 	"date": "2022-02-19T09:33:31.258Z",
 	"title": "Hummelstein GP",
-	"participation": {
-		"BAE": true,
-		"HEG": true,
-		"HOH": true,
-		"JAE": true,
-		"ROH": true,
-		"SOM": true
-	},
+	"participation": [],
 	"results": {
 		"timeTrial": {
 			"pos0": {
@@ -50,9 +43,12 @@
 				"racer": "SOM"
 			}
 		},
-		"penalties": {
-			"HOH": 1
-		},
+		"penalties": [
+			{
+				"racer": "HOH",
+				"points": 1
+			}
+		],
 		"fastestLap": "BAE"
 	},
 	"info": {

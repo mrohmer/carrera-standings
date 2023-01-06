@@ -11,14 +11,7 @@
 		}
 	},
 	"layout": "/uploads/strecke-2022-11.jpg",
-	"participation": {
-		"BAE": true,
-		"HEG": false,
-		"HOH": false,
-		"JAE": true,
-		"ROH": true,
-		"SOM": true
-	},
+	"participation": ["HEG", "HOH"],
 	"results": {
 		"timeTrial": {
 			"pos1": {
