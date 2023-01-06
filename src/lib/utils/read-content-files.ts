@@ -5,7 +5,8 @@ import type { CupContent } from '../models/content/cup';
 import type { Racers } from '$lib/models';
 import { env } from '$env/dynamic/private';
 
-const readJsonFile = <T = any>(file: string): T | undefined => {
+const jsonFileCache: Record<string, any> = {};
+const readJsonFileUncached = <T = any>(file: string): T | undefined => {
 	if (!fs.existsSync(file)) {
 		return undefined;
 	}
@@ -18,6 +19,14 @@ const readJsonFile = <T = any>(file: string): T | undefined => {
 	}
 
 	return JSON.parse(rawJson);
+};
+const readJsonFile = <T = any>(file: string): T | undefined => {
+	if (jsonFileCache[file]) {
+		return jsonFileCache[file];
+	}
+	const result = readJsonFileUncached<T>(file);
+	result && (jsonFileCache[file] = result);
+	return result;
 };
 const getContentsDir = (year: number) => {
 	const rootDir = env.ROOT_DIR ?? path.resolve(new URL('.', import.meta.url).pathname, '../../..');
@@ -59,7 +68,7 @@ export const readCupFile = (year: number, slug: string): CupContent | undefined 
 export const readRacersFile = (year: number): Racers | undefined =>
 	readContentFile<Record<'racers', Record<'key' | 'color' | 'manufacturer', string>[]>>(
 		year,
-		'racers.json'
+		'racer.json'
 	)?.racers?.reduce(
 		(prev, curr) => ({
 			...prev,
