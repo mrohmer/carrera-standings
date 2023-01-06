@@ -7,7 +7,7 @@ import type { Cup } from '$lib/models';
 import { error } from '@sveltejs/kit';
 import { validateSlug } from '$lib/api/validate-slug';
 
-export const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefined => {
+const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefined => {
 	const { slug } = params;
 	const cup = readCupFile(slug!);
 
