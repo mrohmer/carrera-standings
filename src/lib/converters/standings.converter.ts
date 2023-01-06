@@ -28,7 +28,7 @@ export const standingsConverter = (rawCups: CupContent[], racers: Racers): Stand
 						[0, 1, 2].some((index) => cup.order.length >= index + 1 && cup.order[index] === name)
 				).length,
 				fastestLaps: cups.filter((cup) => cup.fastestLap === name).length,
-				mayStillWin: racerMayStillWin(name, cupsWithDiscardedResults)
+				mayStillWin: racerMayStillWin(name, cupsWithDiscardedResults, racers)
 			}))
 			.sort((a, b) => (a.points < b.points ? 1 : -1))
 	};
