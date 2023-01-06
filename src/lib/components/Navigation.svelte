@@ -9,6 +9,7 @@
 	const OVERFLOW_THRESHOLD = 15;
 
 	export let cups: Cup[] = [];
+	export let urlPrefix: string;
 
 	let navEl: HTMLElement;
 	let leftButtonEl: HTMLButtonElement;
@@ -82,16 +83,16 @@
 		on:scroll={() => (scrollPosition = navEl?.scrollLeft)}
 	>
 		<a
-			href="/"
-			class:active={$page.url.pathname === '/'}
+			href={`${urlPrefix ?? ''}/`}
+			class:active={$page.url.pathname === `${urlPrefix ?? ''}/`}
 			on:click={({ target }) => (activeClicked = target)}
 			sveltekit:prefetch
 		>
 			Gesamt
 		</a>
 		<a
-			href="/course"
-			class:active={$page.url.pathname.startsWith('/course')}
+			href={`${urlPrefix ?? ''}/course`}
+			class:active={$page.url.pathname.startsWith(`${urlPrefix ?? ''}/course`)}
 			on:click={({ target }) => (activeClicked = target)}
 			sveltekit:prefetch
 		>
@@ -99,8 +100,10 @@
 		</a>
 		{#each cups as { title, slug }}
 			<a
-				href="/cups/{slug}"
-				class:active={decodeURIComponent($page.url.pathname).startsWith(`/cups/${slug}`)}
+				href={`${urlPrefix ?? ''}/cups/${slug}`}
+				class:active={decodeURIComponent($page.url.pathname).startsWith(
+					`${urlPrefix ?? ''}/cups/${slug}`
+				)}
 				on:click={({ target }) => (activeClicked = target)}
 				sveltekit:prefetch
 			>

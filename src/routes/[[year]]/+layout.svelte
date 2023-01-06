@@ -5,6 +5,7 @@
 	import PoweredBy from '@rohmer/svelte-base/PoweredBy.svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import { goto } from '$app/navigation';
+	import { getYear } from '$lib/api/get-year.js';
 
 	export let data: Record<'cups', Record<'slug' | 'title', string>[]>;
 
@@ -75,6 +76,9 @@
 
 		goto(next);
 	};
+
+	$: year = getYear($page);
+	$: urlPrefix = year !== new Date().getFullYear() ? `/${year}` : undefined;
 </script>
 
 <svelte:head>
@@ -83,7 +87,7 @@
 </svelte:head>
 
 <header>
-	<Navigation cups={data.cups} />
+	<Navigation cups={data.cups} {urlPrefix} />
 </header>
 <div class="main" use:swipe on:swipeleft={swipeLeft} on:swiperight={swipeRight}>
 	<main class="content">
