@@ -1,7 +1,4 @@
-import type { Load, LoadEvent } from '@sveltejs/kit';
-import { error } from '@sveltejs/kit';
-import type { Cup, Racers } from '$lib/models';
-import { validateSlug } from '$lib/api/validate-slug';
+import type { Load } from '@sveltejs/kit';
 
 export const prerender = true;
 
