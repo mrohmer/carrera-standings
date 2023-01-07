@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Cup } from '$lib/models';
+	import TableRow from './components/TableRow.svelte';
 
 	interface Data {
 		cup: Cup & Record<'mayStillWin' | 'discardedResults', string[]>;
@@ -17,66 +18,62 @@
 </script>
 
 {#if data.cup?.layout}
-	<div class="layout">
-		<img src={data.cup.layout} alt="Streckenlayout" />
+	<div class="mb-2.5 w-full">
+		<img src={data.cup.layout} alt="Streckenlayout" class="w-full" />
 	</div>
 {/if}
-{#if hasDefaultInfoTable || hasRecordTable}
-	{#if hasDefaultInfoTable}
-		<h3 class="info-headline">Streckeninfo</h3>
-		<table class="info-table">
-			<tbody>
-				{#if data.cup?.date}
-					<tr class="info-table__row">
-						<th class="info-table__item info-table__item--label">Datum</th>
-						<td class="info-table__item info-table__item--value">{data.cup?.date}</td>
-					</tr>
+<h3 class="info-headline">Generell</h3>
+<table class="mb-12">
+	<tbody>
+		<TableRow title="Datum">
+			{data.cup?.date}
+		</TableRow>
+	</tbody>
+</table>
+{#if hasDefaultInfoTable}
+	<h3 class="info-headline">Streckeninfo</h3>
+	<table class="mb-12">
+		<tbody>
+			{#if totalRounds}
+				<TableRow title="Runden">
+					{totalRounds}
+				</TableRow>
+			{/if}
+			{#if data.cup.info?.trackLength?.average}
+				<TableRow title="Streckenlänge">
+					{data.cup.info.trackLength.average} cm
+				</TableRow>
+			{/if}
+			{#if data.cup.info?.trackLength?.innerTrack}
+				<TableRow title="Streckenlänge" hint="Innere Bahn">
+					{data.cup.info.trackLength.innerTrack} cm
+				</TableRow>
+			{/if}
+			{#if data.cup.info?.trackLength?.outerTrack}
+				<TableRow title="Streckenlänge" hint="Äußere Bahn">
+					{data.cup.info.trackLength.outerTrack} cm
+				</TableRow>
+			{/if}
+			{#if data.cup.info?.pitLaneLength}
+				<TableRow title="Länge Box">
+					{data.cup.info.pitLaneLength} cm
+				</TableRow>
+			{/if}
+		</tbody>
+	</table>
+{/if}
+{#if hasRecordTable}
+	<h3 class="info-headline">Bahnrekord</h3>
+	<table class="mb-12">
+		<tbody>
+			<TableRow title={data.cup.info.record.racer ?? '-'}>
+				{data.cup.info.record.time ? `${data.cup.info.record.time}s` : '-'}
+				{#if data.cup.info.record.date}
+					({data.cup.info.record.date})
 				{/if}
-				{#if data.cup.info?.trackLength?.average}
-					<tr class="info-table__row">
-						<th class="info-table__item info-table__item--label">Streckenlänge</th>
-						<td class="info-table__item info-table__item--value"
-							>{data.cup.info.trackLength.average} cm
-						</td>
-					</tr>
-					<tr class="info-table__row">
-						<th class="info-table__item info-table__item--label">Runden</th>
-						<td class="info-table__item info-table__item--value">{totalRounds}</td>
-					</tr>
-				{/if}
-				{#if data.cup.info?.pitLaneLength}
-					<tr class="info-table__row">
-						<th class="info-table__item info-table__item--label">Länge Box</th>
-						<td class="info-table__item info-table__item--value"
-							>{data.cup.info.pitLaneLength} cm
-						</td>
-					</tr>
-				{/if}
-			</tbody>
-		</table>
-	{/if}
-	{#if hasRecordTable}
-		<h3 class="info-headline">Bahnrekord</h3>
-		<table class="info-table">
-			<tbody>
-				<tr class="info-table__row">
-					<th class="info-table__item info-table__item--label"
-						>{data.cup.info.record.racer ?? '-'}</th
-					>
-					<td class="info-table__item info-table__item--value">
-						{data.cup.info.record.time ? `${data.cup.info.record.time}s` : '-'}
-						{#if data.cup.info.record.date}
-							({data.cup.info.record.date})
-						{/if}
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	{/if}
-{:else}
-	<div class="info-not-yet">
-		Keine Infos zu {data.cup?.title ?? 'Cup'} hinterlegt
-	</div>
+			</TableRow>
+		</tbody>
+	</table>
 {/if}
 
 <style lang="postcss">
@@ -85,40 +82,10 @@
 		width: 100%;
 	}
 
-	.layout {
-		width: 100%;
-		margin: 0 0 10px;
-	}
-
-	.layout img {
-		width: 100%;
-	}
-
-	.info-not-yet {
-		font-size: 25px;
-		text-align: center;
-		padding: 30px 0;
-
-		color: #444;
-	}
-
 	.info-headline {
 		font-size: 20px;
 		text-align: center;
 		line-height: 20px;
 		margin-top: 20px;
-	}
-
-	.info-table {
-		margin: 0 0 50px;
-	}
-
-	.info-table__item {
-		padding: 10px;
-		width: 50%;
-	}
-
-	.info-table__item--label {
-		text-align: right;
 	}
 </style>
