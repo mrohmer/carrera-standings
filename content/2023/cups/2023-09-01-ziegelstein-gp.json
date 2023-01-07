@@ -1,0 +1,20 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		]
+	},
+	"date": "2023-09-01T13:12:27.678Z",
+	"title": "Ziegelstein GP",
+	"layout": "/uploads/2023/strecke-ziegelstein-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1298.9,
+			"innerTrack": 1236.8,
+			"average": 1267.85
+		},
+		"pitLaneLength": 112.1
+	}
+}

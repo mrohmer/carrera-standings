@@ -1,0 +1,39 @@
+{
+	"racers": [
+		{
+			"key": "BAE",
+			"color": "#005996",
+			"manufacturer": "BMW"
+		},
+		{
+			"key": "HEG",
+			"color": "#a4aaae",
+			"manufacturer": "Mercedes-Benz"
+		},
+		{
+			"key": "SOM",
+			"manufacturer": "Audi",
+			"color": "#b30000"
+		},
+		{
+			"key": "JAE",
+			"manufacturer": "Mercedes-Benz",
+			"color": "#f8bdff"
+		},
+		{
+			"key": "ROH",
+			"manufacturer": "Audi",
+			"color": "#19b900"
+		},
+		{
+			"key": "HOH",
+			"manufacturer": "BMW",
+			"color": "#027e1c"
+		},
+		{
+			"key": "KRU",
+			"manufacturer": "Ferrari",
+			"color": "#5dd0ff"
+		}
+	]
+}

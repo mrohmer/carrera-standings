@@ -1,0 +1,20 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		]
+	},
+	"date": "2023-06-01T13:11:37.908Z",
+	"title": "Langwasser GP",
+	"layout": "/uploads/2023/strecke-langwasser-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1248.2,
+			"innerTrack": 1186.1,
+			"average": 1217.15
+		},
+		"pitLaneLength": 339.9
+	}
+}
