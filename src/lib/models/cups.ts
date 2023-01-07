@@ -16,7 +16,7 @@ export interface Cup {
 	pointsDone: Record<'mainRace' | 'timeTrial' | 'fastestLap', boolean>;
 
 	info: {
-		trackLength?: number;
+		trackLength?: Partial<Record<'average' | 'innerTrack' | 'outerTrack', number>>;
 		pitLaneLength?: number;
 		record?: {
 			racer?: string;

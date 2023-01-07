@@ -22,13 +22,13 @@ export const cupConverter = (cup: CupContent, racers: Racers): Cup => {
 	const rawPoints: Omit<Cup['points'], 'total'> = {
 		mainRace: pointsConverter(
 			cup.results?.mainRace,
-			cup.participation ?? {},
+			cup.participation ?? [],
 			[10, 8, 6, 4, 2, 1],
 			racers
 		),
 		timeTrial: pointsConverter(
 			cup.results?.timeTrial,
-			cup.participation ?? {},
+			cup.participation ?? [],
 			[6, 5, 4, 3, 2, 1],
 			racers
 		),

@@ -36,7 +36,7 @@ const getCup = ({
 	const cups = readCupFiles(year).map((cup) => cupConverter(cup, racers));
 	const mayStillWin = Object.keys(racers)
 		.map((name) =>
-			racerMayStillWin(name, getCupsWithoutDiscardedResults(cups, racers), {
+			racerMayStillWin(name, getCupsWithoutDiscardedResults(cups, racers), racers, {
 				currentCupSlug: convertedCup.slug
 			})
 				? name

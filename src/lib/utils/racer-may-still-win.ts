@@ -31,6 +31,10 @@ export const racerMayStillWin = (
 	const { currentCupSlug } = nonNullableExtras;
 	const evaluatedCups = filterCupsUntil(cups, currentCupSlug).filter((cup) => cup.order?.length);
 
+	if (!evaluatedCups?.length) {
+		return true;
+	}
+
 	const totalPoints = calcTotalPoints(evaluatedCups, racers);
 	const leader = Object.entries(totalPoints).reduce(([prevKey, prevValue], [currKey, currValue]) =>
 		currValue <= prevValue ? [prevKey, prevValue] : [currKey, currValue]

@@ -2,7 +2,9 @@
 	"date": "2022-10-15T08:40:41.756Z",
 	"title": "Eibach GP",
 	"info": {
-		"trackLength": 1356,
+		"trackLength": {
+			"average": 1356
+		},
 		"pitLaneLength": 148,
 		"record": {
 			"date": "2022-10-28T17:44:35.375Z",
@@ -10,7 +12,7 @@
 			"time": 3.965
 		}
 	},
-	"layout": "/uploads/strecke-2022-05.jpg",
+	"layout": "/uploads/2022/strecke-2022-05.jpg",
 	"participation": [],
 	"results": {
 		"timeTrial": {

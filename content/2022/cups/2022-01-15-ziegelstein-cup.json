@@ -60,7 +60,9 @@
 		"fastestLap": "HEG"
 	},
 	"info": {
-		"trackLength": 1461,
+		"trackLength": {
+			"average": 1461
+		},
 		"pitLaneLength": 181,
 		"record": {
 			"date": "2022-01-15T08:42:54.718Z",
@@ -68,5 +70,5 @@
 			"time": 3.958
 		}
 	},
-	"layout": "/uploads/strecke-2022-08.jpg"
+	"layout": "/uploads/2022/strecke-2022-08.jpg"
 }

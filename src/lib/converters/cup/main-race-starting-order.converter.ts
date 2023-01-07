@@ -8,7 +8,7 @@ const getMainRaceStartingOrder = (
 	return cupResultToArr(results)
 		?.filter(
 			({ racer, raceStats }) =>
-				!participation.includes(racer) && !!raceStats?.rounds && !!raceStats?.fastestLapTime
+				!participation?.includes(racer) && !!raceStats?.rounds && !!raceStats?.fastestLapTime
 		)
 		.map(({ raceStats, ...result }) => ({
 			...result,

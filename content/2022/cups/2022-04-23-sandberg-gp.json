@@ -40,7 +40,9 @@
 		}
 	},
 	"info": {
-		"trackLength": 1420,
+		"trackLength": {
+			"average": 1420
+		},
 		"pitLaneLength": 426,
 		"record": {
 			"date": "2022-04-23T08:42:54.718Z",
@@ -48,5 +50,5 @@
 			"time": 3.832
 		}
 	},
-	"layout": "/uploads/strecke-2022-12.jpg"
+	"layout": "/uploads/2022/strecke-2022-12.jpg"
 }

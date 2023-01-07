@@ -2,7 +2,9 @@
 	"date": "2022-09-24T08:40:24.914Z",
 	"title": "Boxdorf GP",
 	"info": {
-		"trackLength": 1351,
+		"trackLength": {
+			"average": 1351
+		},
 		"pitLaneLength": 282,
 		"record": {
 			"date": "2022-09-24T16:00:48.475Z",
@@ -10,7 +12,7 @@
 			"time": 3.554
 		}
 	},
-	"layout": "/uploads/strecke-2022-07.jpg",
+	"layout": "/uploads/2022/strecke-2022-07.jpg",
 	"participation": ["SOM"],
 	"results": {
 		"timeTrial": {

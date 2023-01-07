@@ -14,9 +14,9 @@ export const pointsConverter = (
 			.map((racer) => {
 				let p = 0;
 
-				if (participation.includes(racer)) {
+				if (participation?.includes(racer)) {
 					const notParticipatingDriverCount = Object.keys(racers).filter((i) =>
-						participation.includes(i)
+						participation?.includes(i)
 					).length;
 					const sharedPoints = [...points]
 						.reverse()

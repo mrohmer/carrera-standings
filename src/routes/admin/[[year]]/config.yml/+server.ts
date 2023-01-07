@@ -12,10 +12,6 @@ const getLocalBackend = () => {
 	};
 };
 
-const loadRacers = async ({ fetch }: RequestEvent) => {
-	const response = await fetch(`/api/${new Date().getFullYear()}/racers`);
-	return response.json();
-};
 export const GET: RequestHandler = async (event) => {
 	const { url } = event;
 	const year = getYear(event);
@@ -50,8 +46,8 @@ export const GET: RequestHandler = async (event) => {
 				openAuthoring: 'content: {{message}}'
 			}
 		},
-		media_folder: 'static/uploads',
-		public_folder: '/uploads',
+		media_folder: `static/uploads/${year}`,
+		public_folder: `/uploads/${year}`,
 		collections: [
 			{
 				name: 'files',
@@ -126,7 +122,7 @@ export const GET: RequestHandler = async (event) => {
 				folder: `content/${year}/cups`,
 				create: true,
 				slug: '{{year}}-{{month}}-{{day}}-{{title}}',
-				summary: '{{title}} ({{day}}.{{month}}.{{year}})',
+				summary: '{{title}} ({{month}}.{{year}})',
 				extension: 'json',
 				editor: {
 					preview: false
@@ -161,12 +157,30 @@ export const GET: RequestHandler = async (event) => {
 						collapsed: true,
 						fields: [
 							{
-								label: 'Streckenlänge',
 								name: 'trackLength',
-								required: false,
-								widget: 'number',
-								min: 0,
-								value_type: 'int'
+								label: 'Streckenlänge',
+								widget: 'object',
+								collapsed: true,
+								fields: [
+									{
+										label: 'Schnitt',
+										name: 'average'
+									},
+									{
+										label: 'Innere Bahn',
+										name: 'innerTrack'
+									},
+									{
+										label: 'Außere Bahn',
+										name: 'outerTrack'
+									}
+								].map((field) => ({
+									...field,
+									required: false,
+									widget: 'number',
+									min: 0,
+									value_type: 'float'
+								}))
 							},
 							{
 								label: 'Länge Box',
@@ -174,7 +188,7 @@ export const GET: RequestHandler = async (event) => {
 								required: false,
 								widget: 'number',
 								min: 0,
-								value_type: 'int'
+								value_type: 'float'
 							},
 							{
 								label: 'Bahnrekord',
@@ -282,7 +296,8 @@ export const GET: RequestHandler = async (event) => {
 										file: `racers`,
 										valueField: 'racers.*.key',
 										displayFields: ['racers.*.key'],
-										searchFields: ['racers.*.key']
+										searchFields: ['racers.*.key'],
+										required: false
 									},
 									{
 										name: 'points',

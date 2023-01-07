@@ -2,7 +2,9 @@
 	"date": "2022-05-21T08:39:22.092Z",
 	"title": "Maxfeld GP",
 	"info": {
-		"trackLength": 1756,
+		"trackLength": {
+			"average": 1756
+		},
 		"pitLaneLength": 228,
 		"record": {
 			"date": "2022-05-21T14:15:29.994Z",
@@ -10,7 +12,7 @@
 			"time": 4.946
 		}
 	},
-	"layout": "/uploads/strecke-2022-02.jpg",
+	"layout": "/uploads/2022/strecke-2022-02.jpg",
 	"participation": [],
 	"results": {
 		"timeTrial": {

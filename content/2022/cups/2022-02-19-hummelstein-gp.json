@@ -52,7 +52,9 @@
 		"fastestLap": "BAE"
 	},
 	"info": {
-		"trackLength": 1568,
+		"trackLength": {
+			"average": 1568
+		},
 		"pitLaneLength": 318,
 		"record": {
 			"date": "2022-02-19T08:42:54.718Z",
@@ -60,5 +62,5 @@
 			"time": 4.036
 		}
 	},
-	"layout": "/uploads/strecke-2022-01.jpg"
+	"layout": "/uploads/2022/strecke-2022-01.jpg"
 }

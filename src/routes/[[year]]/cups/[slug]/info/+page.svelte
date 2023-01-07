@@ -11,8 +11,8 @@
 		['trackLength', 'pitLaneLength'].some((key) => !!data.cup?.info[key]) || !!data.cup?.date;
 	$: hasRecordTable = !!data.cup?.info?.record;
 	$: totalRounds =
-		hasDefaultInfoTable && data.cup.info.trackLength
-			? Math.ceil(305000 / data.cup.info.trackLength)
+		hasDefaultInfoTable && data.cup.info?.trackLength?.average
+			? Math.ceil(305000 / data.cup.info.trackLength.average)
 			: undefined;
 </script>
 
@@ -32,11 +32,11 @@
 						<td class="info-table__item info-table__item--value">{data.cup?.date}</td>
 					</tr>
 				{/if}
-				{#if data.cup.info?.trackLength}
+				{#if data.cup.info?.trackLength?.average}
 					<tr class="info-table__row">
 						<th class="info-table__item info-table__item--label">Streckenlänge</th>
 						<td class="info-table__item info-table__item--value"
-							>{data.cup.info.trackLength} cm
+							>{data.cup.info.trackLength.average} cm
 						</td>
 					</tr>
 					<tr class="info-table__row">
