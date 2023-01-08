@@ -28,6 +28,11 @@ const loadRacers = async ({ fetch, params }: LoadEvent): Promise<Record<'racers'
 	const response = await fetch(`/api/${year}/racers`);
 	return await response.json();
 };
+const loadSettings = async ({ fetch, params }: LoadEvent): Promise<Record<'racers', Racers>> => {
+	const year = getYear({ params });
+	const response = await fetch(`/api/${year}/settings`);
+	return await response.json();
+};
 export const load: Load = async (event: LoadEvent) => {
 	if (!validateSlug(event)) {
 		throw error(400);
@@ -35,6 +40,7 @@ export const load: Load = async (event: LoadEvent) => {
 	const cup = await loadCup(event);
 	const previous = await loadPreviousCup(event);
 	const racers = await loadRacers(event);
+	const settings = await loadSettings(event);
 
-	return { cup, previous, racers };
+	return { cup, previous, racers, settings };
 };

@@ -4,6 +4,7 @@ import fs from 'fs';
 import type { CupContent } from '../models/content/cup';
 import type { Racers } from '$lib/models';
 import { env } from '$env/dynamic/private';
+import type { Settings } from '$lib/models/settings';
 
 const jsonFileCache: Record<string, any> = {};
 const readJsonFileUncached = <T = any>(file: string): T | undefined => {
@@ -94,3 +95,5 @@ export const getAvailableYears = (): number[] => {
 		.sort()
 		.reverse();
 };
+export const readSettingsFile = (year: number): Settings | undefined =>
+	readContentFile<Settings>(year, 'settings.json');

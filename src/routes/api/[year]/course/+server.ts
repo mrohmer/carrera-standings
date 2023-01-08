@@ -2,7 +2,7 @@ import type { Cup } from '$lib/models/cups';
 import { cupConverter } from '$lib/converters/cup';
 import { readCupFiles, readRacersFile } from '$lib/utils/read-content-files';
 import type { Course, Standings } from '$lib/models';
-import { standingsConverter } from '$lib/converters/standings.converter';
+import { racerStandingsConverter } from '$lib/converters/standings';
 import type { CupContent } from '$lib/models/content/cup';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { getYear } from '$lib/api/get-year';
@@ -31,7 +31,7 @@ export const getCourse = (event: RequestEvent): Course => {
 				(key) => cup.pointsDone[key]
 			);
 			const standings: Standings | undefined = hasStandings
-				? standingsConverter(cups, racers)
+				? racerStandingsConverter(cups, racers)
 				: undefined;
 
 			const order = standings?.standings?.map(({ name }) => name);

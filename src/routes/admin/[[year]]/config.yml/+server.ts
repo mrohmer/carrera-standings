@@ -54,6 +54,22 @@ export const GET: RequestHandler = async (event) => {
 				label: 'Files',
 				files: [
 					{
+						label: 'Settings',
+						name: 'settings',
+						file: `content/${year}/settings.json`,
+						extension: 'json',
+						editor: {
+							preview: false
+						},
+						fields: [
+							{
+								label: 'Has Team Rating',
+								name: 'hasTeamRating',
+								widget: 'boolean'
+							}
+						]
+					},
+					{
 						label: 'Manufacturer',
 						name: 'manufacturer',
 						file: `content/${year}/manufacturer.json`,
