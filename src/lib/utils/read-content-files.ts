@@ -28,10 +28,11 @@ const readJsonFile = <T = any>(file: string): T | undefined => {
 	result && (jsonFileCache[file] = result);
 	return result;
 };
-const getContentsDir = (year: number) => {
+const getBaseContentsDir = () => {
 	const rootDir = env.ROOT_DIR ?? path.resolve(new URL('.', import.meta.url).pathname, '../../..');
-	return path.resolve(rootDir, 'content', String(year));
+	return path.resolve(rootDir, 'content');
 };
+const getContentsDir = (year: number) => path.resolve(getBaseContentsDir(), String(year));
 const readContentFile = <T = any>(year: number, file: string): T | undefined =>
 	readJsonFile<T>(path.resolve(getContentsDir(year), file));
 const getCupsDir = (year: number) => path.resolve(getContentsDir(year), 'cups');
@@ -78,3 +79,18 @@ export const readRacersFile = (year: number): Racers | undefined =>
 		}),
 		{}
 	);
+
+export const getAvailableYears = (): number[] => {
+	const dir = getBaseContentsDir();
+	if (!fs.existsSync(dir)) {
+		return [];
+	}
+	return fs
+		.readdirSync(dir)
+		.filter((year) => /^\d{4}$/.test(year))
+		.map((year) => +year)
+		.filter((year) => year > 2021 && year < 2050)
+		.filter((year) => readRacersFile(year))
+		.sort()
+		.reverse();
+};

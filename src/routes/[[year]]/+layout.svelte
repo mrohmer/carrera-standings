@@ -6,8 +6,9 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 	import { goto } from '$app/navigation';
 	import { getYear } from '$lib/api/get-year.js';
+	import YearDropdown from '$lib/components/YearDropdown.svelte';
 
-	export let data: Record<'cups', Record<'slug' | 'title', string>[]>;
+	export let data: Record<'cups', Record<'slug' | 'title', string>[]> & Record<'years', number[]>;
 
 	const swipe = async (node: HTMLElement) => {
 		if (typeof window === 'undefined') {
@@ -86,8 +87,14 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<header>
-	<Navigation cups={data.cups} {urlPrefix} />
+<header class="flex content w-full justify-between">
+	<YearDropdown {year} years={data.years} />
+
+	<div class="flex-1 overflow-auto">
+		<div class="w-full">
+			<Navigation cups={data.cups} {urlPrefix} />
+		</div>
+	</div>
 </header>
 <div class="main" use:swipe on:swipeleft={swipeLeft} on:swiperight={swipeRight}>
 	<main class="content">
@@ -105,7 +112,7 @@
 
 <style lang="scss">
 	header {
-		overflow: hidden;
+		overflow: visible !important;
 		padding: 0;
 		margin-bottom: 10px;
 	}
