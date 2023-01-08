@@ -8,7 +8,7 @@ const getMainRaceStartingOrder = (
 	return cupResultToArr(results)
 		?.filter(
 			({ racer, raceStats }) =>
-				!!participation[racer] && !!raceStats?.rounds && !!raceStats?.fastestLapTime
+				!participation?.includes(racer) && !!raceStats?.rounds && !!raceStats?.fastestLapTime
 		)
 		.map(({ raceStats, ...result }) => ({
 			...result,
@@ -64,6 +64,6 @@ export const mainRaceStartingOrderConverter = (
 	results: CupContentPositionResult,
 	participation: CupContentParticipation | undefined
 ): Record<string, number> | undefined => {
-	const startOrderForMainRace = getMainRaceStartingOrder(results, participation ?? {});
+	const startOrderForMainRace = getMainRaceStartingOrder(results, participation ?? []);
 	return Object.keys(startOrderForMainRace ?? {}).length ? startOrderForMainRace : undefined;
 };

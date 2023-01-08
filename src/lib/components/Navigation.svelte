@@ -9,6 +9,7 @@
 	const OVERFLOW_THRESHOLD = 15;
 
 	export let cups: Cup[] = [];
+	export let urlPrefix: string;
 
 	let navEl: HTMLElement;
 	let leftButtonEl: HTMLButtonElement;
@@ -64,7 +65,7 @@
 	$: setTimeout(() => $page.url.pathname && resetActiveClicked(), 1);
 </script>
 
-<div class="nav content">
+<div class="nav">
 	{#if overflowsLeft}
 		<button
 			bind:this={leftButtonEl}
@@ -82,16 +83,18 @@
 		on:scroll={() => (scrollPosition = navEl?.scrollLeft)}
 	>
 		<a
-			href="/"
-			class:active={$page.url.pathname === '/'}
+			href={`${urlPrefix ?? ''}/`}
+			class="hover:bg-neutral-200 dark:hover:bg-neutral-700"
+			class:active={$page.url.pathname === `${urlPrefix ?? ''}/`}
 			on:click={({ target }) => (activeClicked = target)}
 			sveltekit:prefetch
 		>
 			Gesamt
 		</a>
 		<a
-			href="/course"
-			class:active={$page.url.pathname.startsWith('/course')}
+			href={`${urlPrefix ?? ''}/course`}
+			class="hover:bg-neutral-200 dark:hover:bg-neutral-700"
+			class:active={$page.url.pathname.startsWith(`${urlPrefix ?? ''}/course`)}
 			on:click={({ target }) => (activeClicked = target)}
 			sveltekit:prefetch
 		>
@@ -99,8 +102,11 @@
 		</a>
 		{#each cups as { title, slug }}
 			<a
-				href="/{slug}"
-				class:active={decodeURIComponent($page.url.pathname).startsWith(`/${slug}`)}
+				href={`${urlPrefix ?? ''}/cups/${slug}`}
+				class="hover:bg-neutral-200 dark:hover:bg-neutral-700"
+				class:active={decodeURIComponent($page.url.pathname).startsWith(
+					`${urlPrefix ?? ''}/cups/${slug}`
+				)}
 				on:click={({ target }) => (activeClicked = target)}
 				sveltekit:prefetch
 			>
@@ -123,6 +129,7 @@
 
 <style lang="scss">
 	.nav {
+		width: 100%;
 		nav {
 			display: flex;
 			width: 100%;
@@ -140,11 +147,6 @@
 				white-space: nowrap;
 				text-decoration: none;
 				padding: 10px 15px;
-				font-size: 18px;
-
-				&:hover {
-					background: #333;
-				}
 
 				&.active {
 					color: #fff;
@@ -158,21 +160,22 @@
 			top: 0;
 			bottom: 0;
 			border: none;
-			background: linear-gradient(90deg, #222 50%, transparent);
+			background: linear-gradient(90deg, rgb(38, 38, 38) 50%, transparent);
 			color: white;
 			cursor: pointer;
 			z-index: 1;
-			padding: 14px 8px;
 
 			&--left {
 				left: 0;
-				background: linear-gradient(90deg, #222 50%, transparent);
+				background: linear-gradient(90deg, rgb(38, 38, 38) 50%, transparent);
 				padding-right: 16px;
+				padding-left: 8px;
 			}
 			&--right {
 				right: 0;
-				background: linear-gradient(90deg, transparent, #222 50%);
+				background: linear-gradient(90deg, transparent, rgb(38, 38, 38) 50%);
 				padding-left: 16px;
+				padding-right: 8px;
 			}
 		}
 	}

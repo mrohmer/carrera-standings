@@ -1,0 +1,84 @@
+{
+	"date": "2022-10-15T08:40:41.756Z",
+	"title": "Eibach GP",
+	"info": {
+		"trackLength": {
+			"average": 1356
+		},
+		"pitLaneLength": 148,
+		"record": {
+			"date": "2022-10-28T17:44:35.375Z",
+			"racer": "BAE",
+			"time": 3.965
+		}
+	},
+	"layout": "/uploads/2022/strecke-2022-05.jpg",
+	"participation": [],
+	"results": {
+		"timeTrial": {
+			"pos1": {
+				"racer": "BAE",
+				"raceStats": {
+					"rounds": 103,
+					"fastestLapTime": 4.324
+				}
+			},
+			"pos2": {
+				"racer": "SOM",
+				"raceStats": {
+					"rounds": 100,
+					"fastestLapTime": 4.348
+				}
+			},
+			"pos3": {
+				"racer": "HOH",
+				"raceStats": {
+					"rounds": 99,
+					"fastestLapTime": 4.362
+				}
+			},
+			"pos4": {
+				"racer": "JAE",
+				"raceStats": {
+					"rounds": 98,
+					"fastestLapTime": 4.827
+				}
+			},
+			"pos5": {
+				"racer": "HEG",
+				"raceStats": {
+					"rounds": 90,
+					"fastestLapTime": 4.471
+				}
+			},
+			"pos6": {
+				"racer": "ROH",
+				"raceStats": {
+					"fastestLapTime": 4.89,
+					"rounds": 71
+				}
+			}
+		},
+		"mainRace": {
+			"pos1": {
+				"racer": "HOH"
+			},
+			"pos2": {
+				"racer": "ROH"
+			},
+			"pos3": {
+				"racer": "HEG"
+			},
+			"pos4": {
+				"racer": "BAE"
+			},
+			"pos5": {
+				"racer": "SOM"
+			},
+			"pos6": {
+				"racer": "JAE"
+			}
+		},
+		"fastestLap": "HOH"
+	}
+}

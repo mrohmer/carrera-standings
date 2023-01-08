@@ -1,0 +1,20 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		]
+	},
+	"date": "2023-11-01T14:12:53.257Z",
+	"title": "Altstadt GP",
+	"layout": "/uploads/2023/strecke-altstadt-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1206.5,
+			"innerTrack": 1140.6,
+			"average": 1173.55
+		},
+		"pitLaneLength": 177.3
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		]
+	},
+	"date": "2023-05-01T13:11:25.470Z",
+	"title": "Gebersdorf GP",
+	"layout": "/uploads/2023/strecke-gebersdorf-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1301.7,
+			"innerTrack": 1363.9,
+			"average": 1332.8
+		},
+		"pitLaneLength": 146.6
+	}
+}

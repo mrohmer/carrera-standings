@@ -1,0 +1,20 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		]
+	},
+	"date": "2023-02-01T14:10:36.989Z",
+	"title": "Gostenhof GP",
+	"layout": "/uploads/2023/strecke-gostenhof-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1209.2,
+			"innerTrack": 1147.1,
+			"average": 1178.15
+		},
+		"pitLaneLength": 157
+	}
+}

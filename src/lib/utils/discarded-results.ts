@@ -1,12 +1,12 @@
 import type { Cup } from '../models';
-import racers from '../../../content/racer.json';
+import type { Racers } from '../models';
 
 const AMOUNT_OF_DISCARDED_RESULTS = 2;
 
 export const hasDiscardedResults = (cups: Cup[]): boolean =>
 	cups.length > AMOUNT_OF_DISCARDED_RESULTS * 2;
 
-export const getCupsWithoutDiscardedResults = (cups: Cup[]): Cup[] => {
+export const getCupsWithoutDiscardedResults = (cups: Cup[], racers: Racers): Cup[] => {
 	if (!hasDiscardedResults(cups)) {
 		return cups;
 	}

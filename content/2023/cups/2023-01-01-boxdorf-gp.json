@@ -1,0 +1,20 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		]
+	},
+	"date": "2023-01-01T14:04:55.450Z",
+	"title": "Boxdorf GP",
+	"layout": "/uploads/2023/strecke-boxdorf-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1244.6,
+			"innerTrack": 1182.4,
+			"average": 1213.5
+		},
+		"pitLaneLength": 138.2
+	}
+}

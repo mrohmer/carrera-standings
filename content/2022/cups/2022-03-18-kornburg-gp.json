@@ -1,0 +1,68 @@
+{
+	"date": "2022-03-18T09:36:23.775Z",
+	"title": "Kornburg GP",
+	"participation": ["HEG"],
+	"results": {
+		"timeTrial": {
+			"pos0": {
+				"racer": "BAE"
+			},
+			"pos1": {
+				"racer": "HOH"
+			},
+			"pos2": {
+				"racer": "ROH"
+			},
+			"pos3": {
+				"racer": "SOM"
+			},
+			"pos4": {
+				"racer": "JAE"
+			}
+		},
+		"mainRace": {
+			"pos0": {
+				"racer": "BAE"
+			},
+			"pos1": {
+				"racer": "SOM"
+			},
+			"pos2": {
+				"racer": "HOH"
+			},
+			"pos3": {
+				"racer": "ROH"
+			},
+			"pos4": {
+				"racer": "JAE"
+			}
+		},
+		"penalties": [
+			{
+				"racer": "HOH",
+				"points": 1
+			},
+			{
+				"racer": "JAE",
+				"points": 1
+			},
+			{
+				"racer": "SOM",
+				"points": 1
+			}
+		],
+		"fastestLap": "HOH"
+	},
+	"info": {
+		"trackLength": {
+			"average": 1621
+		},
+		"pitLaneLength": 259,
+		"record": {
+			"date": "2022-03-22T08:42:54.718Z",
+			"racer": "ROH",
+			"time": 4.618
+		}
+	},
+	"layout": "/uploads/2022/strecke-2022-04.jpg"
+}

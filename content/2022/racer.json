@@ -1,0 +1,34 @@
+{
+	"racers": [
+		{
+			"key": "BAE",
+			"color": "#ff7b08",
+			"manufacturer": "McLaren"
+		},
+		{
+			"key": "HEG",
+			"color": "#a4aaae",
+			"manufacturer": "Mercedes-Benz"
+		},
+		{
+			"key": "SOM",
+			"manufacturer": "Ford",
+			"color": "#133a7c"
+		},
+		{
+			"key": "JAE",
+			"manufacturer": "Aston Martin",
+			"color": "#156e48"
+		},
+		{
+			"key": "ROH",
+			"manufacturer": "Audi",
+			"color": "#f50437"
+		},
+		{
+			"key": "HOH",
+			"manufacturer": "BMW",
+			"color": "#009ada"
+		}
+	]
+}

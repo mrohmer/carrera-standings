@@ -1,0 +1,66 @@
+{
+	"date": "2022-02-19T09:33:31.258Z",
+	"title": "Hummelstein GP",
+	"participation": [],
+	"results": {
+		"timeTrial": {
+			"pos0": {
+				"racer": "BAE"
+			},
+			"pos1": {
+				"racer": "HEG"
+			},
+			"pos2": {
+				"racer": "HOH"
+			},
+			"pos3": {
+				"racer": "ROH"
+			},
+			"pos4": {
+				"racer": "SOM"
+			},
+			"pos5": {
+				"racer": "JAE"
+			}
+		},
+		"mainRace": {
+			"pos0": {
+				"racer": "JAE"
+			},
+			"pos1": {
+				"racer": "ROH"
+			},
+			"pos2": {
+				"racer": "HOH"
+			},
+			"pos3": {
+				"racer": "HEG"
+			},
+			"pos4": {
+				"racer": "BAE"
+			},
+			"pos5": {
+				"racer": "SOM"
+			}
+		},
+		"penalties": [
+			{
+				"racer": "HOH",
+				"points": 1
+			}
+		],
+		"fastestLap": "BAE"
+	},
+	"info": {
+		"trackLength": {
+			"average": 1568
+		},
+		"pitLaneLength": 318,
+		"record": {
+			"date": "2022-02-19T08:42:54.718Z",
+			"racer": "BAE",
+			"time": 4.036
+		}
+	},
+	"layout": "/uploads/2022/strecke-2022-01.jpg"
+}

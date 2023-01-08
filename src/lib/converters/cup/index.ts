@@ -1,22 +1,41 @@
-import type { Cup } from '../../models';
-import racers from '../../../../content/racer.json';
+import type { Cup, Racers } from '$lib/models';
 import { infoConverter } from './info.converter';
-import { formatDate } from '../../utils/format-date';
-import type { CupContent } from '../../models/content/cup';
+import { formatDate } from '$lib/utils/format-date';
+import type { CupContent, CupContentPenalties } from '$lib/models/content/cup';
 import { liveSessionIdConverter } from './live-session-id.converter';
-import { cupResultToArr } from '../../utils/cup-results-to-arr';
+import { cupResultToArr } from '$lib/utils/cup-results-to-arr';
 import { mainRaceStartingOrderConverter } from './main-race-starting-order.converter';
 import { orderConverter } from './order.converter';
 import { pointsConverter } from './points.converter';
 
-export const cupConverter = (cup: CupContent): Cup => {
+const convertPenalties = (penalties: CupContentPenalties | undefined): Record<string, number> =>
+	(penalties ?? [])
+		.filter((i) => i?.racer && i?.points)
+		.reduce(
+			(prev, curr) => ({
+				...prev,
+				[curr.racer]: curr.points
+			}),
+			{} as Record<string, number>
+		);
+export const cupConverter = (cup: CupContent, racers: Racers): Cup => {
 	const rawPoints: Omit<Cup['points'], 'total'> = {
-		mainRace: pointsConverter(cup.results?.mainRace, cup.participation ?? {}, [10, 8, 6, 4, 2, 1]),
-		timeTrial: pointsConverter(cup.results?.timeTrial, cup.participation ?? {}, [6, 5, 4, 3, 2, 1]),
+		mainRace: pointsConverter(
+			cup.results?.mainRace,
+			cup.participation ?? [],
+			[10, 8, 6, 4, 2, 1],
+			racers
+		),
+		timeTrial: pointsConverter(
+			cup.results?.timeTrial,
+			cup.participation ?? [],
+			[6, 5, 4, 3, 2, 1],
+			racers
+		),
 		fastestLap: (cup.results?.fastestLap
 			? { [cup.results?.fastestLap as string]: 1 }
 			: {}) as Record<string, number>,
-		penalty: (cup.results?.penalties ?? {}) as Record<string, number>
+		penalty: convertPenalties(cup.results?.penalties)
 	};
 
 	const total = Object.keys(racers).reduce(
@@ -46,7 +65,7 @@ export const cupConverter = (cup: CupContent): Cup => {
 		},
 		pointsDone,
 		fastestLap: cup.results?.fastestLap,
-		penalties: cup.results?.penalties ?? {},
+		penalties: convertPenalties(cup.results?.penalties),
 		order: orderMainRace,
 		info: infoConverter(cup),
 		date: formatDate(cup.date),

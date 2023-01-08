@@ -1,0 +1,64 @@
+{
+	"date": "2022-07-16T08:39:56.680Z",
+	"title": "Altstadt GP",
+	"info": {
+		"trackLength": {
+			"average": 1730
+		},
+		"pitLaneLength": 204,
+		"record": {
+			"date": "2022-07-09T18:16:56.216Z",
+			"racer": "BAE",
+			"time": 4.9
+		}
+	},
+	"layout": "/uploads/2022/strecke-2022-10.jpg",
+	"participation": ["HEG", "HOH"],
+	"results": {
+		"timeTrial": {
+			"pos1": {
+				"racer": "BAE",
+				"raceStats": {
+					"rounds": 90,
+					"fastestLapTime": 5.245
+				}
+			},
+			"pos2": {
+				"racer": "SOM",
+				"raceStats": {
+					"rounds": 82,
+					"fastestLapTime": 5.642
+				}
+			},
+			"pos3": {
+				"racer": "ROH",
+				"raceStats": {
+					"rounds": 82,
+					"fastestLapTime": 5.475
+				}
+			},
+			"pos4": {
+				"racer": "JAE",
+				"raceStats": {
+					"rounds": 61,
+					"fastestLapTime": 5.847
+				}
+			}
+		},
+		"mainRace": {
+			"pos1": {
+				"racer": "BAE"
+			},
+			"pos2": {
+				"racer": "SOM"
+			},
+			"pos3": {
+				"racer": "ROH"
+			},
+			"pos4": {
+				"racer": "JAE"
+			}
+		},
+		"fastestLap": "BAE"
+	}
+}

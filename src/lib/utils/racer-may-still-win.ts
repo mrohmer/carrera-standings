@@ -1,4 +1,4 @@
-import type { Cup } from '../models';
+import type { Cup, Racers } from '../models';
 import { calcTotalPoints } from './calc-total-points';
 import { filterCupsUntil } from './filter-cups-until';
 
@@ -13,7 +13,12 @@ interface Extras {
 	currentCupSlug: string;
 }
 
-export const racerMayStillWin = (racer: string, cups: Cup[], extras?: Partial<Extras>): boolean => {
+export const racerMayStillWin = (
+	racer: string,
+	cups: Cup[],
+	racers: Racers,
+	extras?: Partial<Extras>
+): boolean => {
 	const nonNullableExtras = {
 		totalCups: 12,
 		maxPointsPerTimeTrial: 6,
@@ -26,7 +31,11 @@ export const racerMayStillWin = (racer: string, cups: Cup[], extras?: Partial<Ex
 	const { currentCupSlug } = nonNullableExtras;
 	const evaluatedCups = filterCupsUntil(cups, currentCupSlug).filter((cup) => cup.order?.length);
 
-	const totalPoints = calcTotalPoints(evaluatedCups);
+	if (!evaluatedCups?.length) {
+		return true;
+	}
+
+	const totalPoints = calcTotalPoints(evaluatedCups, racers);
 	const leader = Object.entries(totalPoints).reduce(([prevKey, prevValue], [currKey, currValue]) =>
 		currValue <= prevValue ? [prevKey, prevValue] : [currKey, currValue]
 	)?.[0];

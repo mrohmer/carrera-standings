@@ -1,0 +1,102 @@
+{
+	"date": "2022-05-21T08:39:22.092Z",
+	"title": "Maxfeld GP",
+	"info": {
+		"trackLength": {
+			"average": 1756
+		},
+		"pitLaneLength": 228,
+		"record": {
+			"date": "2022-05-21T14:15:29.994Z",
+			"racer": "BAE",
+			"time": 4.946
+		}
+	},
+	"layout": "/uploads/2022/strecke-2022-02.jpg",
+	"participation": [],
+	"results": {
+		"timeTrial": {
+			"pos0": {
+				"racer": "BAE",
+				"raceStats": {
+					"rounds": 90,
+					"fastestLapTime": 5.147
+				}
+			},
+			"pos1": {
+				"racer": "HOH",
+				"raceStats": {
+					"rounds": 88,
+					"fastestLapTime": 5.502
+				}
+			},
+			"pos2": {
+				"racer": "ROH",
+				"raceStats": {
+					"rounds": 85,
+					"fastestLapTime": 5.404
+				}
+			},
+			"pos3": {
+				"racer": "HEG",
+				"raceStats": {
+					"rounds": 85,
+					"fastestLapTime": 5.323
+				}
+			},
+			"pos4": {
+				"racer": "SOM",
+				"raceStats": {
+					"rounds": 81,
+					"fastestLapTime": 5.437
+				}
+			},
+			"pos5": {
+				"racer": "JAE",
+				"raceStats": {
+					"rounds": 57,
+					"fastestLapTime": 6.3
+				}
+			}
+		},
+		"mainRace": {
+			"pos0": {
+				"racer": "ROH"
+			},
+			"pos1": {
+				"racer": "HOH"
+			},
+			"pos2": {
+				"racer": "HEG"
+			},
+			"pos3": {
+				"racer": "SOM"
+			},
+			"pos4": {
+				"racer": "BAE"
+			},
+			"pos5": {
+				"racer": "JAE"
+			}
+		},
+		"penalties": [
+			{
+				"racer": "HEG",
+				"points": 1
+			},
+			{
+				"racer": "JAE",
+				"points": 1
+			},
+			{
+				"racer": "ROH",
+				"points": 1
+			},
+			{
+				"racer": "SOM",
+				"points": 1
+			}
+		],
+		"fastestLap": "BAE"
+	}
+}

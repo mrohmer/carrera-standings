@@ -1,0 +1,19 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		]
+	},
+	"date": "2023-08-01T22:00:00.000Z",
+	"title": "Steinbühl GP",
+	"layout": "/uploads/2023/strecke-steinbühl-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1378.1,
+			"innerTrack": 1316,
+			"average": 1347.05
+		}
+	}
+}

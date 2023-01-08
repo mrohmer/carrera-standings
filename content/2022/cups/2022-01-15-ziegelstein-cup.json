@@ -1,0 +1,74 @@
+{
+	"date": "2022-01-15T08:12:01.388Z",
+	"title": "Ziegelstein GP",
+	"participation": [],
+	"results": {
+		"timeTrial": {
+			"pos0": {
+				"racer": "HEG"
+			},
+			"pos1": {
+				"racer": "BAE"
+			},
+			"pos2": {
+				"racer": "HOH"
+			},
+			"pos3": {
+				"racer": "SOM"
+			},
+			"pos4": {
+				"racer": "JAE"
+			},
+			"pos5": {
+				"racer": "ROH"
+			}
+		},
+		"mainRace": {
+			"pos0": {
+				"racer": "BAE"
+			},
+			"pos1": {
+				"racer": "HOH"
+			},
+			"pos2": {
+				"racer": "HEG"
+			},
+			"pos3": {
+				"racer": "SOM"
+			},
+			"pos4": {
+				"racer": "ROH"
+			},
+			"pos5": {
+				"racer": "JAE"
+			}
+		},
+		"penalties": [
+			{
+				"racer": "HOH",
+				"points": 1
+			},
+			{
+				"racer": "HEG",
+				"points": 1
+			},
+			{
+				"racer": "SOM",
+				"points": 1
+			}
+		],
+		"fastestLap": "HEG"
+	},
+	"info": {
+		"trackLength": {
+			"average": 1461
+		},
+		"pitLaneLength": 181,
+		"record": {
+			"date": "2022-01-15T08:42:54.718Z",
+			"racer": "BAE",
+			"time": 3.958
+		}
+	},
+	"layout": "/uploads/2022/strecke-2022-08.jpg"
+}
