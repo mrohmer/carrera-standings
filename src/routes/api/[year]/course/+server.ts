@@ -1,7 +1,7 @@
 import type { Cup } from '$lib/models/cups';
 import { cupConverter } from '$lib/converters/cup';
 import { readCupFiles, readRacersFile } from '$lib/utils/read-content-files';
-import type { Course, Standings } from '$lib/models';
+import type { Course, RacerStandings } from '$lib/models';
 import { racerStandingsConverter } from '$lib/converters/standings';
 import type { CupContent } from '$lib/models/content/cup';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
@@ -30,7 +30,7 @@ export const getCourse = (event: RequestEvent): Course => {
 			const hasStandings = (['mainRace', 'timeTrial'] as (keyof Cup['pointsDone'])[]).some(
 				(key) => cup.pointsDone[key]
 			);
-			const standings: Standings | undefined = hasStandings
+			const standings: RacerStandings | undefined = hasStandings
 				? racerStandingsConverter(cups, racers)
 				: undefined;
 

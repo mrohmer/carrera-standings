@@ -1,5 +1,5 @@
 import type { Load, LoadEvent } from '@sveltejs/kit';
-import type { Racers, Standings } from '$lib/models';
+import type { Racers, RacerStandings } from '$lib/models';
 import { getYear } from '$lib/api/get-year';
 
 export const prerender = true;
@@ -7,7 +7,7 @@ export const prerender = true;
 const loadStandings = async ({
 	fetch,
 	params
-}: LoadEvent): Promise<Record<'standings', Standings>> => {
+}: LoadEvent): Promise<Record<'standings', RacerStandings>> => {
 	const year = getYear({ params });
 	const response = await fetch(`/api/${year}/racers/standings`);
 	const standings = await response.json();

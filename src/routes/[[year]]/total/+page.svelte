@@ -1,8 +1,8 @@
 <script lang="ts">
 	import MayStillWinLegend from '$lib/components/MayStillWinLegend.svelte';
-	import type { Racers, Standings } from '$lib/models';
+	import type { Racers, RacerStandings } from '$lib/models';
 
-	export let data: Record<'standings', Standings> & Record<'racers', Racers>;
+	export let data: Record<'standings', RacerStandings> & Record<'racers', Racers>;
 </script>
 
 {#if data?.standings?.standings?.length}

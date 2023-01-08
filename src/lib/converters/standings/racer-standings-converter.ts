@@ -1,11 +1,12 @@
-import type { Cup, Racers, Standings } from '$lib/models';
+import type { Cup, Racers, RacerStandings } from '$lib/models';
 import { cupConverter } from '../cup';
 import { calcTotalPoints } from '$lib/utils/calc-total-points';
 import { racerMayStillWin } from '$lib/utils/racer-may-still-win';
 import type { CupContent } from '$lib/models/content/cup';
 import { getCupsWithoutDiscardedResults, hasDiscardedResults } from '$lib/utils/discarded-results';
+import { compareStandings } from '$lib/converters/standings/utils';
 
-export const racerStandingsConverter = (rawCups: CupContent[], racers: Racers): Standings => {
+export const racerStandingsConverter = (rawCups: CupContent[], racers: Racers): RacerStandings => {
 	const cups: Cup[] = rawCups.map((cup) => cupConverter(cup, racers));
 
 	const cupsWithDiscardedResults = getCupsWithoutDiscardedResults(cups, racers);
@@ -30,6 +31,6 @@ export const racerStandingsConverter = (rawCups: CupContent[], racers: Racers): 
 				fastestLaps: cups.filter((cup) => cup.fastestLap === name).length,
 				mayStillWin: racerMayStillWin(name, cupsWithDiscardedResults, racers)
 			}))
-			.sort((a, b) => (a.points < b.points ? 1 : -1))
+			.sort(compareStandings)
 	};
 };

@@ -2,7 +2,7 @@ import path from 'path';
 import { URL } from 'url';
 import fs from 'fs';
 import type { CupContent } from '../models/content/cup';
-import type { Racers } from '$lib/models';
+import type { Manufacturer, Manufacturers, Racers } from '$lib/models';
 import { env } from '$env/dynamic/private';
 import type { Settings } from '$lib/models/settings';
 
@@ -80,6 +80,8 @@ export const readRacersFile = (year: number): Racers | undefined =>
 		}),
 		{}
 	);
+export const readManufacturerFile = (year: number): Manufacturers | undefined =>
+	readContentFile<Record<'manufacturer', Manufacturers>>(year, 'manufacturer.json')?.manufacturer;
 
 export const getAvailableYears = (): number[] => {
 	const dir = getBaseContentsDir();
