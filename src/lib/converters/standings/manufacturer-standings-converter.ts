@@ -9,13 +9,15 @@ import type {
 import type { CupContent } from '$lib/models/content/cup';
 import { racerStandingsConverter } from '$lib/converters/standings/racer-standings-converter';
 import { compareStandings } from '$lib/converters/standings/utils';
+import type { Settings } from '$lib/models/settings';
 
 export const manufacturerStandingsConverter = (
 	rawCups: CupContent[],
 	manufacturers: Manufacturers,
-	racers: Racers
+	racers: Racers,
+	settings?: Settings
 ): ManufacturerStandings => {
-	const racerStandings = racerStandingsConverter(rawCups, racers);
+	const racerStandings = racerStandingsConverter(rawCups, racers, manufacturers, settings);
 
 	const racersByManufacturer = manufacturers.reduce(
 		(prev, curr) => ({

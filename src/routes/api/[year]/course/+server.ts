@@ -1,6 +1,11 @@
 import type { Cup } from '$lib/models/cups';
 import { cupConverter } from '$lib/converters/cup';
-import { readCupFiles, readRacersFile } from '$lib/utils/read-content-files';
+import {
+	readCupFiles,
+	readManufacturerFile,
+	readRacersFile,
+	readSettingsFile
+} from '$lib/utils/read-content-files';
 import type { Course, RacerStandings } from '$lib/models';
 import { racerStandingsConverter } from '$lib/converters/standings';
 import type { CupContent } from '$lib/models/content/cup';
@@ -14,24 +19,29 @@ export const getCourse = (event: RequestEvent): Course => {
 	if (!racers) {
 		throw error(404);
 	}
+	const manufacturers = readManufacturerFile(year);
+	if (!manufacturers?.length) {
+		throw error(404);
+	}
+	const settings = readSettingsFile(year);
 
 	const rawCups = readCupFiles(year);
 
 	return rawCups
 		.map(
 			(cup, index, arr) =>
-				[cup, cupConverter(cup, racers), arr.filter((__, i) => index >= i)] as [
-					CupContent,
-					Cup,
-					CupContent[]
-				]
+				[
+					cup,
+					cupConverter(cup, racers, manufacturers, settings),
+					arr.filter((__, i) => index >= i)
+				] as [CupContent, Cup, CupContent[]]
 		)
 		.map(([rawCup, cup, cups]) => {
 			const hasStandings = (['mainRace', 'timeTrial'] as (keyof Cup['pointsDone'])[]).some(
 				(key) => cup.pointsDone[key]
 			);
 			const standings: RacerStandings | undefined = hasStandings
-				? racerStandingsConverter(cups, racers)
+				? racerStandingsConverter(cups, racers, manufacturers, settings)
 				: undefined;
 
 			const order = standings?.standings?.map(({ name }) => name);

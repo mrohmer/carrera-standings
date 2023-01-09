@@ -1,5 +1,11 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { readCupFile, readCupFiles, readRacersFile } from '$lib/utils/read-content-files';
+import {
+	readCupFile,
+	readCupFiles,
+	readManufacturerFile,
+	readRacersFile,
+	readSettingsFile
+} from '$lib/utils/read-content-files';
 import { cupConverter } from '$lib/converters/cup';
 import { filterCupsUntil } from '$lib/utils/filter-cups-until';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -22,6 +28,11 @@ const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefin
 		throw error(404);
 	}
 
+	const manufacturers = readManufacturerFile(year);
+	if (!manufacturers?.length) {
+		throw error(404);
+	}
+
 	const previous = filterCupsUntil(readCupFiles(year), slug)
 		.reverse()
 		.find((c) => c.slug !== slug);
@@ -29,7 +40,10 @@ const getPreviousCup = ({ params }: Pick<RequestEvent, 'params'>): Cup | undefin
 	if (!previous) {
 		return undefined;
 	}
-	return cupConverter(previous, racers);
+
+	const settings = readSettingsFile(year);
+
+	return cupConverter(previous, racers, manufacturers, settings);
 };
 export const GET: RequestHandler = (event) => {
 	if (!validateSlug(event)) {

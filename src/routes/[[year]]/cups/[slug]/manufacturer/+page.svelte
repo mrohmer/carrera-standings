@@ -1,23 +1,16 @@
 <script lang="ts">
 	import MayStillWinLegend from '$lib/components/MayStillWinLegend.svelte';
-	import type { Cup, Racers } from '$lib/models';
+	import type { Cup, Manufacturers, Racers } from '$lib/models';
 
 	interface Data {
 		cup: Cup & Record<'mayStillWin' | 'discardedResults', string[]>;
 		racers: Racers;
+		manufacturers: Manufacturers;
 	}
 
 	export let data: Data;
 
-	const getMainPoints = (racer: string): number | undefined => {
-		const mainRace = data.cup.points.mainRace[racer];
-
-		if (!(mainRace >= 0)) {
-			return undefined;
-		}
-
-		return mainRace + +(data.cup.fastestLap === racer);
-	};
+	const round = (points: number) => Math.round(points * 100) / 100;
 	const calcPosition = (index: number, points: number): number => {
 		if (index <= 0) {
 			return 1;
@@ -31,6 +24,16 @@
 
 		return index + 1;
 	};
+	$: racerNamesByManufacturer = data.manufacturers?.reduce(
+		(prev, curr) => ({
+			...prev,
+			[curr.name]: Object.values(data.racers)
+				.filter(({ manufacturer }) => manufacturer === curr.name)
+				.map(({ key }) => key)
+				.sort()
+		}),
+		{} as Record<string, string[]>
+	);
 </script>
 
 <table>
@@ -38,70 +41,43 @@
 		<tr class="row row--head">
 			<th class="cell cell--head cell--position">Rang</th>
 			<th class="cell cell--head cell--name">Name</th>
-			<th class="cell cell--head cell--total">Gesamt</th>
-			<th class="cell cell--head cell--time-trial">Zeit</th>
-			<th
-				class="cell cell--head cell--main-race"
-				class:cell--fastest-lap-set={!!data.cup?.fastestLap}
-				>Haupt
-			</th>
-			<th class="cell cell--head">Strafe</th>
+			<th class="cell cell--head cell--total">Ø-Gesamt</th>
+			<th class="cell cell--head cell--time-trial">Ø-Zeit</th>
+			<th class="cell cell--head cell--main-race"> Ø-Haupt </th>
+			<th class="cell cell--head">Ø-Strafe</th>
 		</tr>
 	</thead>
 
-	{#if data.cup?.order?.length}
+	{#if data.cup?.manufacturerOrder?.length}
 		<tbody>
-			{#each data.cup.order as racer, index}
+			{#each data.cup.manufacturerOrder as manufacturer, index}
 				<tr class="row">
-					<th class="cell cell--position"
-						>{calcPosition(index, data.cup.points.total[racer])}{data.cup.mayStillWin?.includes(
-							racer
-						)
-							? '*'
-							: ' '}</th
-					>
+					<th class="cell cell--position">
+						{calcPosition(index, data.cup.manufacturerPoints.total[manufacturer])}
+					</th>
 					<td class="cell cell--name">
 						<div class="cell__line">
-							<span class:strikethrough={data.cup.discardedResult?.includes(racer)}>{racer}</span>
-							{#if data.cup.discardedResult?.includes(racer)}
-								<span class="cell__subline">(Streichergebnis)</span>
-							{/if}
+							<span>{manufacturer}</span>
 						</div>
 						<div class="cell__subline">
-							{data.racers[racer].manufacturer}
+							{racerNamesByManufacturer[manufacturer]?.join(', ')}
 						</div>
 					</td>
-					<td
-						class="cell cell--total"
-						class:strikethrough={data.cup.discardedResult?.includes(racer)}
-					>
-						{data.cup.points.total[racer] ?? '-'}
+					<td class="cell cell--total">
+						{round(data.cup.manufacturerPoints.total[manufacturer] ?? 0)}
 					</td>
-					<td
-						class="cell cell--time-trial"
-						class:strikethrough={data.cup.discardedResult?.includes(racer)}
-					>
-						{data.cup.points.timeTrial[racer] ?? '-'}
+					<td class="cell cell--time-trial">
+						{round(data.cup.manufacturerPoints.timeTrial[manufacturer] ?? 0)}
 					</td>
-					<td
-						class="cell cell--main-race"
-						class:cell--fastest-lap={racer === data.cup.fastestLap}
-						class:cell--fastest-lap-set={!!data.cup.fastestLap}
-						class:strikethrough={data.cup.discardedResult?.includes(racer)}
-					>
+					<td class="cell cell--main-race">
 						<div class="cell__line">
-							{getMainPoints(racer) ?? '-'}
+							{round(data.cup.manufacturerPoints.mainRace[manufacturer] ?? 0)}
 						</div>
-
-						{#if racer === data.cup.fastestLap}
-							<div class="cell__subline">(schnellste)</div>
-						{/if}
 					</td>
-					<td
-						class="cell cell--penalty"
-						class:strikethrough={data.cup.discardedResult?.includes(racer)}
-					>
-						{data.cup.points.penalty[racer] ? -data.cup.points.penalty[racer] : '-'}
+					<td class="cell cell--penalty">
+						{data.cup.manufacturerPoints.penalty[manufacturer]
+							? -round(data.cup.manufacturerPoints.penalty[manufacturer])
+							: '-'}
 					</td>
 				</tr>
 			{/each}
@@ -114,8 +90,6 @@
 		{data.cup?.title ?? 'Cup'} noch nicht gewertet
 	</div>
 {/if}
-
-<MayStillWinLegend />
 
 <style lang="postcss">
 	table {

@@ -25,7 +25,10 @@ export const GET: RequestHandler = (event) => {
 	if (!racers) {
 		throw error(404);
 	}
+
 	return new Response(
-		JSON.stringify(manufacturerStandingsConverter(readCupFiles(year), manufacturer, racers))
+		JSON.stringify(
+			manufacturerStandingsConverter(readCupFiles(year), manufacturer, racers, settings)
+		)
 	);
 };

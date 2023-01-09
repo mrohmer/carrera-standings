@@ -1,4 +1,4 @@
-import type { Cup, Racers } from '$lib/models';
+import type { Cup, Manufacturers, Racers } from '$lib/models';
 import { infoConverter } from './info.converter';
 import { formatDate } from '$lib/utils/format-date';
 import type { CupContent, CupContentPenalties } from '$lib/models/content/cup';
@@ -7,6 +7,8 @@ import { cupResultToArr } from '$lib/utils/cup-results-to-arr';
 import { mainRaceStartingOrderConverter } from './main-race-starting-order.converter';
 import { orderConverter } from './order.converter';
 import { pointsConverter } from './points.converter';
+import { manufacturerPointsConverter } from '$lib/converters/cup/manufacturer-points.converter';
+import type { Settings } from '$lib/models/settings';
 
 const convertPenalties = (penalties: CupContentPenalties | undefined): Record<string, number> =>
 	(penalties ?? [])
@@ -18,7 +20,12 @@ const convertPenalties = (penalties: CupContentPenalties | undefined): Record<st
 			}),
 			{} as Record<string, number>
 		);
-export const cupConverter = (cup: CupContent, racers: Racers): Cup => {
+export const cupConverter = (
+	cup: CupContent,
+	racers: Racers,
+	manufacturers: Manufacturers,
+	settings?: Settings
+): Cup => {
 	const rawPoints: Omit<Cup['points'], 'total'> = {
 		mainRace: pointsConverter(
 			cup.results?.mainRace,
@@ -48,25 +55,35 @@ export const cupConverter = (cup: CupContent, racers: Racers): Cup => {
 		{}
 	);
 
-	const orderMainRace = orderConverter(rawPoints.mainRace);
-
 	const pointsDone: Cup['pointsDone'] = {
 		mainRace: !!cupResultToArr(cup.results?.mainRace ?? {}).filter(({ racer }) => !!racer).length,
 		timeTrial: !!cupResultToArr(cup.results?.timeTrial ?? {}).filter(({ racer }) => !!racer).length,
 		fastestLap: !!cup.results?.fastestLap
 	};
 
+	const points = {
+		...rawPoints,
+		total
+	};
+	const manufacturerPoints = settings?.hasTeamRating
+		? manufacturerPointsConverter(points, manufacturers, racers)
+		: undefined;
+
+	const order = orderConverter(points.mainRace);
+	const manufacturerOrder = settings?.hasTeamRating
+		? orderConverter(manufacturerPoints!.mainRace)
+		: undefined;
+
 	return {
 		title: cup.title,
 		slug: cup.slug,
-		points: {
-			...rawPoints,
-			total
-		},
+		points,
+		manufacturerPoints,
 		pointsDone,
 		fastestLap: cup.results?.fastestLap,
 		penalties: convertPenalties(cup.results?.penalties),
-		order: orderMainRace,
+		order,
+		manufacturerOrder,
 		info: infoConverter(cup),
 		date: formatDate(cup.date),
 		liveSessionId: liveSessionIdConverter(cup),

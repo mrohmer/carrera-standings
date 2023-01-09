@@ -1,8 +1,9 @@
 import type { Load, LoadEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
-import type { Cup, Racers } from '$lib/models';
+import type { Cup, Manufacturers, Racers } from '$lib/models';
 import { validateSlug } from '$lib/api/validate-slug';
 import { getYear } from '$lib/api/get-year';
+import type { Settings } from '$lib/models/settings';
 
 export const prerender = true;
 
@@ -23,12 +24,17 @@ const loadPreviousCup = async ({ fetch, params }: LoadEvent): Promise<Cup> => {
 	const response = await fetch(`/api/${year}/cups/${params.slug}/previous`);
 	return await response.json();
 };
-const loadRacers = async ({ fetch, params }: LoadEvent): Promise<Record<'racers', Racers>> => {
+const loadRacers = async ({ fetch, params }: LoadEvent): Promise<Racers> => {
 	const year = getYear({ params });
 	const response = await fetch(`/api/${year}/racers`);
 	return await response.json();
 };
-const loadSettings = async ({ fetch, params }: LoadEvent): Promise<Record<'racers', Racers>> => {
+const loadManufacturers = async ({ fetch, params }: LoadEvent): Promise<Manufacturers> => {
+	const year = getYear({ params });
+	const response = await fetch(`/api/${year}/manufacturers`);
+	return await response.json();
+};
+const loadSettings = async ({ fetch, params }: LoadEvent): Promise<Settings> => {
 	const year = getYear({ params });
 	const response = await fetch(`/api/${year}/settings`);
 	return await response.json();
@@ -40,7 +46,8 @@ export const load: Load = async (event: LoadEvent) => {
 	const cup = await loadCup(event);
 	const previous = await loadPreviousCup(event);
 	const racers = await loadRacers(event);
+	const manufacturers = await loadManufacturers(event);
 	const settings = await loadSettings(event);
 
-	return { cup, previous, racers, settings };
+	return { cup, previous, racers, manufacturers, settings };
 };

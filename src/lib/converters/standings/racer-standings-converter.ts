@@ -1,14 +1,20 @@
-import type { Cup, Racers, RacerStandings } from '$lib/models';
+import type { Cup, Manufacturers, Racers, RacerStandings } from '$lib/models';
 import { cupConverter } from '../cup';
 import { calcTotalPoints } from '$lib/utils/calc-total-points';
 import { racerMayStillWin } from '$lib/utils/racer-may-still-win';
 import type { CupContent } from '$lib/models/content/cup';
 import { getCupsWithoutDiscardedResults, hasDiscardedResults } from '$lib/utils/discarded-results';
 import { compareStandings } from '$lib/converters/standings/utils';
+import type { Settings } from '$lib/models/settings';
 
-export const racerStandingsConverter = (rawCups: CupContent[], racers: Racers): RacerStandings => {
+export const racerStandingsConverter = (
+	rawCups: CupContent[],
+	racers: Racers,
+	manufacturers: Manufacturers,
+	settings?: Settings
+): RacerStandings => {
 	const cups: Cup[] = rawCups
-		.map((cup) => cupConverter(cup, racers))
+		.map((cup) => cupConverter(cup, racers, manufacturers, settings))
 		.filter((cup) => Object.values(cup.points?.total ?? {}).some((points) => points > 0));
 
 	const cupsWithDiscardedResults = getCupsWithoutDiscardedResults(cups, racers);
