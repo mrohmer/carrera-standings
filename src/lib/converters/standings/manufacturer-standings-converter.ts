@@ -28,14 +28,13 @@ export const manufacturerStandingsConverter = (
 	return {
 		hasDiscardedResults: racerStandings.hasDiscardedResults,
 		standings: manufacturers
+			.filter((manufacturer) => racersByManufacturer[manufacturer.name]?.length)
 			.map((manufacturer) => {
-				const sum = createSumForManufacturer(
-					racerStandings,
-					racersByManufacturer[manufacturer.name] ?? []
-				);
+				const currentRacers = racersByManufacturer[manufacturer.name]!;
+				const sum = createSumForManufacturer(racerStandings, currentRacers);
 				return {
-					points: sum('points'),
-					pointsWithDiscardedResults: sum('pointsWithDiscardedResults'),
+					points: sum('points') / currentRacers.length,
+					pointsWithDiscardedResults: sum('pointsWithDiscardedResults') / currentRacers.length,
 					wins: sum('wins'),
 					podiums: sum('podiums'),
 					fastestLaps: sum('fastestLaps'),

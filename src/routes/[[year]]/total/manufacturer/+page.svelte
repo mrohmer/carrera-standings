@@ -24,7 +24,7 @@
 			<tr class="row row--head">
 				<th class="cell cell--head cell--position">Rang</th>
 				<th class="cell cell--head cell--name">Fahrer</th>
-				<th class="cell cell--head">Punkte</th>
+				<th class="cell cell--head">Ø-Punkte</th>
 				<th class="cell cell--head">Siege</th>
 				<th class="cell cell--head">Podien</th>
 				<th class="cell cell--head">Schnellste</th>
