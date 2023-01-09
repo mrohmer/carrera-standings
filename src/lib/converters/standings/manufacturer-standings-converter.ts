@@ -53,7 +53,7 @@ const sumByKey = <K extends keyof RacerStandingsStandings>(
 	racers: Racer[]
 ): number =>
 	racerStandings.standings
-		.filter(({ name }) => name in racers)
+		.filter(({ name }) => racers.some(({ key }) => key === name))
 		.map((standings) => ((typeof standings[key] === 'number' ? standings[key] : 0) ?? 0) as number)
 		.reduce((prev, curr) => prev + curr, 0);
 const createSumForManufacturer =

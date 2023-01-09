@@ -1,8 +1,21 @@
 <script lang="ts">
 	import MayStillWinLegend from '$lib/components/MayStillWinLegend.svelte';
-	import type { Racers, RacerStandings } from '$lib/models';
+	import type { Manufacturers, Racer, Racers, RacerStandings } from '$lib/models';
 
-	export let data: Record<'standings', RacerStandings> & Record<'racers', Racers>;
+	export let data: Record<'standings', RacerStandings> &
+		Record<'manufacturers', Manufacturers> &
+		Record<'racers', Racers>;
+
+	$: racerNamesByManufacturer = data.manufacturers?.reduce(
+		(prev, curr) => ({
+			...prev,
+			[curr.name]: Object.values(data.racers)
+				.filter(({ manufacturer }) => manufacturer === curr.name)
+				.map(({ key }) => key)
+				.sort()
+		}),
+		{} as Record<string, string[]>
+	);
 </script>
 
 {#if data?.standings?.standings?.length}
@@ -26,12 +39,12 @@
 							{name}
 						</div>
 						<div class="cell__subline">
-							{data.racers[name].manufacturer}
+							{racerNamesByManufacturer[name]?.join(', ')}
 						</div>
 					</td>
 					<td class="cell">
 						<div class="cell__line">
-							{points}
+							{points ?? 0}
 						</div>
 						{#if data.standings.hasDiscardedResults}
 							<div class="cell__subline">
@@ -39,9 +52,9 @@
 							</div>
 						{/if}
 					</td>
-					<td class="cell">{wins}</td>
-					<td class="cell">{podiums}</td>
-					<td class="cell">{fastestLaps}</td>
+					<td class="cell">{wins ?? 0}</td>
+					<td class="cell">{podiums ?? 0}</td>
+					<td class="cell">{fastestLaps ?? 0}</td>
 				</tr>
 			{/each}
 		</tbody>
