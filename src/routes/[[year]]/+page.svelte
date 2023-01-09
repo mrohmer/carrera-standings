@@ -31,7 +31,7 @@
 					</td>
 					<td class="cell">
 						<div class="cell__line">
-							{points}
+							{points ?? 0}
 						</div>
 						{#if data.standings.hasDiscardedResults}
 							<div class="cell__subline">
@@ -39,9 +39,9 @@
 							</div>
 						{/if}
 					</td>
-					<td class="cell">{wins}</td>
-					<td class="cell">{podiums}</td>
-					<td class="cell">{fastestLaps}</td>
+					<td class="cell">{wins ?? 0}</td>
+					<td class="cell">{podiums ?? 0}</td>
+					<td class="cell">{fastestLaps ?? 0}</td>
 				</tr>
 			{/each}
 		</tbody>
