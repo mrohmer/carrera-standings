@@ -6,7 +6,9 @@ import type { CupContent } from '../models/content/cup';
 import { getCupsWithoutDiscardedResults, hasDiscardedResults } from '../utils/discarded-results';
 
 export const standingsConverter = (rawCups: CupContent[], racers: Racers): Standings => {
-	const cups: Cup[] = rawCups.map((cup) => cupConverter(cup, racers));
+	const cups: Cup[] = rawCups
+		.map((cup) => cupConverter(cup, racers))
+		.filter((cup) => Object.values(cup.points?.total ?? {}).some((points) => points > 0));
 
 	const cupsWithDiscardedResults = getCupsWithoutDiscardedResults(cups, racers);
 	const points = calcTotalPoints(getCupsWithoutDiscardedResults(cups, racers), racers);
