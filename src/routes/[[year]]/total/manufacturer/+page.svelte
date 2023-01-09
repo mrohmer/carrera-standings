@@ -35,7 +35,7 @@
 		<tbody>
 			{#each data.standings.standings as { name, points, pointsWithDiscardedResults, fastestLaps, wins, podiums, mayStillWin }, index}
 				<tr class="row">
-					<th class="cell cell--position">{index + 1}{@html mayStillWin ? '*' : '&nbsp;'}</th>
+					<th class="cell cell--position">{index + 1}</th>
 					<td class="cell cell--name">
 						<div class="cell__line">
 							{name}
@@ -61,8 +61,6 @@
 			{/each}
 		</tbody>
 	</table>
-
-	<MayStillWinLegend />
 {/if}
 
 <style lang="scss">
