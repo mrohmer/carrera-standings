@@ -6,6 +6,8 @@
 		Record<'manufacturers', Manufacturers> &
 		Record<'racers', Racers>;
 
+	const round = (points: number) => Math.round(points * 100) / 100;
+
 	$: racerNamesByManufacturer = data.manufacturers?.reduce(
 		(prev, curr) => ({
 			...prev,
@@ -44,11 +46,11 @@
 					</td>
 					<td class="cell">
 						<div class="cell__line">
-							{points ?? 0}
+							{round(points ?? 0)}
 						</div>
 						{#if data.standings.hasDiscardedResults}
 							<div class="cell__subline">
-								({pointsWithDiscardedResults})
+								({round(pointsWithDiscardedResults)})
 							</div>
 						{/if}
 					</td>
