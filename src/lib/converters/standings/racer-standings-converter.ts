@@ -7,7 +7,9 @@ import { getCupsWithoutDiscardedResults, hasDiscardedResults } from '$lib/utils/
 import { compareStandings } from '$lib/converters/standings/utils';
 
 export const racerStandingsConverter = (rawCups: CupContent[], racers: Racers): RacerStandings => {
-	const cups: Cup[] = rawCups.map((cup) => cupConverter(cup, racers));
+	const cups: Cup[] = rawCups
+		.map((cup) => cupConverter(cup, racers))
+		.filter((cup) => Object.values(cup.points?.total ?? {}).some((points) => points > 0));
 
 	const cupsWithDiscardedResults = getCupsWithoutDiscardedResults(cups, racers);
 	const points = calcTotalPoints(getCupsWithoutDiscardedResults(cups, racers), racers);
