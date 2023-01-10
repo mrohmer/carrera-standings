@@ -43,7 +43,12 @@
 			<th class="cell cell--head cell--name">Name</th>
 			<th class="cell cell--head cell--total">Ø-Gesamt</th>
 			<th class="cell cell--head cell--time-trial">Ø-Zeit</th>
-			<th class="cell cell--head cell--main-race"> Ø-Haupt </th>
+			<th
+				class="cell cell--head cell--main-race"
+				class:cell--fastest-lap-set={!!data.cup?.fastestLap}
+			>
+				Ø-Haupt
+			</th>
 			<th class="cell cell--head">Ø-Strafe</th>
 		</tr>
 	</thead>
@@ -69,10 +74,23 @@
 					<td class="cell cell--time-trial">
 						{round(data.cup.manufacturerPoints.timeTrial[manufacturer] ?? 0)}
 					</td>
-					<td class="cell cell--main-race">
+					<td
+						class="cell cell--main-race"
+						class:cell--fastest-lap={racerNamesByManufacturer[manufacturer]?.includes(
+							data.cup.fastestLap
+						)}
+						class:cell--fastest-lap-set={!!data.cup.fastestLap}
+					>
 						<div class="cell__line">
-							{round(data.cup.manufacturerPoints.mainRace[manufacturer] ?? 0)}
+							{round(
+								(data.cup.manufacturerPoints.mainRace[manufacturer] ?? 0) +
+									(data.cup.manufacturerPoints.fastestLap[manufacturer] ?? 0)
+							)}
 						</div>
+
+						{#if racerNamesByManufacturer[manufacturer]?.includes(data.cup.fastestLap)}
+							<div class="cell__subline">(schnellste)</div>
+						{/if}
 					</td>
 					<td class="cell cell--penalty">
 						{data.cup.manufacturerPoints.penalty[manufacturer]

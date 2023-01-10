@@ -19,7 +19,7 @@ export const manufacturerPointsConverter = (
 		.map((manufacturer) => {
 			const currentRacers = racersByManufacturer[manufacturer.name]!;
 			const sum = createSumForManufacturer(racerPoints, currentRacers);
-			console.log(sum('mainRace'));
+
 			return [
 				manufacturer,
 				{
