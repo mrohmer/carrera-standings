@@ -1,13 +1,20 @@
-import type { Cup, Racers, Standings } from '../models';
-import { cupConverter } from './cup';
-import { calcTotalPoints } from '../utils/calc-total-points';
-import { racerMayStillWin } from '../utils/racer-may-still-win';
-import type { CupContent } from '../models/content/cup';
-import { getCupsWithoutDiscardedResults, hasDiscardedResults } from '../utils/discarded-results';
+import type { Cup, Manufacturers, Racers, RacerStandings } from '$lib/models';
+import { cupConverter } from '../cup';
+import { calcTotalPoints } from '$lib/utils/calc-total-points';
+import { racerMayStillWin } from '$lib/utils/racer-may-still-win';
+import type { CupContent } from '$lib/models/content/cup';
+import { getCupsWithoutDiscardedResults, hasDiscardedResults } from '$lib/utils/discarded-results';
+import { compareStandings } from '$lib/converters/standings/utils';
+import type { Settings } from '$lib/models/settings';
 
-export const standingsConverter = (rawCups: CupContent[], racers: Racers): Standings => {
+export const racerStandingsConverter = (
+	rawCups: CupContent[],
+	racers: Racers,
+	manufacturers: Manufacturers,
+	settings?: Settings
+): RacerStandings => {
 	const cups: Cup[] = rawCups
-		.map((cup) => cupConverter(cup, racers))
+		.map((cup) => cupConverter(cup, racers, manufacturers, settings))
 		.filter((cup) => Object.values(cup.points?.total ?? {}).some((points) => points > 0));
 
 	const cupsWithDiscardedResults = getCupsWithoutDiscardedResults(cups, racers);
@@ -32,6 +39,6 @@ export const standingsConverter = (rawCups: CupContent[], racers: Racers): Stand
 				fastestLaps: cups.filter((cup) => cup.fastestLap === name).length,
 				mayStillWin: racerMayStillWin(name, cupsWithDiscardedResults, racers)
 			}))
-			.sort((a, b) => (a.points < b.points ? 1 : -1))
+			.sort(compareStandings)
 	};
 };

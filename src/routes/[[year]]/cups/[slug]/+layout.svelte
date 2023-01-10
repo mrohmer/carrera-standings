@@ -2,11 +2,13 @@
 	import type { Cup, Racers } from '$lib/models';
 	import { page } from '$app/stores';
 	import { getYear } from '$lib/api/get-year';
+	import type { Settings } from '$lib/models/settings';
 
 	interface Data {
 		cup: Cup & Record<'mayStillWin' | 'discardedResults', string[]>;
 		previous: Cup | undefined;
 		racers: Racers;
+		settings: Settings;
 	}
 
 	export let data: Data;
@@ -15,7 +17,8 @@
 		data.cup?.startOrderForMainRace && Object.keys(data.cup.startOrderForMainRace).length;
 	$: hasPenalties = !!data.previous?.order?.length;
 	$: tabs = {
-		'': 'Tabelle',
+		'': data.settings?.hasTeamRating ? 'Fahrerwertung' : 'Tabelle',
+		...(data.settings?.hasTeamRating ? { '/manufacturer': 'Konstrukteurswertung' } : {}),
 		'/info': 'Info',
 		...(hasPenalties ? { '/penalties': 'Tankmalus' } : {}),
 		...(hasStartOrderForMainRace ? { '/start-order': 'Startreihenfolge' } : {})

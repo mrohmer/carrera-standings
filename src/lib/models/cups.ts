@@ -1,13 +1,16 @@
+export type Points = Record<
+	'mainRace' | 'timeTrial' | 'penalty' | 'fastestLap' | 'total',
+	Record<string, number>
+>;
 export interface Cup {
 	slug: string;
 	title: string;
-	points: Record<
-		'mainRace' | 'timeTrial' | 'penalty' | 'fastestLap' | 'total',
-		Record<string, number>
-	>;
+	points: Points;
+	manufacturerPoints?: Points;
 	penalties: Record<string, number>;
 	fastestLap?: string;
 	order: string[];
+	manufacturerOrder?: string[];
 	date?: string;
 	liveSessionId?: string;
 	layout?: string;

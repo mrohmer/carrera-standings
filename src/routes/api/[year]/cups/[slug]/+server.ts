@@ -1,5 +1,11 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { readCupFile, readCupFiles, readRacersFile } from '$lib/utils/read-content-files';
+import {
+	readCupFile,
+	readCupFiles,
+	readManufacturerFile,
+	readRacersFile,
+	readSettingsFile
+} from '$lib/utils/read-content-files';
 import { cupConverter } from '$lib/converters/cup';
 import { racerMayStillWin } from '$lib/utils/racer-may-still-win';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -26,14 +32,19 @@ const getCup = ({
 	}
 
 	const racers = readRacersFile(year);
-
 	if (!racers) {
 		return undefined;
 	}
 
-	const convertedCup = cupConverter(cup, racers);
+	const manufacturers = readManufacturerFile(year);
+	if (!manufacturers?.length) {
+		throw error(404);
+	}
+	const settings = readSettingsFile(year);
 
-	const cups = readCupFiles(year).map((cup) => cupConverter(cup, racers));
+	const convertedCup = cupConverter(cup, racers, manufacturers, settings);
+
+	const cups = readCupFiles(year).map((cup) => cupConverter(cup, racers, manufacturers, settings));
 	const mayStillWin = Object.keys(racers)
 		.map((name) =>
 			racerMayStillWin(name, getCupsWithoutDiscardedResults(cups, racers), racers, {
