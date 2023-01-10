@@ -36,24 +36,24 @@
 	);
 </script>
 
-<table>
-	<thead>
-		<tr class="row row--head">
-			<th class="cell cell--head cell--position">Rang</th>
-			<th class="cell cell--head cell--name">Name</th>
-			<th class="cell cell--head cell--total">Ø-Gesamt</th>
-			<th class="cell cell--head cell--time-trial">Ø-Zeit</th>
-			<th
-				class="cell cell--head cell--main-race"
-				class:cell--fastest-lap-set={!!data.cup?.fastestLap}
-			>
-				Ø-Haupt
-			</th>
-			<th class="cell cell--head">Ø-Strafe</th>
-		</tr>
-	</thead>
+{#if data.cup?.manufacturerOrder?.length}
+	<table>
+		<thead>
+			<tr class="row row--head">
+				<th class="cell cell--head cell--position">Rang</th>
+				<th class="cell cell--head cell--name">Name</th>
+				<th class="cell cell--head cell--total">Ø-Gesamt</th>
+				<th class="cell cell--head cell--time-trial">Ø-Zeit</th>
+				<th
+					class="cell cell--head cell--main-race"
+					class:cell--fastest-lap-set={!!data.cup?.fastestLap}
+				>
+					Ø-Haupt
+				</th>
+				<th class="cell cell--head">Ø-Strafe</th>
+			</tr>
+		</thead>
 
-	{#if data.cup?.manufacturerOrder?.length}
 		<tbody>
 			{#each data.cup.manufacturerOrder as manufacturer, index}
 				<tr class="row">
@@ -100,11 +100,11 @@
 				</tr>
 			{/each}
 		</tbody>
-	{/if}
-</table>
+	</table>
+{/if}
 
 {#if !data.cup?.order?.length}
-	<div class="info-not-yet">
+	<div class="text-center pt-4 text-sm text-gray-700 dark:text-gray-400">
 		{data.cup?.title ?? 'Cup'} noch nicht gewertet
 	</div>
 {/if}

@@ -33,23 +33,22 @@
 	};
 </script>
 
-<table>
-	<thead>
-		<tr class="row row--head">
-			<th class="cell cell--head cell--position">Rang</th>
-			<th class="cell cell--head cell--name">Name</th>
-			<th class="cell cell--head cell--total">Gesamt</th>
-			<th class="cell cell--head cell--time-trial">Zeit</th>
-			<th
-				class="cell cell--head cell--main-race"
-				class:cell--fastest-lap-set={!!data.cup?.fastestLap}
-				>Haupt
-			</th>
-			<th class="cell cell--head">Strafe</th>
-		</tr>
-	</thead>
-
-	{#if data.cup?.order?.length}
+{#if data.cup?.order?.length}
+	<table>
+		<thead>
+			<tr class="row row--head">
+				<th class="cell cell--head cell--position">Rang</th>
+				<th class="cell cell--head cell--name">Name</th>
+				<th class="cell cell--head cell--total">Gesamt</th>
+				<th class="cell cell--head cell--time-trial">Zeit</th>
+				<th
+					class="cell cell--head cell--main-race"
+					class:cell--fastest-lap-set={!!data.cup?.fastestLap}
+					>Haupt
+				</th>
+				<th class="cell cell--head">Strafe</th>
+			</tr>
+		</thead>
 		<tbody>
 			{#each data.cup.order as racer, index}
 				<tr class="row">
@@ -106,16 +105,15 @@
 				</tr>
 			{/each}
 		</tbody>
-	{/if}
-</table>
+	</table>
+	<MayStillWinLegend />
+{/if}
 
 {#if !data.cup?.order?.length}
-	<div class="info-not-yet">
+	<div class="text-center pt-4 text-sm text-gray-700 dark:text-gray-400">
 		{data.cup?.title ?? 'Cup'} noch nicht gewertet
 	</div>
 {/if}
-
-<MayStillWinLegend />
 
 <style lang="postcss">
 	table {
