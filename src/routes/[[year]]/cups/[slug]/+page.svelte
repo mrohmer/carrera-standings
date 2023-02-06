@@ -51,7 +51,7 @@
 		</thead>
 		<tbody>
 			{#each data.cup.order as racer, index}
-				<tr class="row">
+				<tr class="row" class:opacity-30={data.cup.notPartOfEvent?.includes(racer)}>
 					<th class="cell cell--position"
 						>{calcPosition(index, data.cup.points.total[racer])}{data.cup.mayStillWin?.includes(
 							racer

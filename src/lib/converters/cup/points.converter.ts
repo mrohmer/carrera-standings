@@ -18,9 +18,11 @@ export const pointsConverter = (
 					const notParticipatingDriverCount = Object.keys(racers).filter((i) =>
 						participation?.includes(i)
 					).length;
+					const participatingDriverCount = Object.keys(racers).length - notParticipatingDriverCount;
+
 					const sharedPoints = [...points]
 						.reverse()
-						.filter((_, i) => i < notParticipatingDriverCount)
+						.filter((_, i) => i < points.length - participatingDriverCount)
 						.reduce((prev, curr) => prev + curr, 0);
 
 					p = sharedPoints / notParticipatingDriverCount;

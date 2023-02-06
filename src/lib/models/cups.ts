@@ -27,4 +27,6 @@ export interface Cup {
 			date?: string;
 		};
 	};
+
+	notPartOfEvent: string[];
 }

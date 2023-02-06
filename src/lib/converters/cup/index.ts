@@ -88,6 +88,10 @@ export const cupConverter = (
 		date: formatDate(cup.date),
 		liveSessionId: liveSessionIdConverter(cup),
 		layout: cup.layout,
-		startOrderForMainRace: mainRaceStartingOrderConverter(cup.results?.timeTrial, cup.participation)
+		startOrderForMainRace: mainRaceStartingOrderConverter(
+			cup.results?.timeTrial,
+			cup.participation
+		),
+		notPartOfEvent: cup.participation ?? []
 	};
 };
