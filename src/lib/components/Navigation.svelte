@@ -85,7 +85,7 @@
 		<a
 			href={`${urlPrefix ?? ''}/`}
 			class="hover:bg-neutral-200 dark:hover:bg-neutral-700"
-			class:active={$page.url.pathname === `${urlPrefix ?? ''}/`}
+			class:active={$page.url.pathname.startsWith(`${urlPrefix ?? ''}/total`)}
 			on:click={({ target }) => (activeClicked = target)}
 			sveltekit:prefetch
 		>

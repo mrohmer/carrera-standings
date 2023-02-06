@@ -24,7 +24,10 @@
 	};
 
 	const getNextPath = (dir: number) => {
-		const staticPages = ['/', '/course'];
+		const year = parseInt($page.params.year ?? String(new Date().getFullYear()));
+		const staticPages = ['/total', '/course'].map((path) =>
+			year === new Date().getFullYear() ? path : `${year}${path}`
+		);
 
 		const url = $page.url.pathname;
 
@@ -35,11 +38,11 @@
 
 			if (newIndex < 0) {
 				return data?.cups?.length
-					? `/${data.cups[data.cups.length - 1].slug}`
+					? `/cups/${data.cups[data.cups.length - 1].slug}`
 					: staticPages[staticPages.length - 1];
 			}
 			if (newIndex >= staticPages.length) {
-				return data?.cups?.length ? `/${data.cups[0].slug}` : staticPages[0];
+				return data?.cups?.length ? `/cups/${data.cups[0].slug}` : staticPages[0];
 			}
 
 			return staticPages[newIndex];
@@ -47,7 +50,7 @@
 
 		if (data?.cups?.length) {
 			const indexInCups = data.cups.findIndex((i) => {
-				return decodeURIComponent(url) === `/${i.slug}`;
+				return decodeURIComponent(url) === `/cups/${i.slug}`;
 			});
 
 			if (indexInCups >= 0) {
@@ -60,7 +63,7 @@
 					return staticPages[0];
 				}
 
-				return `/${data.cups[newIndex].slug}`;
+				return `/cups/${data.cups[newIndex].slug}`;
 			}
 		}
 
