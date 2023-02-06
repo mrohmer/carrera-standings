@@ -31,9 +31,12 @@
 
 		return index + 1;
 	};
+
+	$: hasTakenPlace =
+		data.cup?.order?.length && Object.values(data.cup?.points?.total ?? {}).some((v) => v > 0);
 </script>
 
-{#if data.cup?.order?.length}
+{#if hasTakenPlace}
 	<table>
 		<thead>
 			<tr class="row row--head">
@@ -107,9 +110,7 @@
 		</tbody>
 	</table>
 	<MayStillWinLegend />
-{/if}
-
-{#if !data.cup?.order?.length}
+{:else}
 	<div class="text-center pt-4 text-sm text-gray-700 dark:text-gray-400">
 		{data.cup?.title ?? 'Cup'} noch nicht gewertet
 	</div>
