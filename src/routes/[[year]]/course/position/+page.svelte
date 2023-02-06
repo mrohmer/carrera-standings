@@ -4,8 +4,15 @@
 
 	export let data: Record<'course', Course> & Record<'racers', Racers>;
 
-	const orderMappingInCup = (key: string, { cup }: CourseCup): number | null =>
-		cup.order?.length ? [...cup.order]?.reverse().indexOf(key) : null;
+	const orderMappingInCup = (key: string, { cup }: CourseCup): number | null => {
+		if (!cup.order?.length) {
+			return null;
+		}
+		if (!Object.values(cup.points?.total ?? {}).some((v) => v > 0)) {
+			return null;
+		}
+		return [...cup.order]?.reverse().indexOf(key) ?? null;
+	};
 </script>
 
 {#if data.course?.length}

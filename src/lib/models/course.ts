@@ -1,7 +1,7 @@
 import type { Cup } from './cups';
 
 export interface CourseCup {
-	cup: Pick<Cup, 'title' | 'order'>;
+	cup: Pick<Cup, 'title' | 'order' | 'points'>;
 	date: string;
 	order?: string[];
 }

@@ -50,7 +50,8 @@ export const getCourse = (event: RequestEvent): Course => {
 			return {
 				cup: {
 					title: cup.title,
-					order: cup.order
+					order: cup.order,
+					points: cup.points
 				},
 				date: `${origDate.getFullYear()}-${String(origDate.getMonth() + 1).padStart(
 					2,
