@@ -1,10 +1,6 @@
 {
   "results": {
-    "penalties": [
-      {
-        "points": 0
-      }
-    ],
+    "penalties": [],
     "timeTrial": {
       "pos1": {
         "racer": "SOM",
@@ -48,7 +44,28 @@
           "fastestLapTime": 3.77
         }
       }
-    }
+    },
+    "mainRace": {
+      "pos1": {
+        "racer": "HOH"
+      },
+      "pos2": {
+        "racer": "BAE"
+      },
+      "pos3": {
+        "racer": "ROH"
+      },
+      "pos4": {
+        "racer": "JAE"
+      },
+      "pos5": {
+        "racer": "SOM"
+      },
+      "pos6": {
+        "racer": "KRU"
+      }
+    },
+    "fastestLap": "SOM"
   },
   "date": "2023-02-01T14:10:36.989Z",
   "title": "Gostenhof GP",
@@ -61,7 +78,9 @@
     },
     "pitLaneLength": 157,
     "record": {
-      "date": "2023-02-25T19:16:35.402Z"
+      "date": "2023-02-25T19:16:35.402Z",
+      "racer": "SOM",
+      "time": 3.34
     }
   },
   "participation": [
