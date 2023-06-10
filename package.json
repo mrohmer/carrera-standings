@@ -12,8 +12,8 @@
 	"devDependencies": {
 		"@commitlint/cli": "16.2.4",
 		"@commitlint/config-conventional": "16.2.4",
-		"@sveltejs/adapter-auto": "^1.0.0",
-		"@sveltejs/kit": "^1.0.0",
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/kit": "^1.5.0",
 		"@types/ms": "^0.7.31",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
 		"@typescript-eslint/parser": "^5.10.1",
