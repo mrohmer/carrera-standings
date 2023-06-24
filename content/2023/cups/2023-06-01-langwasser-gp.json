@@ -48,6 +48,26 @@
           "fastestLapTime": 4.371
         }
       }
+    },
+    "mainRace": {
+      "pos1": {
+        "racer": "JAE"
+      },
+      "pos2": {
+        "racer": "BAE"
+      },
+      "pos3": {
+        "racer": "HEG"
+      },
+      "pos4": {
+        "racer": "SOM"
+      },
+      "pos5": {
+        "racer": "ROH"
+      },
+      "pos6": {
+        "racer": "KRU"
+      }
     }
   },
   "date": "2023-06-01T13:11:37.908Z",
@@ -63,5 +83,6 @@
     "record": {
       "date": "2023-06-24T18:32:14.434Z"
     }
-  }
+  },
+  "participation": []
 }
