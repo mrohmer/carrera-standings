@@ -1,8 +1,8 @@
 import ical, { ICalCategory, ICalEventBusyStatus } from 'ical-generator';
-import type { Cup } from '$lib/models';
 import ms from 'ms';
+import type { CupContent } from '$lib/models/content/cup';
 
-export const icsBuilder = (name: string, description: string, cups: Cup[]): string => {
+export const icsBuilder = (name: string, description: string, cups: CupContent[]): string => {
 	const calendar = ical({
 		name,
 		description,

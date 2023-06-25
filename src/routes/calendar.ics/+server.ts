@@ -1,25 +1,20 @@
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { icsBuilder } from '$lib/ics/ics-builder';
+import { readCupFiles } from '$lib/utils/read-content-files';
 
-const loadCups = async (year: number, { fetch }: RequestEvent) => {
-	const response = await fetch(`/api/${year}/cups?full=true`);
-	return await response.json();
-};
+const loadCups = (year: number) => readCupFiles(year);
 const loadYears = async ({ fetch }: RequestEvent): Promise<number[]> => {
 	const response = await fetch(`/api/years`);
 	return await response.json();
 };
 export const GET: RequestHandler = async (event) => {
 	const years = await loadYears(event);
-	const cups = (
-		await Promise.all(
-			years.map(async (year) => ({
-				year,
-				cups: await loadCups(year, event)
-			}))
-		)
-	)
+	const cups = years
+		.map((year) => ({
+			year,
+			cups: loadCups(year)
+		}))
 		.sort(({ year: a }, { year: b }) => Math.sign(a - b))
 		.map(({ cups }) => cups)
 		.flat();
