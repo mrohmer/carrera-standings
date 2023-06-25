@@ -137,7 +137,7 @@ export const GET: RequestHandler = async (event) => {
 				label: 'Cup',
 				folder: `content/${year}/cups`,
 				create: true,
-				slug: '{{year}}-{{month}}-{{day}}-{{title}}',
+				slug: '{{year}}-{{month}}-{{title}}',
 				summary: '{{title}} ({{month}}.{{year}})',
 				extension: 'json',
 				editor: {
@@ -152,6 +152,11 @@ export const GET: RequestHandler = async (event) => {
 						label: 'Datum',
 						name: 'date',
 						widget: 'date'
+					},
+					{
+						label: 'Datum Fix',
+						name: 'dateFixed',
+						widget: 'boolean'
 					},
 					{
 						label: 'Streckenlayout',

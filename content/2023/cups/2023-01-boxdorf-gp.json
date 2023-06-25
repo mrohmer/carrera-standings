@@ -1,0 +1,92 @@
+{
+	"results": {
+		"penalties": [
+			{
+				"points": 0
+			}
+		],
+		"timeTrial": {
+			"pos1": {
+				"racer": "SOM",
+				"raceStats": {
+					"rounds": 115,
+					"fastestLapTime": 3.671
+				}
+			},
+			"pos2": {
+				"racer": "BAE",
+				"raceStats": {
+					"rounds": 114,
+					"fastestLapTime": 3.81
+				}
+			},
+			"pos3": {
+				"racer": "KRU",
+				"raceStats": {
+					"rounds": 103,
+					"fastestLapTime": 3.871
+				}
+			},
+			"pos4": {
+				"racer": "HEG",
+				"raceStats": {
+					"rounds": 102,
+					"fastestLapTime": 4.176
+				}
+			},
+			"pos5": {
+				"racer": "HOH",
+				"raceStats": {
+					"rounds": 102,
+					"fastestLapTime": 3.772
+				}
+			},
+			"pos6": {
+				"racer": "JAE",
+				"raceStats": {
+					"rounds": 101,
+					"fastestLapTime": 3.889
+				}
+			}
+		},
+		"mainRace": {
+			"pos1": {
+				"racer": "SOM"
+			},
+			"pos2": {
+				"racer": "BAE"
+			},
+			"pos3": {
+				"racer": "JAE"
+			},
+			"pos4": {
+				"racer": "HEG"
+			},
+			"pos5": {
+				"racer": "KRU"
+			},
+			"pos6": {
+				"racer": "HOH"
+			}
+		},
+		"fastestLap": "SOM"
+	},
+	"date": "2023-01-21T16:00:00.000Z",
+	"dateFixed": true,
+	"title": "Boxdorf GP",
+	"layout": "/uploads/2023/strecke-boxdorf-gp.jpeg",
+	"info": {
+		"trackLength": {
+			"outerTrack": 1244.6,
+			"innerTrack": 1182.4,
+			"average": 1213.5
+		},
+		"pitLaneLength": 138.2,
+		"record": {
+			"date": "2023-01-20T09:47:50.009Z",
+			"racer": "SOM",
+			"time": 3.52
+		}
+	},
+	"participation": ["ROH"]
+}

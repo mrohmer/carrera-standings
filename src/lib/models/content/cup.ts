@@ -18,6 +18,7 @@ export interface CupContent {
 	title: string;
 	slug: string;
 	date: string;
+	dateFixed: boolean;
 	liveSessionId: string;
 	layout: string;
 }

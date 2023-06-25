@@ -12,6 +12,7 @@ export interface Cup {
 	order: string[];
 	manufacturerOrder?: string[];
 	date?: string;
+	dateFixed?: boolean;
 	liveSessionId?: string;
 	layout?: string;
 	startOrderForMainRace?: Record<string, number>;
