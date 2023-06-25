@@ -1,21 +1,24 @@
 {
-	"results": {
-		"penalties": [
-			{
-				"points": 0
-			}
-		]
-	},
-	"date": "2023-07-29T15:00:00.000Z",
-	"dateFixed": false,
-	"title": "Hummelstein GP",
-	"layout": "/uploads/2023/strecke-hummelstein-gp.jpeg",
-	"info": {
-		"trackLength": {
-			"outerTrack": 1370.3,
-			"innerTrack": 1432.4,
-			"average": 1401.35
-		},
-		"pitLaneLength": 121.1
-	}
+  "results": {
+    "penalties": [
+      {
+        "points": 0
+      }
+    ]
+  },
+  "date": "2023-07-29T15:00:00.000Z",
+  "dateFixed": true,
+  "title": "Hummelstein GP",
+  "layout": "/uploads/2023/strecke-hummelstein-gp.jpeg",
+  "info": {
+    "trackLength": {
+      "outerTrack": 1370.3,
+      "innerTrack": 1432.4,
+      "average": 1401.35
+    },
+    "pitLaneLength": 121.1,
+    "record": {
+      "date": "2023-06-25T14:12:55.192Z"
+    }
+  }
 }
