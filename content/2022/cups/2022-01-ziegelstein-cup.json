@@ -1,23 +1,27 @@
 {
-	"date": "2022-03-18T09:36:23.775Z",
-	"title": "Kornburg GP",
-	"participation": ["HEG"],
+	"date": "2022-01-15T08:12:01.388Z",
+	"dateFixed": true,
+	"title": "Ziegelstein GP",
+	"participation": [],
 	"results": {
 		"timeTrial": {
 			"pos0": {
-				"racer": "BAE"
+				"racer": "HEG"
 			},
 			"pos1": {
-				"racer": "HOH"
+				"racer": "BAE"
 			},
 			"pos2": {
-				"racer": "ROH"
+				"racer": "HOH"
 			},
 			"pos3": {
 				"racer": "SOM"
 			},
 			"pos4": {
 				"racer": "JAE"
+			},
+			"pos5": {
+				"racer": "ROH"
 			}
 		},
 		"mainRace": {
@@ -25,15 +29,18 @@
 				"racer": "BAE"
 			},
 			"pos1": {
-				"racer": "SOM"
-			},
-			"pos2": {
 				"racer": "HOH"
 			},
+			"pos2": {
+				"racer": "HEG"
+			},
 			"pos3": {
-				"racer": "ROH"
+				"racer": "SOM"
 			},
 			"pos4": {
+				"racer": "ROH"
+			},
+			"pos5": {
 				"racer": "JAE"
 			}
 		},
@@ -43,7 +50,7 @@
 				"points": 1
 			},
 			{
-				"racer": "JAE",
+				"racer": "HEG",
 				"points": 1
 			},
 			{
@@ -51,18 +58,18 @@
 				"points": 1
 			}
 		],
-		"fastestLap": "HOH"
+		"fastestLap": "HEG"
 	},
 	"info": {
 		"trackLength": {
-			"average": 1621
+			"average": 1461
 		},
-		"pitLaneLength": 259,
+		"pitLaneLength": 181,
 		"record": {
-			"date": "2022-03-22T08:42:54.718Z",
-			"racer": "ROH",
-			"time": 4.618
+			"date": "2022-01-15T08:42:54.718Z",
+			"racer": "BAE",
+			"time": 3.958
 		}
 	},
-	"layout": "/uploads/2022/strecke-2022-04.jpg"
+	"layout": "/uploads/2022/strecke-2022-08.jpg"
 }

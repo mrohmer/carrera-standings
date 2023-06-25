@@ -42,6 +42,7 @@
 		"@fortawesome/free-solid-svg-icons": "^5.15.4",
 		"@rohmer/svelte-base": "^1.0.0",
 		"hammerjs": "^2.0.8",
+		"ical-generator": "5.0.0",
 		"layercake": "^6.1.0",
 		"ms": "^2.1.3"
 	}
