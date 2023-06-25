@@ -3,6 +3,8 @@ import { error } from '@sveltejs/kit';
 import { icsBuilder } from '$lib/ics/ics-builder';
 import { readCupFiles } from '$lib/utils/read-content-files';
 
+export const prerender = true;
+
 const loadCups = (year: number) => readCupFiles(year);
 const loadYears = async ({ fetch }: RequestEvent): Promise<number[]> => {
 	const response = await fetch(`/api/years`);
