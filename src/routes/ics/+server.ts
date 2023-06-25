@@ -1,17 +1,14 @@
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { icsBuilder } from '$lib/ics/ics-builder';
-import { readCupFiles } from '$lib/utils/read-content-files';
+import { getAvailableYears, readCupFiles } from '$lib/utils/read-content-files';
 
 export const prerender = true;
 
 const loadCups = (year: number) => readCupFiles(year);
-const loadYears = async ({ fetch }: RequestEvent): Promise<number[]> => {
-	const response = await fetch(`/api/years`);
-	return await response.json();
-};
-export const GET: RequestHandler = async (event) => {
-	const years = await loadYears(event);
+const loadYears = () => getAvailableYears();
+export const GET: RequestHandler = async () => {
+	const years = loadYears();
 	const cups = years
 		.map((year) => ({
 			year,
