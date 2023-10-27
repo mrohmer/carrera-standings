@@ -1,21 +1,24 @@
 {
-	"results": {
-		"penalties": [
-			{
-				"points": 0
-			}
-		]
-	},
-	"date": "2023-10-28T15:00:00.000Z",
-	"dateFixed": false,
-	"title": "Kornburg GP",
-	"layout": "/uploads/2023/strecke-kornburg-gp.jpeg",
-	"info": {
-		"trackLength": {
-			"outerTrack": 1253.3,
-			"innerTrack": 1225.7,
-			"average": 1239.5
-		},
-		"pitLaneLength": 120.8
-	}
+  "results": {
+    "penalties": [
+      {
+        "points": 0
+      }
+    ]
+  },
+  "date": "2023-10-28T15:00:00.000Z",
+  "dateFixed": true,
+  "title": "Kornburg GP",
+  "layout": "/uploads/2023/strecke-kornburg-gp.jpeg",
+  "info": {
+    "trackLength": {
+      "outerTrack": 1253.3,
+      "innerTrack": 1225.7,
+      "average": 1239.5
+    },
+    "pitLaneLength": 120.8,
+    "record": {
+      "date": "2023-10-27T10:34:04.783Z"
+    }
+  }
 }
